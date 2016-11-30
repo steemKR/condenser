@@ -1,6 +1,6 @@
 import React from 'react'
 import shouldComponentUpdate from 'app/utils/shouldComponentUpdate';
-import VerticalMenu from 'app/components/elements/VerticalMenu';
+import HorizontalShare from 'app/components/elements/HorizontalShare';
 
 export default class ShareFooter extends React.Component {
 
@@ -30,7 +30,13 @@ export default class ShareFooter extends React.Component {
     render(){
         let classHide = this.state.isHide ? "shareHidden" : "";
         return <div className={"shareFooter " + classHide}>
-            <VerticalMenu items={this.props.menu} />
+            <div className={"row"}>
+                <div className="large-8 small-10 columns">
+                    <HorizontalShare items={this.props.menu} />
+                </div>
+                <div className="large-2 columns">
+                </div>
+            </div>
         </div>;
     }
 }
