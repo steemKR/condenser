@@ -1,5 +1,6 @@
 import React from 'react'
 import shouldComponentUpdate from 'app/utils/shouldComponentUpdate';
+import VerticalMenu from 'app/components/elements/VerticalMenu';
 
 export default class ShareFooter extends React.Component {
 
@@ -29,7 +30,7 @@ export default class ShareFooter extends React.Component {
     render(){
         let classHide = this.state.isHide ? "shareHidden" : "";
         return <div className={"shareFooter " + classHide}>
-          <p>Share Footer</p>
+            <VerticalMenu items={this.props.menu} />
         </div>;
     }
 }
