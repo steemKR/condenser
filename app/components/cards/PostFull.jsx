@@ -21,6 +21,7 @@ import {Long} from 'bytebuffer'
 import {List} from 'immutable'
 import {repLog10, parsePayoutAmount} from 'app/utils/ParsersAndFormatters';
 import DMCAList from 'app/utils/DMCAList'
+import ShareFooter from 'app/components/elements/ShareFooter';
 
 function TimeAuthorCategory({content, authorRepLog10, showTags}) {
     return (
@@ -282,6 +283,7 @@ class PostFull extends React.Component {
                         {showReply && renderedEditor}
                     </div>
                 </div>
+                <ShareFooter menu={share_menu} />
             </article>
         )
     }
