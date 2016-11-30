@@ -238,7 +238,13 @@ class PostFull extends React.Component {
         const showReplyOption = post_content.get('depth') < 6
         const showEditOption = username === author
         const authorRepLog10 = repLog10(content.author_reputation)
-        const isOverlay = document.getElementById('post_overlay');
+        let showShareFooter = '';
+        if(process.env.BROWSER){
+            let isOverlay = document.getElementById('post_overlay');
+            if(!isOverlay){
+                showShareFooter = <ShareFooter menu={share_menu} />
+            }
+        }
         return (
             <article className="PostFull hentry" itemScope itemType="http://schema.org/blogPost">
                 {showEdit ?
@@ -283,7 +289,7 @@ class PostFull extends React.Component {
                         {showReply && renderedEditor}
                     </div>
                 </div>
-                {!isOverlay && <ShareFooter menu={share_menu} />}
+                {showShareFooter}
             </article>
         )
     }
