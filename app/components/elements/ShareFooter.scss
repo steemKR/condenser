@@ -6,9 +6,15 @@
     background: #fff;
     box-shadow: 0 -3px 10px 0 rgba(0,0,0,.0785);
     transition: all .3s;
+    z-index: 1000;
+    padding: 0.5em;
 }
 
 .shareHidden {
     display: none;
-    transition: all .3s;
+    transition: opacity 1s ease-out;
+    -webkit-transition: all .3s;
+}
+
+.shareItems {
 }

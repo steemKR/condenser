@@ -1,0 +1,36 @@
+.HorizontalItems {
+    list-style-type: none;
+    align-items: center;
+    .Icon {
+        padding-left: 0.1rem;
+        margin-right: 0.5rem;
+        top: 0;
+    }
+
+    svg path, svg polygon {
+        fill: $dark-gray;
+    }
+
+    li {
+        float: left;
+    }
+
+    > li > a {
+        color: $black;
+        line-height: 1rem;
+        position: relative;
+        padding: 0.5em;
+    }
+
+    > li > a:hover {
+        background-color: #f0f0f0;
+    }
+
+    > li.title {
+        padding: 0.4rem;
+        font-weight: bold;
+        text-align: center;
+        border-bottom: 1px solid $medium-gray;
+    }
+}
+
