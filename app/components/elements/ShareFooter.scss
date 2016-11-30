@@ -1,15 +1,14 @@
 .shareFooter {
-    position: fixed!important;
-    overflow: hidden!important;
-    overflow-y: scroll!important;
-    bottom: 0;
-    width: 100%!important;
-    z-index: 1000;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
     background: #fff;
     box-shadow: 0 -3px 10px 0 rgba(0,0,0,.0785);
     transition: all .3s;
 }
 
 .shareHidden {
-    bottom: -40px;
+    display: none;
+    transition: all .3s;
 }
