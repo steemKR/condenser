@@ -179,7 +179,6 @@ app.use(function*(next) {
             this.session.r = from_link;
         }
     }
-    console.log('--> referer found -->', this.session.r, this.request.headers.referer, from_link);
     yield next;
 });
 
