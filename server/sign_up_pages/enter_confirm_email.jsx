@@ -285,6 +285,7 @@ export default function useEnterAndConfirmEmailPages(app) {
             }
             // create referer attribute
             let user_att = yield models.UserAttribute.findOne({ attributes: ['user_id', 'type_of'], where: { user_id: user.id, type_of: 'referer' }});
+            console.log("-- creating referer --", this.session.user, this.session.r);
             if (!user_att) {
                 yield models.UserAttribute.create({
                     user_id: user.id,

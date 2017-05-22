@@ -178,7 +178,7 @@ app.use(function*(next) {
             this.session.r = this.request.headers.referer;
         }
     }
-    console.log('--> referer found --', this.session.r, this.request.headers, this.request);
+    console.log('--> referer found -->', this.session.r, this.request.headers.referer);
     yield next;
 });
 
