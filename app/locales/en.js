@@ -97,7 +97,7 @@ const en = 	{
 	clear: 'Clear',
 	save: 'Save',
 	upvote_post: 'Upvote post',
-	update_post: 'Update Post',
+	update_post: 'Update post',
 	markdown_is_supported: 'Styling with Markdown is supported',
 	preview: 'Preview',
 	markdown_not_supported: 'Markdown is not supported here',
