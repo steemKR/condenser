@@ -37,16 +37,16 @@ function TopRightMenu({username, showLogin, logout, loggedIn, vertical, navigate
     const settings_link = `/@${username}/settings`;
     if (loggedIn) { // change back to if(username) after bug fix:  Clicking on Login does not cause drop-down to close #TEMP!
         const user_menu = [
-            {link: feed_link, icon: "home", value: 'Feed', addon: <NotifiCounter fields="feed" />},
-            {link: account_link, icon: 'profile', value: 'Blog'},
-            {link: comments_link, icon: 'replies', value: 'Comments'},
-            {link: replies_link, icon: 'reply', value: 'Replies', addon: <NotifiCounter fields="comment_reply" />},
-            {link: wallet_link, icon: 'wallet', value: 'Wallet', addon: <NotifiCounter fields="follow,send,receive,account_update" />},
-            {link: reset_password_link, icon: 'key', value: 'Change Password'},
-            {link: settings_link, icon: 'cog', value: 'Settings'},
+            {link: feed_link, icon: "home", value: translate('feed'), addon: <NotifiCounter fields="feed" />},
+            {link: account_link, icon: 'profile', value: translate('blog')},
+            {link: comments_link, icon: 'replies', value: translate('comments')},
+            {link: replies_link, icon: 'reply', value: translate('replies'), addon: <NotifiCounter fields="comment_reply" />},
+            {link: wallet_link, icon: 'wallet', value: translate('wallet'), addon: <NotifiCounter fields="follow,send,receive,account_update" />},
+            {link: reset_password_link, icon: 'key', value: translate('change_password')},
+            {link: settings_link, icon: 'cog', value: translate('settings')},
             loggedIn ?
-            {link: '#', icon: 'enter', onClick: logout, value: 'Logout'} :
-            {link: '#', onClick: showLogin, value: 'Login'}
+            {link: '#', icon: 'enter', onClick: logout, value: translate('logout')} :
+            {link: '#', onClick: showLogin, value: translate('login')}
         ];
         return (
             <ul className={mcn + mcl}>

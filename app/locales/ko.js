@@ -126,7 +126,7 @@ const ko = 	{
 	must_end_with_a_letter_or_number: 'Must end with a letter or number',
 	// tags page
 	tag: 'Tag',
-	replies: 'Replies',
+	replies: '답변',
 	payouts: 'Payouts',
 	need_password_or_key: 'You need a private password or key (not a public key)',
 	// BlocktradesDeposit
@@ -276,10 +276,10 @@ const ko = 	{
 	witness: 'Witness',
 	top_witnesses: 'Witness Voting',
 	// user's navigational menu
-	feed: 'Feed',
-	wallet: 'Wallet',
-	blog: 'Blog',
-	change_password: 'Change Password',
+	feed: '피드',
+	wallet: '지갑',
+	blog: '블로그',
+	change_password: '비밀번호 변경',
 	// UserProfile
 	unknown_account: 'Unknown Account',
 	user_hasnt_made_any_posts_yet: "Looks like {name} hasn't made any posts yet!",
@@ -417,7 +417,7 @@ const ko = 	{
 	your_existing_DEBT_TOKEN_are_liquid_and_transferable: 'Your existing ' + DEBT_TOKEN + ' are liquid and transferable. Instead of converting, you may wish to trade ' + DEBT_TOKEN + ' for ' + LIQUID_TOKEN_UPPERCASE + ' directly in this site under {link}. There is less risk, and you do not need to wait 3.5 days.',
 	trending_30_day: 'trending (30 day)',
 	promoted: 'promoted',
-	comments: 'Comments',
+	comments: '댓글',
 	topics: 'Topics',
 	this_password_is_bound_to_your_accounts_private_key: 'This password is bound to your account\'s active key and can not be used to login to this page. You may use this active key on other more secure pages like the Wallet or Market pages.',
 	potential_payout: 'Potential Payout',
@@ -532,7 +532,7 @@ const ko = 	{
 	reblog: "Resteem",
 	updated: 'updated',
 	created: 'created',
-	settings: 'Settings',
+	settings: '설정',
 	incorrect_password: 'Incorrect password',
 	username_does_not_exist: 'Username does not exist',
 	// string with a '.'(dot) is returned from the server, so you should add it too, despite rules
