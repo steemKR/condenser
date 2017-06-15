@@ -23,7 +23,8 @@ import ruLocaleData from 'react-intl/locale-data/ru';
 import frLocaleData from 'react-intl/locale-data/fr';
 import esLocaleData from 'react-intl/locale-data/es';
 import itLocaleData from 'react-intl/locale-data/it';
-addLocaleData([...enLocaleData, ...ruLocaleData, ...frLocaleData, ...esLocaleData, ...itLocaleData]);
+import koLocaleData from 'react-intl/locale-data/ko';
+addLocaleData([...enLocaleData, ...ruLocaleData, ...frLocaleData, ...esLocaleData, ...itLocaleData, ...koLocaleData]);
 
 // Our translated strings
 import { ru } from './locales/ru';
@@ -31,7 +32,8 @@ import { en } from './locales/en';
 import { fr } from './locales/fr';
 import { es } from './locales/es';
 import { it } from './locales/it';
-const messages = {ru, en, fr, es, it}
+import { ko } from './locales/ko';
+const messages = {ru, en, fr, es, it, ko}
 
 /*
 	exported function placeholders
