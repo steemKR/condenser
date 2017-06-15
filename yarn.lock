@@ -2,6 +2,12 @@
 # yarn lockfile v1
 
 
+"@newrelic/native-metrics@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-2.1.1.tgz#2a7abd87373e46b3c957a08124a72c0c41968dc8"
+  dependencies:
+    nan "^2.4.0"
+
 "@steem/crypto-session@git+https://github.com/steemit/crypto-session.git#83a90b319ce5bc6a70362d52a15a815de7e729bb":
   version "1.0.3"
   resolved "git+https://github.com/steemit/crypto-session.git#83a90b319ce5bc6a70362d52a15a815de7e729bb"
@@ -52,6 +58,10 @@ acorn@^5.0.1:
 addressparser@~1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/addressparser/-/addressparser-1.0.1.tgz#47afbe1a2a9262191db6838e4fd1d39b40821746"
+
+agent-base@~1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-1.0.2.tgz#6890d3fb217004b62b70f8928e0fae5f8952a706"
 
 ajv-keywords@^1.0.0:
   version "1.5.1"
@@ -1627,7 +1637,7 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
 
-concat-stream@^1.4.6, concat-stream@^1.4.7:
+concat-stream@^1.4.6, concat-stream@^1.4.7, concat-stream@^1.5.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/concat-stream/-/concat-stream-1.6.0.tgz#0aac662fd52be78964d5532f694784e70110acf7"
   dependencies:
@@ -1721,6 +1731,10 @@ core-js@^2.4.0:
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
+
+cpu-stat@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/cpu-stat/-/cpu-stat-2.0.1.tgz#501e8d6dd2d44cef5d842939c38d1822c078fcac"
 
 create-hash@^1.1.0, create-hash@^1.1.1, create-hash@^1.1.2:
   version "1.1.2"
@@ -1945,11 +1959,17 @@ dateformat@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-2.0.0.tgz#2743e3abb5c3fc2462e527dca445e04e9f4dee17"
 
-debug@*, debug@2, debug@^2.1.1, debug@^2.2.0:
+debug@*, debug@^2.1.1, debug@^2.2.0:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.3.tgz#0f7eb8c30965ec08c72accfa0130c8b79984141d"
   dependencies:
     ms "0.7.2"
+
+debug@2, debug@^2.6.8:
+  version "2.6.8"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
+  dependencies:
+    ms "2.0.0"
 
 debug@2.2.0:
   version "2.2.0"
@@ -1962,12 +1982,6 @@ debug@2.6.1:
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
   dependencies:
     ms "0.7.2"
-
-debug@^2.6.8:
-  version "2.6.8"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
-  dependencies:
-    ms "2.0.0"
 
 decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2:
   version "1.2.0"
@@ -2079,6 +2093,10 @@ diff@1.4.0:
 dirty-chai@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/dirty-chai/-/dirty-chai-1.2.2.tgz#78495e619635f7fe44219aa4c837849bf183142e"
+
+disk-stat@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/disk-stat/-/disk-stat-1.0.4.tgz#42a47930f5d4f2ceea9a261c02126954d117a6c4"
 
 dns-prefetch-control@0.1.0:
   version "0.1.0"
@@ -2545,7 +2563,7 @@ extend@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/extend/-/extend-2.0.1.tgz#1ee8010689e7395ff9448241c98652bc759a8260"
 
-extend@3.0.0, extend@^3.0.0, extend@~3.0.0:
+extend@3, extend@3.0.0, extend@^3.0.0, extend@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.0.tgz#5a474353b9f3353ddd8176dfd37b91c83a46f1d4"
 
@@ -3368,6 +3386,14 @@ https-browserify@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
 
+https-proxy-agent@^0.3.5:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-0.3.6.tgz#713fa38e5d353f50eb14a342febe29033ed1619b"
+  dependencies:
+    agent-base "~1.0.1"
+    debug "2"
+    extend "3"
+
 humanize-number@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/humanize-number/-/humanize-number-0.0.2.tgz#11c0af6a471643633588588048f1799541489c18"
@@ -3861,7 +3887,7 @@ json-stable-stringify@^1.0.0, json-stable-stringify@^1.0.1:
   dependencies:
     jsonify "~0.0.0"
 
-json-stringify-safe@~5.0.0, json-stringify-safe@~5.0.1:
+json-stringify-safe@^5.0.0, json-stringify-safe@~5.0.0, json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
@@ -4502,6 +4528,10 @@ medium-editor@^5.10.0, medium-editor@^5.15.0:
   version "5.23.0"
   resolved "https://registry.yarnpkg.com/medium-editor/-/medium-editor-5.23.0.tgz#7d16c15cdf152b95ced2a583bf07203e8539a3c6"
 
+mem-stat@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/mem-stat/-/mem-stat-1.0.5.tgz#7d66c297184da38bacbfe4f9cd2e9a7a0e195086"
+
 memoizee@^0.4.3:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/memoizee/-/memoizee-0.4.4.tgz#ecf4b791a09cd11c970203f80682534730fad78f"
@@ -4745,7 +4775,7 @@ mz@~2.4.0:
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
 
-nan@^2.3.0, nan@^2.3.2, nan@^2.3.3:
+nan@^2.3.0, nan@^2.3.2, nan@^2.3.3, nan@^2.4.0:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
 
@@ -4768,6 +4798,16 @@ negotiator@0.6.1:
 net@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/net/-/net-1.0.2.tgz#d1757ec9a7fb2371d83cf4755ce3e27e10829388"
+
+newrelic@^1.40.0:
+  version "1.40.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-1.40.0.tgz#2548df14c441ebfc9d3b8eb989d137f7b69a1d6f"
+  dependencies:
+    concat-stream "^1.5.0"
+    https-proxy-agent "^0.3.5"
+    json-stringify-safe "^5.0.0"
+    readable-stream "^1.1.13"
+    semver "^5.3.0"
 
 next-tick@1:
   version "1.0.0"
@@ -5860,7 +5900,7 @@ readable-stream@1.0.27-1:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readable-stream@1.1.14, readable-stream@~1.1.9:
+readable-stream@1.1.14, readable-stream@^1.1.13, readable-stream@~1.1.9:
   version "1.1.14"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-1.1.14.tgz#7cf4c54ef648e3813084c636dd2079e166c081d9"
   dependencies:

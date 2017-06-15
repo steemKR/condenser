@@ -67,6 +67,7 @@ plooniex
 poloex
 oloniex
 pooloniex
+poliniex
 blocktardes
 blocktrade
 bocktrades
@@ -74,6 +75,7 @@ changelly.com
 changely
 shapeshif
 shapeshift
+randomwhale
 `.trim().split('\n');
 
 export default list;

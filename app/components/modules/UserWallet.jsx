@@ -10,7 +10,7 @@ import TimeAgoWrapper from 'app/components/elements/TimeAgoWrapper';
 import BlocktradesDeposit from 'app/components/modules/BlocktradesDeposit';
 import Reveal from 'react-foundation-components/lib/global/reveal'
 import CloseButton from 'react-foundation-components/lib/global/close-button';
-import {steemTip, powerTip, valueTip, savingsTip} from 'app/utils/Tips'
+import {steemTip, powerTip, valueTip, savingsTip, delegationTip} from 'app/utils/Tips'
 import {numberWithCommas, vestingSteem, delegatedSteem} from 'app/utils/StateFunctions'
 import FoundationDropdownMenu from 'app/components/elements/FoundationDropdownMenu'
 import WalletSubMenu from 'app/components/elements/WalletSubMenu'
@@ -29,11 +29,17 @@ class UserWallet extends React.Component {
         this.onShowDeposit = () => {this.setState({showDeposit: !this.state.showDeposit})};
         this.onShowDepositSteem = (e) => {
             e.preventDefault();
-            this.setState({showDeposit: !this.state.showDeposit, depositType: 'STEEM'})
+            // this.setState({showDeposit: !this.state.showDeposit, depositType: 'STEEM'})
+            const new_window = window.open();
+            new_window.opener = null;
+            new_window.location = 'https://blocktrades.us';
         };
         this.onShowDepositPower = (e) => {
             e.preventDefault();
-            this.setState({showDeposit: !this.state.showDeposit, depositType: 'VESTS'})
+            // this.setState({showDeposit: !this.state.showDeposit, depositType: 'VESTS'})
+            const new_window = window.open();
+            new_window.opener = null;
+            new_window.location = 'https://blocktrades.us';
         };
         // this.onShowDeposit = this.onShowDeposit.bind(this)
         this.shouldComponentUpdate = shouldComponentUpdate(this, 'UserWallet');
@@ -251,9 +257,9 @@ class UserWallet extends React.Component {
                 <div className="columns small-10 medium-12 medium-expand">
                     {isMyAccount ? <WalletSubMenu account_name={account.get('name')} /> : <div><br /><h4>BALANCES</h4><br /></div>}
                 </div>
-                <div className="columns shrink">
+                {/*<div className="columns shrink">
                     {isMyAccount && <button className="UserWallet__buysp button hollow" onClick={this.onShowDepositSteem}>Buy Steem or Steem Power</button>}
-                </div>
+                </div>*/}
             </div>
             <div className="UserWallet__balance row">
                 <div className="column small-12 medium-8">
@@ -269,6 +275,7 @@ class UserWallet extends React.Component {
             <div className="UserWallet__balance row zebra">
                 <div className="column small-12 medium-8">
                     STEEM POWER<br /><span className="secondary">{powerTip.split(".").map((a, index) => {if (a) {return <div key={index}>{a}.</div>;} return null;})}</span>
+                    {delegated_steem != 0 ? <span className="secondary">{delegationTip}</span> : null}
                 </div>
                 <div className="column small-12 medium-4">
                     {isMyAccount ?
