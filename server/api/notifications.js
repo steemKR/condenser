@@ -1,13 +1,12 @@
 import koa_router from 'koa-router';
 import koa_body from 'koa-body';
 import Tarantool from 'db/tarantool';
-import config from 'config';
 import webPush from 'web-push';
 import {checkCSRF} from 'server/utils/misc';
 import sendEmail from "../sendEmail";
 
-if(config.has('notify.gcm_key')) {
-    webPush.setGCMAPIKey(config.get('notify.gcm_key'));
+if(process.env.GCM_SECRET_KEY) {
+    webPush.setGCMAPIKey(process.env.GCM_SECRET_KEY);
 }
 
 function toResArray(result) {
