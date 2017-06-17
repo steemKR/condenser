@@ -1,5 +1,8 @@
 import config from 'config';
+
 if(config.get('newrelic')) require('newrelic');
+
+require('dotenv').config()
 
 import * as steem from 'steem';
 
