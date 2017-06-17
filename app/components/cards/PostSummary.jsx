@@ -13,6 +13,7 @@ import {Map} from 'immutable';
 import Author from 'app/components/elements/Author';
 import TagList from 'app/components/elements/TagList';
 import UserNames from 'app/components/elements/UserNames';
+import { translate } from 'app/Translator.js';
 
 function isLeftClickEvent(event) {
     return event.button === 0
@@ -73,7 +74,7 @@ class PostSummary extends React.Component {
 
         if(reblogged_by) {
             reblogged_by = (<div className="PostSummary__reblogged_by">
-                               <Icon name="reblog" /> Resteemed by <UserNames names={reblogged_by} />
+                               <Icon name="reblog" /> {translate('reblogged_by')}<UserNames names={reblogged_by} />
                            </div>)
         }
 

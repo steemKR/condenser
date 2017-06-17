@@ -1,13 +1,13 @@
 // sometimes it's impossible to use html tags to style coin name, hence usage of _UPPERCASE modifier
-export const APP_NAME = 'Steemit';
+export const APP_NAME = '한국어 스팀잇';
 // sometimes APP_NAME is written in non-latin characters, but they are needed for technical purposes
 // ie. "Голос" > "Golos"
-export const APP_NAME_LATIN = 'Steemit';
-export const APP_NAME_UPPERCASE = 'STEEMIT';
+export const APP_NAME_LATIN = 'SteemKR';
+export const APP_NAME_UPPERCASE = 'STEEMKR';
 export const APP_ICON = 'steem';
 // FIXME figure out best way to do this on both client and server from env
 // vars. client should read $STM_Config, server should read config package.
-export const APP_DOMAIN = 'steemit.com';
+export const APP_DOMAIN = 'steemkr.com';
 export const LIQUID_TOKEN = 'Steem';
 // sometimes it's impossible to use html tags to style coin name, hence usage of _UPPERCASE modifier
 export const LIQUID_TOKEN_UPPERCASE = 'STEEM';
@@ -29,7 +29,7 @@ export const DEBT_TICKER = 'SBD';
 export const DEBT_TOKEN_SHORT = 'SBD';
 
 // application settings
-export const DEFAULT_LANGUAGE = 'en'; // used on application internationalization bootstrap
+export const DEFAULT_LANGUAGE = 'ko'; // used on application internationalization bootstrap
 export const DEFAULT_CURRENCY = 'USD';
 export const ALLOWED_CURRENCIES = ['USD'];
 export const FRACTION_DIGITS = 2; // default amount of decimal digits

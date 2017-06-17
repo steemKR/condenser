@@ -9,6 +9,7 @@ import shouldComponentUpdate from 'app/utils/shouldComponentUpdate'
 import reactForm from 'app/utils/ReactForm'
 import {serverApiRecordEvent} from 'app/utils/ServerApiClient';
 import {PrivateKey, PublicKey} from 'steem/lib/auth/ecc';
+import { translate } from 'app/Translator.js';
 
 class LoginForm extends Component {
 
@@ -142,7 +143,7 @@ class LoginForm extends Component {
         }
         const title = postType ? postType : 'Login';
         const authType = /^vote|comment/.test(opType) ? 'Posting' : 'Active or Owner';
-        const submitLabel = loginBroadcastOperation ? 'Sign In' : 'Login';
+        const submitLabel = loginBroadcastOperation ? translate('sign_up') : translate('login');
         let error = password.touched && password.error ? password.error : this.props.login_error;
         if (error === 'owner_login_blocked') {
             error = <span>This password is bound to your account&apos;s owner key and can not be used to login to this site.
@@ -185,14 +186,14 @@ class LoginForm extends Component {
             >
                 <div className="input-group">
                     <span className="input-group-label">@</span>
-                    <input className="input-group-field" type="text" required placeholder="Enter your username" ref="username"
+                    <input className="input-group-field" type="text" required placeholder={translate('enter_username')} ref="username"
                         {...username.props} onChange={usernameOnChange} autoComplete="on" disabled={submitting}
                     />
                 </div>
                 {username.touched && username.blur && username.error ? <div className="error">{username.error}&nbsp;</div> : null}
 
                 <div>
-                    <input type="password" required ref="pw" placeholder="Password or WIF" {...password.props} autoComplete="on" disabled={submitting} />
+                    <input type="password" required ref="pw" placeholder={translate('password_or_wif')} {...password.props} autoComplete="on" disabled={submitting} />
                     {error && <div className="error">{error}&nbsp;</div>}
                     {error && password_info && <div className="warning">{password_info}&nbsp;</div>}
                 </div>
@@ -201,7 +202,7 @@ class LoginForm extends Component {
                 </div>}
                 <div>
                     <label htmlFor="saveLogin">
-                        Keep me logged in &nbsp;
+                        {translate('keep_me_logged_in')} &nbsp;
                         <input id="saveLogin" type="checkbox" ref="pw" {...saveLogin.props} onChange={this.saveLoginToggle} disabled={submitting} /></label>
                 </div>
                 <div>
@@ -210,7 +211,7 @@ class LoginForm extends Component {
                         {submitLabel}
                     </button>
                     {this.props.onCancel && <button type="button float-right" disabled={submitting} className="button hollow" onClick={onCancel}>
-                        Cancel
+                        {translate('cancel')}
                     </button>}
                 </div>
                 {authType == 'Posting' &&

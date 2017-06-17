@@ -9,6 +9,7 @@ import { LinkWithDropdown } from 'react-foundation-components/lib/global/dropdow
 import VerticalMenu from 'app/components/elements/VerticalMenu';
 import LoadingIndicator from 'app/components/elements/LoadingIndicator';
 import NotifiCounter from 'app/components/elements/NotifiCounter';
+import { translate } from 'app/Translator.js';
 
 const defaultNavigate = (e) => {
     if (e.metaKey || e.ctrlKey) {
@@ -25,7 +26,7 @@ function TopRightMenu({username, showLogin, logout, loggedIn, vertical, navigate
     const mcl = vertical ? '' : ' sub-menu';
     const lcn = vertical ? '' : 'show-for-medium';
     const nav = navigate || defaultNavigate;
-    const submit_story = $STM_Config.read_only_mode ? null : <li className={lcn + ' submit-story' + (vertical ? ' last' : '')}><a href="/submit.html" onClick={nav}>Submit a Story</a></li>;
+    const submit_story = $STM_Config.read_only_mode ? null : <li className={lcn + ' submit-story' + (vertical ? ' last' : '')}><a href="/submit.html" onClick={nav}>{translate('submit_a_story')}</a></li>;
     const submit_icon = $STM_Config.read_only_mode ? null : <li className="show-for-small-only"><Link to="/submit.html"><Icon name="pencil2" /></Link></li>;
     const feed_link = `/@${username}/feed`;
     const replies_link = `/@${username}/recent-replies`;
@@ -36,16 +37,16 @@ function TopRightMenu({username, showLogin, logout, loggedIn, vertical, navigate
     const settings_link = `/@${username}/settings`;
     if (loggedIn) { // change back to if(username) after bug fix:  Clicking on Login does not cause drop-down to close #TEMP!
         const user_menu = [
-            {link: feed_link, icon: "home", value: 'Feed', addon: <NotifiCounter fields="feed" />},
-            {link: account_link, icon: 'profile', value: 'Blog'},
-            {link: comments_link, icon: 'replies', value: 'Comments'},
-            {link: replies_link, icon: 'reply', value: 'Replies', addon: <NotifiCounter fields="comment_reply" />},
-            {link: wallet_link, icon: 'wallet', value: 'Wallet', addon: <NotifiCounter fields="follow,send,receive,account_update" />},
-            {link: reset_password_link, icon: 'key', value: 'Change Password'},
-            {link: settings_link, icon: 'cog', value: 'Settings'},
+            {link: feed_link, icon: "home", value: translate('feed'), addon: <NotifiCounter fields="feed" />},
+            {link: account_link, icon: 'profile', value: translate('blog')},
+            {link: comments_link, icon: 'replies', value: translate('comments')},
+            {link: replies_link, icon: 'reply', value: translate('replies'), addon: <NotifiCounter fields="comment_reply" />},
+            {link: wallet_link, icon: 'wallet', value: translate('wallet'), addon: <NotifiCounter fields="follow,send,receive,account_update" />},
+            {link: reset_password_link, icon: 'key', value: translate('change_password')},
+            {link: settings_link, icon: 'cog', value: translate('settings')},
             loggedIn ?
-            {link: '#', icon: 'enter', onClick: logout, value: 'Logout'} :
-            {link: '#', onClick: showLogin, value: 'Login'}
+            {link: '#', icon: 'enter', onClick: logout, value: translate('logout')} :
+            {link: '#', onClick: showLogin, value: translate('login')}
         ];
         return (
             <ul className={mcn + mcl}>
@@ -87,8 +88,8 @@ function TopRightMenu({username, showLogin, logout, loggedIn, vertical, navigate
     return (
         <ul className={mcn + mcl}>
             {!vertical && <li className="Header__search"><a href="/static/search.html" title="Search"><Icon name="search" /></a></li>}
-            <li className={lcn}><a href="/pick_account">Sign Up</a></li>
-            <li className={lcn}><a href="/login.html" onClick={showLogin}>Login</a></li>
+            <li className={lcn}><a href="/pick_account">{translate('sign_up')}</a></li>
+            <li className={lcn}><a href="/login.html" onClick={showLogin}>{translate('login')}</a></li>
             {submit_story}
             {!vertical && submit_icon}
             {toggleOffCanvasMenu && <li className="toggle-menu Header__hamburger"><a href="#" onClick={toggleOffCanvasMenu}>
