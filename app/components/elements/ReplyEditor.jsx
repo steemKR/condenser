@@ -8,6 +8,7 @@ import LoadingIndicator from 'app/components/elements/LoadingIndicator'
 import shouldComponentUpdate from 'app/utils/shouldComponentUpdate'
 import Tooltip from 'app/components/elements/Tooltip'
 import sanitizeConfig, {allowedTags} from 'app/utils/SanitizeConfig'
+import { translate } from 'app/Translator.js';
 import sanitize from 'sanitize-html'
 import HtmlReady from 'shared/HtmlReady'
 import g from 'app/redux/GlobalReducer'
@@ -166,7 +167,7 @@ class ReplyEditor extends React.Component {
         const value = e.target.value
         // TODO block links in title (they do not make good permlinks)
         const hasMarkdown = /(?:\*[\w\s]*\*|\#[\w\s]*\#|_[\w\s]*_|~[\w\s]*~|\]\s*\(|\]\s*\[)/.test(value)
-        this.setState({ titleWarn: hasMarkdown ? 'Markdown is not supported here' : '' })
+        this.setState({ titleWarn: hasMarkdown ? translate('markdown_not_supported') : '' })
         const {title} = this.state
         title.props.onChange(e)
     }
@@ -320,7 +321,7 @@ class ReplyEditor extends React.Component {
             jsonMetadata, autoVote: autoVoteValue, payoutType,
             successCallback: successCallbackWrapper, errorCallback
         }
-        const postLabel = username ? <Tooltip t={'Post as “' + username + '”'}>Post</Tooltip> : 'Post'
+        const postLabel = username ? <Tooltip t={translate('post_as') + '“' + username + '”'}>{translate('post')}</Tooltip> : translate('post')
         const hasTitleError = title && title.touched && title.error
         let titleError = null
         // The Required title error (triggered onBlur) can shift the form making it hard to click on things..
@@ -348,10 +349,10 @@ class ReplyEditor extends React.Component {
                     >
                         <div className={vframe_section_shrink_class}>
                             {isStory && <span>
-                                <input type="text" className="ReplyEditor__title" {...title.props} onChange={onTitleChange} disabled={loading} placeholder="Title" autoComplete="off" ref="titleRef" tabIndex={1} />
+                                <input type="text" className="ReplyEditor__title" {...title.props} onChange={onTitleChange} disabled={loading} placeholder={translate('title')} autoComplete="off" ref="titleRef" tabIndex={1} />
                                 <div className="float-right secondary" style={{marginRight: '1rem'}}>
-                                    {rte && <a href="#" onClick={this.toggleRte}>{body.value ? 'Raw HTML' : 'Markdown'}</a>}
-                                    {!rte && (isHtml || !body.value) && <a href="#" onClick={this.toggleRte}>Editor</a>}
+                                    {rte && <a href="#" onClick={this.toggleRte}>{body.value ? translate('raw_html') : translate('markdown')}</a>}
+                                    {!rte && (isHtml || !body.value) && <a href="#" onClick={this.toggleRte}>{translate('editor')}</a>}
                                 </div>
                                 {titleError}
                             </span>}
@@ -374,7 +375,7 @@ class ReplyEditor extends React.Component {
                                             onPasteCapture={this.onPasteCapture}
                                             className={type === 'submit_story' ? 'upload-enabled' : ''}
                                             disabled={loading} rows={isStory ? 10 : 3}
-                                            placeholder={isStory ? 'Write your story...' : 'Reply'}
+                                            placeholder={isStory ? translate('write_your_story') : translate('reply')}
                                             autoComplete="off"
                                             tabIndex={2} />
                                     </Dropzone>
@@ -405,17 +406,17 @@ class ReplyEditor extends React.Component {
                         </div>
                         <div className={vframe_section_shrink_class}>
                             {!loading &&
-                                <button type="submit" className="button" disabled={disabled} tabIndex={4}>{isEdit ? 'Update Post' : postLabel}</button>
+                                <button type="submit" className="button" disabled={disabled} tabIndex={4}>{isEdit ? translate('update_post') : postLabel}</button>
                             }
                             {loading && <span><br /><LoadingIndicator type="circle" /></span>}
                             &nbsp; {!loading && this.props.onCancel &&
                                 <button type="button" className="secondary hollow button no-border" tabIndex={5} onClick={onCancel}>Cancel</button>
                             }
-                            {!loading && !this.props.onCancel && <button className="button hollow no-border" tabIndex={5} disabled={submitting} onClick={onCancel}>Clear</button>}
+                            {!loading && !this.props.onCancel && <button className="button hollow no-border" tabIndex={5} disabled={submitting} onClick={onCancel}>{translate('clear')}</button>}
 
                             {isStory && !isEdit && <div className="ReplyEditor__options float-right text-right">
 
-                                Rewards:&nbsp;
+                                {translate('rewards')}:&nbsp;
                                 <select value={this.state.payoutType} onChange={this.onPayoutTypeChange} style={{color: this.state.payoutType == '0%' ? 'orange' : 'inherit'}}>
                                     <option value="100%">Power Up 100%</option>
                                     <option value="50%">Default (50% / 50%)</option>
@@ -424,14 +425,14 @@ class ReplyEditor extends React.Component {
 
                                 <br />
                                 <label title="Check this to auto-upvote your post">
-                                  Upvote post&nbsp;
+                                  {translate('upvote_post')}&nbsp;
                                   <input type="checkbox" checked={autoVote.value} onChange={autoVoteOnChange} />
                                 </label>
                             </div>}
                         </div>
                         {!loading && !rte && body.value && <div className={'Preview ' + vframe_section_shrink_class}>
                             {!isHtml && <div className="float-right"><a target="_blank" href="https://guides.github.com/features/mastering-markdown/" rel="noopener noreferrer">Markdown Styling Guide</a></div>}
-                            <h6>Preview</h6>
+                            <h6>{translate('preview')}</h6>
                             <MarkdownViewer formId={formId} text={body.value} canEdit jsonMetadata={jsonMetadata} large={isStory} noImage={noImage} />
                         </div>}
                     </form>
