@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import {connect} from 'react-redux';
 import { browserHistory } from 'react-router';
+import { translate } from 'app/Translator.js';
 
 class Topics extends React.Component {
     static propTypes = {
@@ -37,7 +38,7 @@ class Topics extends React.Component {
 
         if (compact) {
             return <select className={cn} onChange={(e) => browserHistory.push(e.target.value)} value={currentValue}>
-                <option key={'*'} value={'/' + order}>Topics...</option>
+                <option key={'*'} value={'/' + order}>{translate('topics')}...</option>
                 {categories.map(cat => {
                     const link = order ? `/${order}/${cat}` : `/${cat}`;
                     return <option key={cat} value={link}>{cat}</option>
@@ -53,7 +54,7 @@ class Topics extends React.Component {
         });
         return (
             <ul className={cn}>
-                <li className="Topics__title" key={'*'}>Tags and Topics</li>
+                <li className="Topics__title" key={'*'}>{translate('tags_and_topics')}</li>
                 <hr />
                {categories}
                <li className="show-more">
