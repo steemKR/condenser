@@ -418,9 +418,9 @@ class ReplyEditor extends React.Component {
 
                                 {translate('rewards')}:&nbsp;
                                 <select value={this.state.payoutType} onChange={this.onPayoutTypeChange} style={{color: this.state.payoutType == '0%' ? 'orange' : 'inherit'}}>
-                                    <option value="100%">Power Up 100%</option>
-                                    <option value="50%">Default (50% / 50%)</option>
-                                    <option value="0%">Decline Payout</option>
+                                    <option value="100%">파워 업 100%</option>
+                                    <option value="50%">기본 (50% / 50%)</option>
+                                    <option value="0%">미지급</option>
                                 </select>
 
                                 <br />

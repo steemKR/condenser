@@ -1,5 +1,5 @@
 // sometimes it's impossible to use html tags to style coin name, hence usage of _UPPERCASE modifier
-export const APP_NAME = '한국어 스팀잇';
+export const APP_NAME = '스팀KR';
 // sometimes APP_NAME is written in non-latin characters, but they are needed for technical purposes
 // ie. "Голос" > "Golos"
 export const APP_NAME_LATIN = 'SteemKR';
@@ -36,7 +36,7 @@ export const FRACTION_DIGITS = 2; // default amount of decimal digits
 export const FRACTION_DIGITS_MARKET = 3; // accurate amount of deciaml digits (example: used in market)
 
 // meta info
-export const TWITTER_HANDLE = '@steemit';
+export const TWITTER_HANDLE = '@steemkr';
 export const SHARE_IMAGE = 'https://' +
     APP_DOMAIN +
     '/images/steemit-share.png';

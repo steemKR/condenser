@@ -142,7 +142,7 @@ class LoginForm extends Component {
             postType = loginBroadcastOperation.getIn(['operation', 'title']) ? 'Login to Post' : 'Login to Proceed';
         }
         const title = postType ? postType : 'Login';
-        const authType = /^vote|comment/.test(opType) ? 'Posting' : 'Active or Owner';
+        const authType = /^vote|comment/.test(opType) ? translate('posting') : translate('active_or_owner');
         const submitLabel = loginBroadcastOperation ? translate('sign_up') : translate('login');
         let error = password.touched && password.error ? password.error : this.props.login_error;
         if (error === 'owner_login_blocked') {
@@ -198,7 +198,7 @@ class LoginForm extends Component {
                     {error && password_info && <div className="warning">{password_info}&nbsp;</div>}
                 </div>
                 {loginBroadcastOperation && <div>
-                    <div className="info">This operation requires your {authType} key or Master password.</div>
+                    <div className="info">{translate('requires_auth_key', {authType: authType})}</div>
                 </div>}
                 <div>
                     <label htmlFor="saveLogin">
@@ -217,8 +217,8 @@ class LoginForm extends Component {
                 {authType == 'Posting' &&
                     <div>
                         <hr />
-                        <p>Join our <span className="free-slogan">amazing community</span> to comment and reward others.</p>
-                        <button type="button" className="button sign-up" onClick={this.SignUp}>Sign up now to receive <span className="free-money">FREE STEEM!</span></button>
+                        <p>{translate('if_you_enjoyed_what_you_read_earn_amount')}</p>
+                        <button type="button" className="button sign-up" onClick={this.SignUp}>{translate('get_sp_when_sign_up')}</button>
                     </div>}
             </form>
         </center>
