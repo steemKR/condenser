@@ -254,7 +254,7 @@ class App extends React.Component {
                 </ul>
                 <ul className="vertical menu">
                     <li>
-                        <a href="https://steemit.chat/home" target="_blank" rel="noopener noreferrer">
+                        <a href="https://t.me/steemkr" target="_blank" rel="noopener noreferrer">
                             {translate("APP_NAME_chat")}&nbsp;<Icon name="extlink" />
                         </a>
                     </li>
