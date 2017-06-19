@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  server:
+    container_name: server
+    build: .
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - TZ=Asia/Seoul
+      - STEEMKR_VERSION=stable
+    restart: always
+    ports:
+      - 3001:8080
+    depends_on:
+      - steemkr_mysql
