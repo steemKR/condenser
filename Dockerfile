@@ -20,10 +20,10 @@ COPY . /var/app
 #  npm run build
 
 RUN mkdir tmp && \
-  npm run-script build
+  npm run build
 
 ENV PORT 8080
-ENV NODE_ENV production
+ENV NODE_ENV $NODE_ENV
 
 EXPOSE 8080
 

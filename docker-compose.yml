@@ -1,14 +1,14 @@
 version: '2'
 
 services:
-  alpha:
-    container_name: alpha
+  server:
+    container_name: server
     build: .
     restart: always
     environment:
       - NODE_ENV=production
       - TZ=Asia/Seoul
-      - STEEMKR_VERSION=alpha
+      - STEEMKR_VERSION=stable
     restart: always
     ports:
       - 3021:8080
