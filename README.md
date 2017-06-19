@@ -156,8 +156,7 @@ We adhere to BEM methodology with exception for Foundation classes, here is an e
 </ul>
 ```
 
-### Production
-
+### Production on local
 If you want to test it locally in production mode, just run the following commands:
 
 ```bash
@@ -165,14 +164,30 @@ npm run build
 npm run prod
 ```
 
-or via pm2:
+### Production on server
 
-```bash
-npm run build
-npm -i -g pm2 # one time
-pm2 start config/process.json
+#### Prerequisites
+- Docker
+- Docker Compose
+- Run Database Container
+  ```
+  docker-compose -f docker-compose.mysql.yml --build -d
+  ```
+- Setup Database
+  ```
+  $ npm install -g sequelize sequelize-cli mysql
+  $ cd db && sequelize db:migrate --url 'mysql://root@localhost:13306/steemit_dev'  
+  ```
+
+### How to run
 ```
-
+# Alpha
+$ docker-compose -f docker-compose.mysql.yml -f docker-compose.alpha.yml up --build -d
+```
+```
+# Beta
+$ docker-compose -f docker-compose.mysql.yml -f docker-compose.beta.yml up --build -d
+```
 
 ## Issues
 
