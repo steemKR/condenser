@@ -15,5 +15,7 @@
     },
     "reportOnly": false,
     "setAllHeaders": true
-  }
+  },
+  "img_proxy_prefix": "https://steemitimages.com/",
+  "upload_image": "https://steemitimages.com"
 }
