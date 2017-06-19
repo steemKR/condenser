@@ -381,9 +381,9 @@ class ReplyEditor extends React.Component {
                                     </Dropzone>
                                     {type === 'submit_story' &&
                                         <p className="drag-and-drop">
-                                            Insert images by dragging &amp; dropping,&nbsp;
-                                            {noClipboardData ? '' : 'pasting from the clipboard, '}
-                                            or by <a onClick={this.onOpenClick}>selecting them</a>.
+                                            {translate('insert_image_by_drag_and_drop')}
+                                            {noClipboardData ? '' : translate('or_insert_image_by')+ ' ' +translate('paste_from_clipboard')}
+                                            {translate('or_insert_image_by')} <a onClick={this.onOpenClick}>{translate('selecting_them')}</a>.
                                         </p>
                                     }
                                     {progress.message && <div className="info">{progress.message}</div>}
