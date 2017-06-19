@@ -169,6 +169,10 @@ npm run prod
 #### Prerequisites
 - Docker
 - Docker Compose
+- Run Database Container
+  ```
+  docker-compose -f docker-compose.mysql.yml --build -d
+  ```
 - Setup Database
   ```
   $ npm install -g sequelize sequelize-cli mysql
@@ -176,7 +180,6 @@ npm run prod
   ```
 
 ### How to run
-
 ```
 # Alpha
 $ docker-compose -f docker-compose.mysql.yml -f docker-compose.alpha.yml up --build -d
