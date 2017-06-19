@@ -14,7 +14,7 @@ const ko = 	{
 	stolen_account_recovery: "도난당한 계정 찾기",
 	change_account_password: "비밀번호 변경하기",
 	steemit_api_docs: "Steemit API 문서",
-	APP_NAME_chat: APP_NAME + " 채팅",
+	APP_NAME_chat: "스팀KR 텔레그램 채팅",
 	witnesses: "증인들",
 	vote_for_witnesses: "증인 투표하기",
 	privacy_policy: "개인 정보 정책",
