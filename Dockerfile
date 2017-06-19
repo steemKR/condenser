@@ -6,6 +6,7 @@ FROM node:7.5
 RUN npm install -g yarn
 
 WORKDIR /var/app
+
 RUN mkdir -p /var/app
 ADD package.json /var/app/package.json
 RUN yarn --production
@@ -18,6 +19,9 @@ COPY . /var/app
 #  npm test && \
 #  ./node_modules/.bin/eslint . && \
 #  npm run build
+
+RUN \
+  sed -i -e 's/127\.0\.0\.1/steemkr_mysql/g' db/config/config.json
 
 RUN mkdir tmp && \
   npm run build

@@ -156,8 +156,7 @@ We adhere to BEM methodology with exception for Foundation classes, here is an e
 </ul>
 ```
 
-### Production
-
+### Production on local
 If you want to test it locally in production mode, just run the following commands:
 
 ```bash
@@ -165,14 +164,22 @@ npm run build
 npm run prod
 ```
 
-or via pm2:
+### Production on server
 
-```bash
-npm run build
-npm -i -g pm2 # one time
-pm2 start config/process.json
+#### Prerequisites
+- Docker
+- Docker Compose
+
+### How to run
+
 ```
-
+# Alpha
+$ docker-compose -f docker-compose.mysql.yml -f docker-compose.alpha.yml up --build -d
+```
+```
+# Beta
+$ docker-compose -f docker-compose.mysql.yml -f docker-compose.beta.yml up --build -d
+```
 
 ## Issues
 

@@ -11,6 +11,6 @@ services:
       - STEEMKR_VERSION=stable
     restart: always
     ports:
-      - 3021:8080
+      - 3001:8080
     depends_on:
       - steemkr_mysql
