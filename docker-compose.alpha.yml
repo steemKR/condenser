@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  alpha:
+    container_name: alpha
+    build: .
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - TZ=Asia/Seoul
+    restart: always
+    ports:
+      - 80:8080
+    volumes:
+      - /var/log/server:/var/log/server
+      - /etc/letsencrypt:/root/letsencrypt
