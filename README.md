@@ -169,6 +169,11 @@ npm run prod
 #### Prerequisites
 - Docker
 - Docker Compose
+- Setup Database
+  ```
+  $ npm install -g sequelize sequelize-cli mysql
+  $ cd db && sequelize db:migrate --url 'mysql://root@localhost:13306/steemit_dev'  
+  ```
 
 ### How to run
 
