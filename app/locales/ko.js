@@ -84,7 +84,8 @@ const ko = 	{
 	update_your_password: '패스워드 변경하기',
 	enter_username: '아이디를 입력해주세요',
 	password_or_wif: '패스워드나 개인키를 입력해주세요.',
-	requires_auth_key: '이 기능은 {authType} 키가 필요합니다. (혹은 마스터 패스워드를 입력해주세요) / SteemKR은 베타서비스 입니다. 사고에 대해서 보상해드릴 수 없습니다. 포스팅키만 사용하시기를 권장드립니다.',
+	requires_auth_key: '이 기능은 {authType} 키가 필요합니다. (혹은 마스터 패스워드를 입력해주세요)',
+	login_form_information: 'SteemKR은 베타서비스 입니다. 사고에 대해서 보상해드릴 수 없습니다. 포스팅키만 사용하시기를 권장드립니다.',
 	keep_me_logged_in: '로그인 유지하기',
 	// this are used mainly in "submit a story" form
 	title: "제목",
