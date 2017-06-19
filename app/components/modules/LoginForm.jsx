@@ -194,6 +194,7 @@ class LoginForm extends Component {
 
                 <div>
                     <input type="password" required ref="pw" placeholder={translate('password_or_wif')} {...password.props} autoComplete="on" disabled={submitting} />
+                    <div className="info">{translate('login_form_information')}</div>
                     {error && <div className="error">{error}&nbsp;</div>}
                     {error && password_info && <div className="warning">{password_info}&nbsp;</div>}
                 </div>
