@@ -103,6 +103,7 @@ const ko = 	{
 	or_insert_image_by: '하시거나',
 	selecting_image: '이미지 파일 선택하세요',
 	upvote_post: '게시물 보팅하기',
+	donate_post_reward_to_app: '게시물 보상의 {fee}%를 {app}에 후원하기',
 	update_post: '게시물 업데이트',
 	markdown_is_supported: '마크다운을 지원합니다',
 	preview: '미리보기',
