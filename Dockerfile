@@ -28,10 +28,13 @@ RUN mkdir tmp && \
 
 ENV PORT 8080
 ENV NODE_ENV $NODE_ENV
+ENV STEEMKR_VERSION $STEEMKR_VERSION
 
 EXPOSE 8080
 
-CMD [ "yarn", "run", "production" ]
+CMD \
+  cp -rf ./config/production-$NETWORK.json ./config/production.json && \
+  yarn run production
 
 # uncomment the lines below to run it in development mode
 # ENV NODE_ENV development
