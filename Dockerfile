@@ -23,8 +23,7 @@ COPY . /var/app
 RUN \
   sed -i -e 's/127\.0\.0\.1/steemkr_mysql/g' db/config/config.json
 
-RUN mkdir tmp && \
-  npm run build
+RUN mkdir tmp
 
 ENV PORT 8080
 ENV NODE_ENV $NODE_ENV
@@ -34,6 +33,7 @@ EXPOSE 8080
 
 CMD \
   cp -rf ./config/production-$NETWORK.json ./config/production.json && \
+  yarn run build && \
   yarn run production
 
 # uncomment the lines below to run it in development mode

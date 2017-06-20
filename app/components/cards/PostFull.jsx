@@ -22,6 +22,8 @@ import {serverApiRecordEvent} from 'app/utils/ServerApiClient';
 import Userpic from 'app/components/elements/Userpic';
 import { APP_DOMAIN } from 'app/client_config';
 
+import translate from 'google-translate-api'
+
 // function loadFbSdk(d, s, id) {
 //     return new Promise(resolve => {
 //         window.fbAsyncInit = function () {
@@ -84,7 +86,9 @@ class PostFull extends React.Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+          translated: false,
+        };
         this.fbShare = this.fbShare.bind(this);
         this.twitterShare = this.twitterShare.bind(this);
         this.linkedInShare = this.linkedInShare.bind(this);
@@ -287,6 +291,8 @@ class PostFull extends React.Component {
         const authorRepLog10 = repLog10(content.author_reputation)
         const isPreViewCount = Date.parse(post_content.get('created')) < 1480723200000 // check if post was created before view-count tracking began (2016-12-03)
 
+        console.log(content_body)
+
         return (
             <article className="PostFull hentry" itemScope itemType="http://schema.org/blogPost">
                 {showEdit ?
@@ -295,6 +301,7 @@ class PostFull extends React.Component {
                         <div className="float-right"><Voting post={post} flag /></div>
                         <div className="PostFull__header">
                             {post_header}
+                            한국어로 번역하기
                             <TimeAuthorCategoryLarge content={content} authorRepLog10={authorRepLog10} />
                         </div>
                         <div className="PostFull__body entry-content">

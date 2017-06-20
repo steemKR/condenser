@@ -54,6 +54,7 @@
     "file-loader": "^0.8.5",
     "foundation-sites": "git+https://github.com/steemit/foundation-sites.git#e8e32c715bbc4c822b80b555345f61337269ca78",
     "git-rev-sync": "^1.6.0",
+    "google-translate-api": "^2.2.2",
     "grant-koa": "^3.6.0",
     "highcharts": "^4.2.5",
     "humanize-number": "0.0.2",
@@ -92,6 +93,7 @@
     "raw-loader": "^0.5.1",
     "react": "15.4.2",
     "react-ab-test": "^1.7.0",
+    "react-addons-perf": "15.4.2",
     "react-addons-pure-render-mixin": "15.4.2",
     "react-copy-to-clipboard": "^4.2.3",
     "react-dom": "15.4.2",
@@ -140,8 +142,7 @@
     "webpack-isomorphic-tools": "^2.2.31",
     "websocket": "^1.0.22",
     "whatwg-fetch": "^0.11.1",
-    "xmldom": "^0.1.22",
-    "react-addons-perf": "15.4.2"
+    "xmldom": "^0.1.22"
   },
   "devDependencies": {
     "babel-plugin-react-transform": "^2.0.2",
