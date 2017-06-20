@@ -649,6 +649,10 @@ export default formId => connect(
                         }
                         break;
                     default: // 50% steem power, 50% sd+steem
+                        __config.comment_options = {
+
+                        }
+                        break;
                 }
                 __config.comment_options.extensions = extensions
             }
