@@ -169,15 +169,6 @@ npm run prod
 #### Prerequisites
 - Docker
 - Docker Compose
-- Run Database Container
-  ```
-  docker-compose -f docker-compose.mysql.yml --build -d
-  ```
-- Setup Database
-  ```
-  $ npm install -g sequelize sequelize-cli mysql
-  $ cd db && sequelize db:migrate --url 'mysql://root@localhost:13306/steemit_dev'  
-  ```
 
 ### How to run
 ```
@@ -187,6 +178,12 @@ $ docker-compose -f docker-compose.mysql.yml -f docker-compose.alpha.yml up --bu
 ```
 # Beta
 $ docker-compose -f docker-compose.mysql.yml -f docker-compose.beta.yml up --build -d
+```
+
+### Setup Database(After successfully running service)
+```
+$ npm install -g sequelize sequelize-cli mysql
+$ cd db && sequelize db:migrate --url 'mysql://root@localhost:13306/steemit_dev'  
 ```
 
 ## Issues
