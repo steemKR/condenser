@@ -92,6 +92,7 @@ class ReplyEditor extends React.Component {
                 rte_value: rte ? stateFromHtml(raw) : null
             })
             this.setAutoVote()
+            this.setDonateToApp()
             this.setState({payoutType: this.props.isStory ? (localStorage.getItem('defaultPayoutType') || '50%') : '50%'})
         }
     }
@@ -179,6 +180,7 @@ class ReplyEditor extends React.Component {
         if(!body.value || confirm('Are you sure you want to clear this form?')) {
             replyForm.resetForm()
             this.setAutoVote()
+            this.setDonateToApp()
             this.setState({rte_value: stateFromHtml()})
             this.setState({progress: {}})
             if(onCancel) onCancel(e)
@@ -190,6 +192,13 @@ class ReplyEditor extends React.Component {
         const key = 'replyEditorData-autoVote-story'
         localStorage.setItem(key, !autoVote.value)
         autoVote.props.onChange(!autoVote.value)
+    }
+
+    donateToAppOnChange = () => {
+        const {donateToApp} = this.state
+        const key = 'replyEditorData-donateToApp-story'
+        localStorage.setItem(key, !donateToApp.value)
+        donateToApp.props.onChange(!donateToApp.value)
     }
 
     // As rte_editor is updated, keep the (invisible) 'body' field in sync.
@@ -207,6 +216,16 @@ class ReplyEditor extends React.Component {
             const key = 'replyEditorData-autoVote-story'
             const autoVoteDefault = JSON.parse(localStorage.getItem(key) || true)
             autoVote.props.onChange(autoVoteDefault)
+        }
+    }
+
+    setDonateToApp() {
+        const {isStory} = this.props
+        if(isStory) {
+            const {donateToApp} = this.state
+            const key = 'replyEditorData-donateToApp-story'
+            const donateToAppDefault = JSON.parse(localStorage.getItem(key) || true)
+            donateToApp.props.onChange(donateToAppDefault)
         }
     }
     toggleRte = (e) => {
@@ -294,8 +313,8 @@ class ReplyEditor extends React.Component {
             category: this.props.category,
             body: this.props.body,
         }
-        const {onCancel, onTitleChange, autoVoteOnChange} = this
-        const {title, category, body, autoVote} = this.state
+        const {onCancel, onTitleChange, autoVoteOnChange, donateToAppOnChange} = this
+        const {title, category, body, autoVote, donateToApp} = this.state
         const {
             reply, username, isStory, formId, noImage,
             author, permlink, parent_author, parent_permlink, type, jsonMetadata,
@@ -316,9 +335,10 @@ class ReplyEditor extends React.Component {
         const isHtml = rte || isHtmlTest(body.value)
         // Be careful, autoVote can reset curation rewards.  Never autoVote on edit..
         const autoVoteValue = !isEdit && autoVote.value
+        const donateToAppValue = !isEdit && donateToApp.value
         const replyParams = {
             author, permlink, parent_author, parent_permlink, type, state, originalPost, isHtml, isStory,
-            jsonMetadata, autoVote: autoVoteValue, payoutType,
+            jsonMetadata, autoVote: autoVoteValue, donateToApp: donateToAppValue, payoutType,
             successCallback: successCallbackWrapper, errorCallback
         }
         const postLabel = username ? <Tooltip t={translate('post_as') + '“' + username + '”'}>{translate('post')}</Tooltip> : translate('post')
@@ -381,9 +401,9 @@ class ReplyEditor extends React.Component {
                                     </Dropzone>
                                     {type === 'submit_story' &&
                                         <p className="drag-and-drop">
-                                            Insert images by dragging &amp; dropping,&nbsp;
-                                            {noClipboardData ? '' : 'pasting from the clipboard, '}
-                                            or by <a onClick={this.onOpenClick}>selecting them</a>.
+                                            {translate('insert_image_by_drag_and_drop')}
+                                            {noClipboardData ? '' : translate('or_insert_image_by')+ ' ' +translate('paste_from_clipboard')}
+                                            {translate('or_insert_image_by')} <a onClick={this.onOpenClick}>{translate('selecting_image')}</a>.
                                         </p>
                                     }
                                     {progress.message && <div className="info">{progress.message}</div>}
@@ -422,11 +442,14 @@ class ReplyEditor extends React.Component {
                                     <option value="50%">기본 (50% / 50%)</option>
                                     <option value="0%">미지급</option>
                                 </select>
-
                                 <br />
                                 <label title="Check this to auto-upvote your post">
                                   {translate('upvote_post')}&nbsp;
                                   <input type="checkbox" checked={autoVote.value} onChange={autoVoteOnChange} />
+                                </label>
+                                <label title="Check this to donate your post rewards to">
+                                  {translate('donate_post_reward_to_app', {app: 'SteemKR', fee: 15})}&nbsp;
+                                  <input type="checkbox" checked={donateToApp.value} onChange={donateToAppOnChange} />
                                 </label>
                             </div>}
                         </div>
@@ -486,7 +509,7 @@ export default formId => connect(
     // mapStateToProps
     (state, ownProps) => {
         const username = state.user.getIn(['current', 'username'])
-        const fields = ['body', 'autoVote:checked']
+        const fields = ['body', 'autoVote:checked', 'donateToApp:checked']
         const {type, parent_author, jsonMetadata} = ownProps
         const isEdit = type === 'edit'
         const isStory = /submit_story/.test(type) || (
@@ -524,7 +547,7 @@ export default formId => connect(
             })
         },
         reply: ({category, title, body, author, permlink, parent_author, parent_permlink, isHtml, isStory,
-            type, originalPost, autoVote = false, payoutType = '50%',
+            type, originalPost, autoVote = false, donateToApp = false, payoutType = '50%',
             state, jsonMetadata,
             successCallback, errorCallback, startLoadingIndicator
         }) => {
@@ -580,7 +603,7 @@ export default formId => connect(
             if(rtags.images.size) meta.image = rtags.images; else delete meta.image
             if(rtags.links.size) meta.links = rtags.links; else delete meta.links
 
-            meta.app = "steemit/0.1"
+            meta.app = "steemkr/0.1"
             if(isStory) {
                 meta.format = isHtml ? 'html' : 'markdown'
             }
@@ -602,10 +625,18 @@ export default formId => connect(
             startLoadingIndicator()
 
             const originalBody = isEdit ? originalPost.body : null
-            const __config = {originalBody, autoVote}
+            const __config = {originalBody, autoVote, donateToApp}
 
             // Avoid changing payout option during edits #735
             if(!isEdit) {
+                const appBeneficiaries = {
+                    account: "steemkr",
+                    weight: 1500
+                };
+                const beneficiaries = donateToApp ? [appBeneficiaries] : [];
+                const extensions = [[0, {
+                    beneficiaries: beneficiaries
+                }]]
                 switch(payoutType) {
                     case '0%': // decline payout
                         __config.comment_options = {
@@ -618,7 +649,12 @@ export default formId => connect(
                         }
                         break;
                     default: // 50% steem power, 50% sd+steem
+                        __config.comment_options = {
+
+                        }
+                        break;
                 }
+                __config.comment_options.extensions = extensions
             }
 
             const operation = {

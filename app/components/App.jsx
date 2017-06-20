@@ -255,6 +255,11 @@ class App extends React.Component {
                 <ul className="vertical menu">
                     <li>
                         <a href="https://t.me/steemkr" target="_blank" rel="noopener noreferrer">
+                            SteemKR 공개 채팅방&nbsp;<Icon name="extlink" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://steemit.chat/home" target="_blank" rel="noopener noreferrer">
                             {translate("APP_NAME_chat")}&nbsp;<Icon name="extlink" />
                         </a>
                     </li>
