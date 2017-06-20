@@ -634,9 +634,12 @@ export default formId => connect(
                     weight: 1500
                 };
                 const beneficiaries = donateToApp ? [appBeneficiaries] : [];
-                const extensions = [[0, {
-                    beneficiaries: beneficiaries
-                }]]
+                const extensions = [];
+                if (beneficiaries.length > 0) {
+                    extensions.push([0, {
+                        beneficiaries: beneficiaries
+                    }]);
+                }
                 switch(payoutType) {
                     case '0%': // decline payout
                         __config.comment_options = {
