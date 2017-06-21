@@ -68,6 +68,15 @@ poloex
 oloniex
 pooloniex
 poliniex
+polniex
+poleniex
+polionex
+pollniex
+polloniex
+polnoiex
+polonyex
+polonied
+polonixe
 blocktardes
 blocktrade
 bocktrades
@@ -76,6 +85,7 @@ changely
 shapeshif
 shapeshift
 randomwhale
+coinpayments
 `.trim().split('\n');
 
 export default list;
