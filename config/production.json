@@ -16,6 +16,9 @@
     "reportOnly": false,
     "setAllHeaders": true
   },
+  "notify": {
+    "gcm_key": "AIzaSyAbmPJfm1X0_8pUbwRv9qPUpNZyh526ngA"
+  },
   "img_proxy_prefix": "https://steemitimages.com/",
   "upload_image": "https://steemitimages.com"
 }
