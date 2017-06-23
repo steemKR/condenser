@@ -3097,9 +3097,9 @@ glogg@^1.0.0:
   dependencies:
     sparkles "^1.0.0"
 
-google-translate-api@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/google-translate-api/-/google-translate-api-2.2.2.tgz#10f5e63159a5dbfa91f1aa6bfc70b7ce3f73a3a0"
+"google-translate-api@git+https://github.com/snkrsnkampa/google-translate-api.git#8a288f5bf98582c788029eda6157e03d51fd8639":
+  version "2.3.0"
+  resolved "git+https://github.com/snkrsnkampa/google-translate-api.git#8a288f5bf98582c788029eda6157e03d51fd8639"
   dependencies:
     configstore "^2.0.0"
     google-translate-token latest
