@@ -19,6 +19,7 @@ import Dropzone from 'react-dropzone'
 const remarkable = new Remarkable({ html: true, linkify: false, breaks: true })
 const RichTextEditor = process.env.BROWSER ? require('react-rte-image').default : null;
 const RTE_DEFAULT = false
+const DONATE_RATE = 15
 //var htmlclean = require('htmlclean');
 
 class ReplyEditor extends React.Component {
@@ -448,7 +449,7 @@ class ReplyEditor extends React.Component {
                                   <input type="checkbox" checked={autoVote.value} onChange={autoVoteOnChange} />
                                 </label>
                                 <label title="Check this to donate your post rewards to">
-                                  {translate('donate_post_reward_to_app', {app: 'SteemKR', fee: 15})}&nbsp;
+                                  {translate('donate_post_reward_to_app', {app: 'SteemKR', fee: DONATE_RATE})}&nbsp;
                                   <input type="checkbox" checked={donateToApp.value} onChange={donateToAppOnChange} />
                                 </label>
                             </div>}
@@ -631,7 +632,7 @@ export default formId => connect(
             if(!isEdit) {
                 const appBeneficiaries = {
                     account: "steemkr",
-                    weight: 1500
+                    weight: DONATE_RATE * 100
                 };
                 const beneficiaries = donateToApp ? [appBeneficiaries] : [];
                 const extensions = [];
