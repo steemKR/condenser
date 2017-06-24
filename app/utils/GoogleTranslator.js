@@ -6,13 +6,14 @@ const getUrl = (text, from, to) =>
 
 
 export default function ({ title, bodyContent, from, to }) {
-  const bodyTextSplitted = compact(striptags(bodyContent, [], '\n').split(/\n|\r/))
+  const cleanedBodyContent = bodyContent.replace(/&nbsp;/g, ' ');
+  const bodyTextSplitted = compact(striptags(cleanedBodyContent, [], '\n').split(/\n|\r|\./))
   const sourceArray = [...[title], ...bodyTextSplitted];
 
   return Promise
     .all(sourceArray.map((t) => fetch(getUrl(t, from, to)).then(r => r.json())))
     .then((result) => {
-      let translatedBodyContent = bodyContent;
+      let translatedBodyContent = cleanedBodyContent;
       flatten(result.map(r => r[0]))
         .forEach((r, index) => {
           if (title && index === 0 ) {
@@ -32,15 +33,4 @@ export default function ({ title, bodyContent, from, to }) {
         bodyContent: translatedBodyContent,
       }
     })
-
-  // return fetch('/api/v1/translation', {
-  //   method: 'post',
-  //   mode: 'no-cors',
-  //   credentials: 'same-origin',
-  //   headers: {
-  //     Accept: 'application/json',
-  //     'Content-type': 'application/json'
-  //   },
-  //   body: JSON.stringify({ text, to })
-  // }).then(r => r.json());
 }

@@ -44,7 +44,6 @@ export default function translateButtonEnhancer(Comp, {titleSelector, bodySelect
         this.setState({ translating: true });
         googleTranslateTextTo({title: titleText, bodyContent, to })
           .then((result) => {
-            console.log(result)
             this._translated = { title: result.title, body: result.bodyContent };
             this._original = { title: titleText, body: bodyContent };
 
