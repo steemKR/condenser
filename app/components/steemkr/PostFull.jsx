@@ -24,6 +24,7 @@ export default class PostFullWrapper extends React.Component {
     const titleText = titleElement.textContent
     const bodyElement = document.querySelector('.PostFull__body.entry-content')
     const bodyContent = bodyElement.innerHTML
+    const bodyText = bodyElement.textContent
 
     if (this.state.translated) {
       titleElement.textContent = this._original.title;
@@ -38,13 +39,14 @@ export default class PostFullWrapper extends React.Component {
       }
 
       this.setState({ translating: true });
-      googleTranslateTextTo({text: [titleText, bodyContent], to })
+      googleTranslateTextTo({title: titleText, bodyContent, bodyText, to })
         .then((result) => {
-          this._translated = { title: result.text[0], body: result.text[1] };
+          console.log(result)
+          this._translated = { title: result.title, body: result.bodyContent };
           this._original = { title: titleText, body: bodyContent };
 
           titleElement.textContent = this._translated.title;
-          bodyElement.innerHTML = this.translated.body;
+          bodyElement.innerHTML = this._translated.body;
 
           this.setState({ translating: false, translated: true });
         })

@@ -79,6 +79,7 @@
     "koa-router": "^5.4.0",
     "koa-session": "^3.3.1",
     "koa-static-cache": "^3.1.2",
+    "lodash": "^4.17.4",
     "lodash.debounce": "^4.0.7",
     "medium-editor-insert-plugin": "^2.3.2",
     "mem-stat": "^1.0.5",
