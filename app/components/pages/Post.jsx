@@ -3,6 +3,7 @@ import React from 'react';
 import Comment from 'app/components/cards/Comment';
 import PostFull from 'app/components/cards/PostFull';
 import {connect} from 'react-redux';
+import translateButtonEnhancer from 'app/components/steemkr/translateButtonEnhancer'
 
 import {sortComments} from 'app/components/cards/Comment';
 // import { Link } from 'react-router';
@@ -12,6 +13,25 @@ import { translate } from 'app/Translator';
 import { localizedCurrency } from 'app/components/elements/LocalizedCurrency';
 import shouldComponentUpdate from 'app/utils/shouldComponentUpdate';
 import {serverApiRecordEvent} from 'app/utils/ServerApiClient';
+
+const PostFullWithTranslateButton = translateButtonEnhancer(PostFull, {
+  titleSelector: '.PostFull__header .entry-title',
+  bodySelector: '.PostFull__body.entry-content',
+  style: {
+    float: 'right',
+  }
+})
+
+const CommentWithTranslateButton = translateButtonEnhancer(Comment, {
+  bodySelector: '.Comment__body.entry-content',
+  style: {
+    position: 'absolute',
+    right: '40px',
+    top: '-3px',
+    border: 0,
+    zIndex: 100,
+  }
+})
 
 class Post extends React.Component {
 
@@ -97,7 +117,7 @@ class Post extends React.Component {
         sortComments( content, replies, sort_order );
         const positiveComments = replies
             .map(reply => (
-                <Comment
+                <CommentWithTranslateButton
                     root
                     key={post + reply}
                     content={reply}
@@ -157,7 +177,7 @@ class Post extends React.Component {
             <div className="Post">
                 <div className="row">
                     <div className="column">
-                        <PostFull post={post} cont={content} />
+                        <PostFullWithTranslateButton post={post} cont={content} />
                     </div>
                 </div>
                 {!current_user && <div className="row">
@@ -179,6 +199,7 @@ class Post extends React.Component {
                                 {translate('sort_order')}: &nbsp;
                                 <FoundationDropdownMenu menu={sort_menu} label={sort_label} dropdownPosition="bottom" dropdownAlignment="right" />
                             </div>) : null}
+                            <div className="clear-both" />
                             {positiveComments}
                             {negativeGroup}
                         </div>

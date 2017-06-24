@@ -92,7 +92,7 @@ const ko = 	{
 	title: "제목",
 	write_your_story: '당신의 이야기를 쓰세요',
 	editor: '에디터',
-	reply: '댓글',
+	reply: '답글',
 	edit: '수정',
 	delete: '삭제',
 	cancel: '취소',
@@ -133,7 +133,7 @@ const ko = 	{
 	must_end_with_a_letter_or_number: '마지막 글자는 문자나 숫자로 입력해주세요',
 	// tags page
 	tag: '태그',
-	replies: '댓글',
+	replies: '답글',
 	payouts: '지불',
 	need_password_or_key: '마스터 패스워드나 개인키를 입력해주세요. (공개키가 아닙니다)',
 	// BlocktradesDeposit
