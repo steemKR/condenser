@@ -51,6 +51,13 @@ export default createModule({
             }
         },
         {
+            action: 'RECEIVE_FUND',
+            reducer: (state, {payload: {type, rewardPerVest}}) => {
+                const reward = rewardPerVest
+                return state.updateIn(['reward'], 0, () => reward);
+            }
+        },
+        {
             action: 'RECEIVE_COMMENT',
             reducer: (state, {payload: op}) => {
                 const {author, permlink, parent_author = '', parent_permlink = '', title = '', body} = op
