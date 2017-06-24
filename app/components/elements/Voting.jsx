@@ -11,6 +11,7 @@ import DropdownMenu from 'app/components/elements/DropdownMenu';
 import TimeAgoWrapper from 'app/components/elements/TimeAgoWrapper';
 import FoundationDropdown from 'app/components/elements/FoundationDropdown';
 import CloseButton from 'react-foundation-components/lib/global/close-button';
+import Progress from 'react-foundation-components/lib/global/progress-bar';
 
 const ABOUT_FLAG = <div>
     <p>Flagging a post can remove rewards and make this material less visible.  Some common reasons to flag:</p>
@@ -43,6 +44,9 @@ class Voting extends React.Component {
         loggedin: React.PropTypes.bool,
         post_obj: React.PropTypes.object,
         vesting_shares: React.PropTypes.number,
+        voting_power: React.PropTypes.number,
+        reward_per_vest: React.PropTypes.number,
+        merged_vesting_shares: React.PropTypes.number,
         voting: React.PropTypes.bool,
     };
 
@@ -126,7 +130,7 @@ class Voting extends React.Component {
     }
 
     render() {
-        const {active_votes, showList, voting, flag, vesting_shares, is_comment, post_obj} = this.props;
+        const {active_votes, showList, voting, flag, vesting_shares, voting_power, reward_per_vest, merged_vesting_shares, is_comment, post_obj} = this.props;
         const {username} = this.props;
         const {votingUp, votingDown, showWeight, weight, myVote} = this.state;
         // console.log('-- Voting.render -->', myVote, votingUp, votingDown);
@@ -235,8 +239,12 @@ class Voting extends React.Component {
         let dropdown = null;
         if (myVote <= 0 && vesting_shares > VOTE_WEIGHT_DROPDOWN_THRESHOLD) {
             voteUpClick = this.toggleWeightUp;
+            const reward = (parseInt(merged_vesting_shares) * parseInt((voting_power*weight+49)/50) * reward_per_vest).toFixed(2)
             dropdown = <FoundationDropdown show={showWeight} onHide={() => this.setState({showWeight: false})}>
                 <div className="Voting__adjust_weight">
+                    <div>
+                        <Progress tabIndex="0" value={voting_power} max={100} labelFormatter={(percent, boundedValue, min, max) => voting_power+'% -'+(2 * weight * 0.0001).toFixed(2)+'% ($'+ reward +')'  } />
+                    </div>
                     <a href="#" onClick={this.voteUp} className="confirm_weight" title="Upvote"><Icon size="2x" name="chevron-up-circle" /></a>
                     <div className="weight-display">{weight / 100}%</div>
                     <Slider min={100} max={10000} step={100} value={weight} onChange={this.handleWeightChange} />
@@ -274,11 +282,28 @@ export default connect(
         const vesting_shares = current_account ? current_account.get('vesting_shares') : 0.0;
         const voting = state.global.get(`transaction_vote_active_${author}_${permlink}`)
 
+        const accounts = state.global.get('accounts')
+        const voter = accounts.get(username);
+        
+        let merged_vesting_shares = vesting_shares;
+        let voting_power = 0.0;
+        const reward_per_vest = state.global.get('reward'); 
+        if (voter && voter.get('voting_power')) {
+            const delegated_vesting_shares = Number(voter.get('delegated_vesting_shares').replace(" VESTS", ""));
+            const received_vesting_shares = Number(voter.get('received_vesting_shares').replace(" VESTS", ""));
+            merged_vesting_shares = merged_vesting_shares - delegated_vesting_shares + received_vesting_shares;
+            voting_power = voter.get('voting_power');
+            const recover = (new Date - new Date(voter.get('last_vote_time') + "Z")) / 1e3
+            voting_power = (voting_power = (voting_power + 1e4 * recover / 432e3)) > 10000 ? 10000 : voting_power
+        }
+        merged_vesting_shares = Number(merged_vesting_shares);
+        voting_power = Number((voting_power * 0.01).toFixed(2))
+
         return {
             post: ownProps.post,
             flag: ownProps.flag,
             showList: ownProps.showList,
-            author, permlink, username, active_votes, vesting_shares, is_comment,
+            author, permlink, username, active_votes, vesting_shares, is_comment, voting_power, reward_per_vest, merged_vesting_shares,
             post_obj: post,
             loggedin: username != null,
             voting
