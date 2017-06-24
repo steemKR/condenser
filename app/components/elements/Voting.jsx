@@ -239,11 +239,14 @@ class Voting extends React.Component {
         let dropdown = null;
         if (myVote <= 0 && vesting_shares > VOTE_WEIGHT_DROPDOWN_THRESHOLD) {
             voteUpClick = this.toggleWeightUp;
-            const reward = (parseInt(merged_vesting_shares) * parseInt((voting_power*weight+49)/50) * reward_per_vest).toFixed(2)
+            const reward = (merged_vesting_shares
+                * parseInt(((voting_power * weight*0.01) + 49) / 50) 
+                * reward_per_vest
+                * 100).toFixed(2)
             dropdown = <FoundationDropdown show={showWeight} onHide={() => this.setState({showWeight: false})}>
                 <div className="Voting__adjust_weight">
                     <div>
-                        <Progress tabIndex="0" value={voting_power} max={100} labelFormatter={(percent, boundedValue, min, max) => voting_power+'% -'+(2 * weight * 0.0001).toFixed(2)+'% ($'+ reward +')'  } />
+                        <Progress tabIndex="0" value={voting_power} max={100} labelFormatter={(percent, boundedValue, min, max) => voting_power.toFixed(2)+'% -'+(2 * weight * 0.0001).toFixed(2)+'% ($'+ reward +')'  } />
                     </div>
                     <a href="#" onClick={this.voteUp} className="confirm_weight" title="Upvote"><Icon size="2x" name="chevron-up-circle" /></a>
                     <div className="weight-display">{weight / 100}%</div>
@@ -292,12 +295,11 @@ export default connect(
             const delegated_vesting_shares = Number(voter.get('delegated_vesting_shares').replace(" VESTS", ""));
             const received_vesting_shares = Number(voter.get('received_vesting_shares').replace(" VESTS", ""));
             merged_vesting_shares = merged_vesting_shares - delegated_vesting_shares + received_vesting_shares;
-            voting_power = voter.get('voting_power');
+            voting_power = voter.get('voting_power') * 0.01;
             const recover = (new Date - new Date(voter.get('last_vote_time') + "Z")) / 1e3
-            voting_power = (voting_power = (voting_power + 1e4 * recover / 432e3)) > 10000 ? 10000 : voting_power
+            voting_power = (voting_power = (voting_power + 1e2 * recover / 432e3)) > 100 ? 100 : voting_power
         }
         merged_vesting_shares = Number(merged_vesting_shares);
-        voting_power = Number((voting_power * 0.01).toFixed(2))
 
         return {
             post: ownProps.post,
