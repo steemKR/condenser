@@ -41,6 +41,3 @@ export default function useTranslationApi(app) {
       }
     });
 }
-
-
-console.log(translate())

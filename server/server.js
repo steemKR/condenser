@@ -40,7 +40,7 @@ const env = process.env.NODE_ENV || 'development';
 // cache of a thousand days
 const cacheOpts = { maxAge: 86400000, gzip: true };
 
-app.use(requestTime());
+// app.use(requestTime());
 
 app.keys = [config.get('session_key')];
 

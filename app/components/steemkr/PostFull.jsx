@@ -1,8 +1,8 @@
 import React from 'react'
 import googleTranslateTextTo from 'app/utils/GoogleTranslator';
-import PostFull from '../PostFull'
+import PostFull from '../cards/PostFull'
 
-export default class PostFull extends React.Component {
+export default class PostFullWrapper extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -11,31 +11,42 @@ export default class PostFull extends React.Component {
     };
   }
 
-  transFormContent = (content) => {
-
+  transformContent = (content) => {
+    if (!content) return
+    // Replace Steemit to SteemKR
+    content.body = content.body.replace(/https:\/\/steemit\.com/ig, location.origin)
   }
-  
-  toggleTranslatePostTo = ({ title, body, to }) => {
+
+  toggleTranslatePost = (to) => {
     if (this.state.translating) return;
+
+    const titleElement = document.querySelector('.PostFull__header .entry-title')
+    const titleText = titleElement.textContent
+    const bodyElement = document.querySelector('.PostFull__body.entry-content')
+    const bodyContent = bodyElement.innerHTML
+
     if (this.state.translated) {
-      this.setState({ translated: false });
+      titleElement.textContent = this._original.title;
+      bodyElement.innerHTML = this._original.body;
+      this.setState({ translating: false, translated: false });
     } else {
-      if (this.state.translatedResult) {
+      if (this._translated) {
+        titleElement.textContent = this._translated.title;
+        bodyElement.innerHTML = this._translated.body;
         this.setState({ translating: false, translated: true })
-        return
+        return;
       }
 
       this.setState({ translating: true });
-      googleTranslateTextTo({text: [title, body], to })
+      googleTranslateTextTo({text: [titleText, bodyContent], to })
         .then((result) => {
-          this.setState({
-            translating: false,
-            translated: true,
-            translatedResult: {
-              title: result.text[0],
-              body: result.text[1],
-            }
-          })
+          this._translated = { title: result.text[0], body: result.text[1] };
+          this._original = { title: titleText, body: bodyContent };
+
+          titleElement.textContent = this._translated.title;
+          bodyElement.innerHTML = this.translated.body;
+
+          this.setState({ translating: false, translated: true });
         })
         .catch(() => this.setState({translating: false}))
     }
@@ -43,16 +54,12 @@ export default class PostFull extends React.Component {
 
 
   render() {
-
-
-
-
     return (
       <div>
-        <button className="float-right button hollow tiny" onClick={() => this.toggleTranslatePostTo({ body: content_body, title: content.title, to: 'ko' })}>
+        <button className="float-right button hollow tiny" onClick={() => this.toggleTranslatePost('ko')}>
           { this.state.translated ? "원본 보기" : "한국어로 번역하기" }
         </button>
-        <PostFull {...this.props} />
+        <PostFull {...this.props} transformContent={this.transformContent} />
       </div>
     )
   }

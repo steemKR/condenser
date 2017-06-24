@@ -1,7 +1,7 @@
 import React from 'react';
 // import ReactMarkdown from 'react-markdown';
 import Comment from 'app/components/cards/Comment';
-import PostFull from 'app/components/cards/PostFull';
+import PostFull from 'app/components/steemkr/PostFull';
 import {connect} from 'react-redux';
 
 import {sortComments} from 'app/components/cards/Comment';
