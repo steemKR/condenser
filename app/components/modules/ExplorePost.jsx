@@ -49,7 +49,7 @@ class ExplorePost extends Component {
         const steemd = 'https://steemd.com' + link;
         const steemdb = 'https://steemdb.com' + link;
         const busy = 'https://busy.org' + link;
-        const steemit = 'https://steemit.com' + link;
+        const steemit = 'https://steemkr.com' + link;
         const phist = 'https://phist.steemdata.com/history?identifier=steemit.com' + link;
         let text = this.state.copied == true ? 'Copied!' : 'COPY';
         return (
