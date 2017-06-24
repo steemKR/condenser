@@ -32,7 +32,7 @@ ENV STEEMKR_VERSION $STEEMKR_VERSION
 EXPOSE 8080
 
 CMD \
-  cp -rf ./config/production-$NETWORK.json ./config/production.json && \
+  cp -rf ./config/production-$STEEMKR_VERSION.json ./config/production.json && \
   yarn run build && \
   yarn run production
 
