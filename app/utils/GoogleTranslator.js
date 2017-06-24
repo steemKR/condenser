@@ -1,8 +1,6 @@
 import { compact, flatten } from 'lodash'
 import striptags from 'striptags'
 
-window.striptags = striptags
-
 const getUrl = (text, from, to) =>
   `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${from || 'auto'}&tl=${to}&dt=t&q=${encodeURI(text)}`
 
