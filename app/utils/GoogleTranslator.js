@@ -1,14 +1,15 @@
 import { compact, flatten } from 'lodash'
+import striptags from 'striptags'
+
+window.striptags = striptags
 
 const getUrl = (text, from, to) =>
   `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${from || 'auto'}&tl=${to}&dt=t&q=${encodeURI(text)}`
 
 
-export default function ({ title, bodyContent, bodyText, from, to }) {
-  const bodyTextSplitted = compact(bodyText.split(/\n|\r/))
+export default function ({ title, bodyContent, from, to }) {
+  const bodyTextSplitted = compact(striptags(bodyContent, [], '\n').split(/\n|\r/))
   const sourceArray = [...[title], ...bodyTextSplitted];
-
-  console.log(sourceArray);
 
   return Promise
     .all(sourceArray.map((t) => fetch(getUrl(t, from, to)).then(r => r.json())))
@@ -21,6 +22,9 @@ export default function ({ title, bodyContent, bodyText, from, to }) {
           }
           const source = r[1];
           const translated = r[0];
+
+          if (source.match(/^http|^@|^#/))
+            return
 
           translatedBodyContent = translatedBodyContent.replace(source, translated);
         })
