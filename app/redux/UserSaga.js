@@ -3,13 +3,15 @@ import {takeLatest} from 'redux-saga';
 import {call, put, select, fork} from 'redux-saga/effects';
 import {accountAuthLookup} from 'app/redux/AuthSaga'
 import user from 'app/redux/User'
-import {getAccount} from 'app/redux/SagaShared'
+import {getAccount, getRewardFund} from 'app/redux/SagaShared'
 import {browserHistory} from 'react-router'
 import {serverApiLogin, serverApiLogout} from 'app/utils/ServerApiClient';
 import {serverApiRecordEvent} from 'app/utils/ServerApiClient';
 import {loadFollows} from 'app/redux/FollowSaga'
 import {PrivateKey, Signature, hash} from 'steem/lib/auth/ecc';
 import {api} from 'steem';
+import {translate} from 'app/Translator';
+import DMCAUserList from 'app/utils/DMCAUserList';
 
 
 export const userWatches = [
@@ -93,6 +95,7 @@ function* removeHighSecurityKeys({payload: {pathname}}) {
 function* usernamePasswordLogin(action) {
     // Sets 'loading' while the login is taking place.  The key generation can take a while on slow computers.
     yield call(usernamePasswordLogin2, action)
+    yield call(getRewardFund, 'post');
     const current = yield select(state => state.user.get('current'))
     if(current) {
         const username = current.get('username')
@@ -146,6 +149,11 @@ function* usernamePasswordLogin2({payload: {username, password, saveLogin,
     const account = yield call(getAccount, username)
     if (!account) {
         yield put(user.actions.loginError({ error: 'Username does not exist' }))
+        return
+    }
+    //dmca user block
+    if (username && DMCAUserList.includes(username)) {
+        yield put(user.actions.loginError({ error: translate('terms_violation') }))
         return
     }
 

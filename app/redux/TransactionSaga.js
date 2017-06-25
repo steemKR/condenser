@@ -267,11 +267,12 @@ function* accepted_delete_comment({operation}) {
     yield put(g.actions.deleteContent(operation))
 }
 
-function* accepted_vote({operation: {author, permlink, weight}}) {
-    console.log('Vote accepted, weight', weight, 'on', author + '/' + permlink, 'weight');
+function* accepted_vote({operation: {voter, author, permlink, weight}}) {
+    console.log('Vote accepted, weight', weight, 'on', author + '/' + permlink, 'weight, from', voter);
     // update again with new $$ amount from the steemd node
     yield put(g.actions.remove({key: `transaction_vote_active_${author}_${permlink}`}))
     yield call(getContent, {author, permlink})
+    yield call(getAccount, voter, true)
 }
 
 function* accepted_withdraw_vesting({operation}) {
@@ -284,6 +285,7 @@ function* accepted_account_update({operation}) {
     let [account] = yield call([api, api.getAccountsAsync], [operation.account])
     account = fromJS(account)
     yield put(g.actions.receiveAccount({account}))
+    
 
     // bug, fork, etc.. the folowing would be mis-leading
     // const {account} = operation

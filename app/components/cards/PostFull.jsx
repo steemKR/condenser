@@ -80,11 +80,15 @@ class PostFull extends React.Component {
         deletePost: React.PropTypes.func.isRequired,
         showPromotePost: React.PropTypes.func.isRequired,
         showExplorePost: React.PropTypes.func.isRequired,
+
+        transformContent: React.PropTypes.func,
     };
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+          translated: false,
+        };
         this.fbShare = this.fbShare.bind(this);
         this.twitterShare = this.twitterShare.bind(this);
         this.linkedInShare = this.linkedInShare.bind(this);
@@ -168,7 +172,7 @@ class PostFull extends React.Component {
         const winTop = (screen.height / 2) - (winWidth / 2);
         const winLeft = (screen.width / 2) - (winHeight / 2);
         const s = this.share_params;
-        const q = 'title=' + encodeURIComponent(s.title) + '&url=' + encodeURIComponent(s.url) + '&source=Steemit&mini=true';
+        const q = 'title=' + encodeURIComponent(s.title) + '&url=' + encodeURIComponent(s.url) + '&source=SteemKR&mini=true';
         window.open('https://www.linkedin.com/shareArticle?' + q, 'Share', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
     }
 
@@ -192,6 +196,11 @@ class PostFull extends React.Component {
         if (!post_content) return null;
         const p = extractContent(immutableAccessor, post_content);
         const content = post_content.toJS();
+
+        if (this.props.transformContent) {
+          this.props.transformContent(content);
+        }
+
         const {author, permlink, parent_author, parent_permlink} = content
         const jsonMetadata = this.state.showReply ? null : p.json_metadata
         // let author_link = '/@' + content.author;
@@ -199,7 +208,7 @@ class PostFull extends React.Component {
         if (content.category) link = `/${content.category}${link}`;
 
         const {category, title, body} = content;
-        if (process.env.BROWSER && title) document.title = title + ' — Steemit';
+        if (process.env.BROWSER && title) document.title = title + ' — SteemKR';
 
         let content_body = content.body;
         const url = `/${category}/@${author}/${permlink}`
@@ -212,7 +221,7 @@ class PostFull extends React.Component {
         this.share_params = {
             link,
             url: 'https://' + APP_DOMAIN + link,
-            title: title + ' — Steemit',
+            title: title + ' — SteemKR',
             desc: p.desc
         };
 

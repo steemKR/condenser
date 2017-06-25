@@ -156,12 +156,12 @@ class App extends React.Component {
                         <CloseButton onClick={() => this.setState({showCallout: false})} />
                         <ul>
                             <li>
-                                <a href="https://steemit.com/steemit/@steemitblog/steemit-com-is-now-open-source">
+                                <a href={`${location.origin}/steemit/@steemitblog/steemit-com-is-now-open-source`}>
                                     {translate('steemit_is_now_open_source')}
                                 </a>
                             </li>
                             <li>
-                                <a href="https://steemit.com/steemit/@steemitblog/all-recovered-accounts-have-been-fully-refunded">
+                                <a href={`${location.origin}/steemit/@steemitblog/all-recovered-accounts-have-been-fully-refunded`}>
                                     {translate("all_accounts_refunded")}
                                 </a>
                             </li>
