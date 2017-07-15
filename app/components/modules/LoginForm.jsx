@@ -11,6 +11,7 @@ import {serverApiRecordEvent} from 'app/utils/ServerApiClient';
 import tt from 'counterpart';
 import { APP_URL } from 'app/client_config';
 import {PrivateKey, PublicKey} from 'steem/lib/auth/ecc';
+import { translate } from 'app/Translator.js';
 
 class LoginForm extends Component {
 
@@ -191,6 +192,7 @@ class LoginForm extends Component {
 
                 <div>
                     <input type="password" required ref="pw" placeholder={tt('loginform_jsx.password_or_wif')} {...password.props} autoComplete="on" disabled={submitting} />
+                    <div className="info">{tt('loginform_jsx.login_form_information')}</div>
                     {error && <div className="error">{error}&nbsp;</div>}
                     {error && password_info && <div className="warning">{password_info}&nbsp;</div>}
                 </div>

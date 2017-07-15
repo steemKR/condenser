@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  alpha:
+    container_name: alpha
+    build: .
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - TZ=Asia/Seoul
+      - STEEMKR_VERSION=alpha
+    restart: always
+    ports:
+      - 3021:8080
+    depends_on:
+      - steemkr_mysql

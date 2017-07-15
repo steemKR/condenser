@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import MarkdownViewer from 'app/components/cards/MarkdownViewer';
 import Icon from 'app/components/elements/Icon';
 import {renderToString} from 'react-dom/server';
@@ -63,7 +63,7 @@ export default class HelpContent extends React.Component {
 
     constructor(props) {
         super(props);
-        this.locale = 'en';
+        this.locale = 'ko';
     }
 
     componentWillMount() {

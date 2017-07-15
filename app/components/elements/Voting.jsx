@@ -11,6 +11,7 @@ import DropdownMenu from 'app/components/elements/DropdownMenu';
 import TimeAgoWrapper from 'app/components/elements/TimeAgoWrapper';
 import FoundationDropdown from 'app/components/elements/FoundationDropdown';
 import CloseButton from 'react-foundation-components/lib/global/close-button';
+import Progress from 'react-foundation-components/lib/global/progress-bar';
 import tt from 'counterpart';
 
 const ABOUT_FLAG = <div>
@@ -24,7 +25,7 @@ const ABOUT_FLAG = <div>
 </div>;
 
 const MAX_VOTES_DISPLAY = 20;
-const VOTE_WEIGHT_DROPDOWN_THRESHOLD = 1.0 * 1000.0 * 1000.0;
+const VOTE_WEIGHT_DROPDOWN_THRESHOLD = 0.01 * 1000.0 * 1000.0;
 
 class Voting extends React.Component {
 
@@ -43,6 +44,8 @@ class Voting extends React.Component {
         active_votes: React.PropTypes.object,
         loggedin: React.PropTypes.bool,
         post_obj: React.PropTypes.object,
+        voting_power: React.PropTypes.number,
+        reward_per_vest: React.PropTypes.number,
         net_vesting_shares: React.PropTypes.number,
         voting: React.PropTypes.bool,
     };
@@ -236,8 +239,15 @@ class Voting extends React.Component {
         let dropdown = null;
         if (myVote <= 0 && net_vesting_shares > VOTE_WEIGHT_DROPDOWN_THRESHOLD) {
             voteUpClick = this.toggleWeightUp;
+            const reward = (net_vesting_shares
+                * parseInt(((voting_power * weight*0.01) + 49) / 50) 
+                * reward_per_vest
+                * 100).toFixed(2)
             dropdown = <FoundationDropdown show={showWeight} onHide={() => this.setState({showWeight: false})}>
                 <div className="Voting__adjust_weight">
+                    <div>
+                        <Progress tabIndex="0" value={voting_power} max={100} labelFormatter={(percent, boundedValue, min, max) => voting_power.toFixed(2)+'% -'+(2 * weight * 0.0001).toFixed(2)+'% ($'+ reward +')'  } />
+                    </div>
                     <a href="#" onClick={this.voteUp} className="confirm_weight" title={tt('g.upvote')}><Icon size="2x" name="chevron-up-circle" /></a>
                     <div className="weight-display">{weight / 100}%</div>
                     <Slider min={100} max={10000} step={100} value={weight} onChange={this.handleWeightChange} />
@@ -278,11 +288,22 @@ export default connect(
         const net_vesting_shares = vesting_shares - delegated_vesting_shares + received_vesting_shares;
         const voting = state.global.get(`transaction_vote_active_${author}_${permlink}`)
 
+        const accounts = state.global.get('accounts')
+        const voter = accounts.get(username);
+        
+        let voting_power = 0.0;
+        const reward_per_vest = state.global.get('reward'); 
+        if (voter && voter.get('voting_power')) {
+            voting_power = voter.get('voting_power') * 0.01;
+            const recover = (new Date - new Date(voter.get('last_vote_time') + "Z")) / 1e3
+            voting_power = (voting_power = (voting_power + 1e2 * recover / 432e3)) > 100 ? 100 : voting_power
+        }
+
         return {
             post: ownProps.post,
             flag: ownProps.flag,
             showList: ownProps.showList,
-            author, permlink, username, active_votes, net_vesting_shares, is_comment,
+            author, permlink, username, active_votes, net_vesting_shares, is_comment, voting_power, reward_per_vest, 
             post_obj: post,
             loggedin: username != null,
             voting

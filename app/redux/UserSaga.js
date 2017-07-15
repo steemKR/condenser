@@ -3,7 +3,7 @@ import {takeLatest} from 'redux-saga';
 import {call, put, select, fork} from 'redux-saga/effects';
 import {accountAuthLookup} from 'app/redux/AuthSaga'
 import user from 'app/redux/User'
-import {getAccount} from 'app/redux/SagaShared'
+import {getAccount, getRewardFund} from 'app/redux/SagaShared'
 import {browserHistory} from 'react-router'
 import {serverApiLogin, serverApiLogout} from 'app/utils/ServerApiClient';
 import {serverApiRecordEvent} from 'app/utils/ServerApiClient';
@@ -95,6 +95,7 @@ function* removeHighSecurityKeys({payload: {pathname}}) {
 function* usernamePasswordLogin(action) {
     // Sets 'loading' while the login is taking place.  The key generation can take a while on slow computers.
     yield call(usernamePasswordLogin2, action)
+    yield call(getRewardFund, 'post');
     const current = yield select(state => state.user.get('current'))
     if(current) {
         const username = current.get('username')

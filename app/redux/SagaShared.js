@@ -25,6 +25,21 @@ export function* getAccount(username, force = false) {
     return account
 }
 
+export function* getRewardFund(type = 'post') {
+    const fund = yield call([api, api.getRewardFund], type)
+    const feed_price = yield call([api, api.getCurrentMedianHistoryPrice])
+    
+    let rewardPerVest = undefined
+    if(feed_price) {
+        const {base, quote} = feed_price
+        const price = base.replace(" SBD", "") * quote.replace(" STEEM", "")
+        const reward = fund.reward_balance.replace(" STEEM", "") / fund.recent_claims
+        rewardPerVest = reward * price;
+        yield put(g.actions.receiveFund({type, rewardPerVest}))
+    }
+    return rewardPerVest;
+}
+
 export function* watchGetState() {
     yield* takeEvery('global/GET_STATE', getState);
 }

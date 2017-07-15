@@ -1,6 +1,8 @@
 import config from 'config';
 const newrelic = config.get('newrelic') ? require('newrelic') : undefined;
 
+require('dotenv').config()
+
 import * as steem from 'steem';
 
 delete process.env.BROWSER;

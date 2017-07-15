@@ -157,12 +157,12 @@ class App extends React.Component {
                         <CloseButton onClick={() => this.setState({showCallout: false})} />
                         <ul>
                             <li>
-                                <a href="https://steemit.com/steemit/@steemitblog/steemit-com-is-now-open-source">
+                                <a href={`${location.origin}/steemit/@steemitblog/steemit-com-is-now-open-source`}>
                                     {tt('submit_a_story.APP_NAME_is_now_open_source', {APP_NAME})}
                                 </a>
                             </li>
                             <li>
-                                <a href="https://steemit.com/steemit/@steemitblog/all-recovered-accounts-have-been-fully-refunded">
+                                <a href={`${location.origin}/steemit/@steemitblog/all-recovered-accounts-have-been-fully-refunded`}>
                                     {tt('submit_a_story.all_accounts_refunded')}
                                 </a>
                             </li>
@@ -254,6 +254,11 @@ class App extends React.Component {
                     </li>
                 </ul>
                 <ul className="vertical menu">
+                    <li>
+                        <a href="https://t.me/steemkr" target="_blank" rel="noopener noreferrer">
+                            SteemKR 공개 채팅방&nbsp;<Icon name="extlink" />
+                        </a>
+                    </li>
                     <li>
                         <a href="https://steemit.chat/home" target="_blank" rel="noopener noreferrer">
                             {tt('navigation.chat')}&nbsp;<Icon name="extlink" />

@@ -15,6 +15,9 @@ import tt from 'counterpart';
 import {parsePayoutAmount} from 'app/utils/ParsersAndFormatters';
 import {Long} from 'bytebuffer';
 
+import translateButtonEnhancer from 'app/components/steemkr/translateButtonEnhancer';
+
+
 // returns true if the comment has a 'hide' flag AND has no descendants w/ positive payout
 function hideSubtree(cont, c) {
     return cont.getIn([c, 'stats', 'hide']) && !hasPositivePayout(cont, c)
@@ -108,6 +111,8 @@ class CommentImpl extends React.Component {
         rootComment: React.PropTypes.string,
         anchor_link: React.PropTypes.string.isRequired,
         deletePost: React.PropTypes.func.isRequired,
+
+        transformContent: React.PropTypes.func,
     };
     static defaultProps = {
         depth: 1,
@@ -266,6 +271,10 @@ class CommentImpl extends React.Component {
         const archived = comment.cashout_time === '1969-12-31T23:59:59' // TODO: audit after HF19. #1259
         const readonly = archived || $STM_Config.read_only_mode
 
+        if (this.props.transformContent) {
+          this.props.transformContent(comment);
+        }
+
         let body = null;
         let controls = null;
 
@@ -293,7 +302,7 @@ class CommentImpl extends React.Component {
                 // When a comment has hidden replies and is collapsed, the reply count is off
                 //console.log("replies:", replies.length, "num_visible:", replies.filter( reply => !cont.get(reply).getIn(['stats', 'hide'])).length)
                 replies = replies.map((reply, idx) => (
-                    <Comment
+                    <CommentWithTranslateButton
                         key={idx}
                         content={reply}
                         cont={cont}
@@ -413,4 +422,16 @@ const Comment = connect(
         },
     })
 )(CommentImpl)
+
+const CommentWithTranslateButton = translateButtonEnhancer(Comment, {
+  bodySelector: '.Comment__body.entry-content',
+  style: {
+    position: 'absolute',
+    right: '40px',
+    top: '-3px',
+    border: 0,
+    zIndex: 100,
+  }
+})
+
 export default Comment;

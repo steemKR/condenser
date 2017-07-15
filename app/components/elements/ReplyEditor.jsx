@@ -8,6 +8,7 @@ import LoadingIndicator from 'app/components/elements/LoadingIndicator'
 import shouldComponentUpdate from 'app/utils/shouldComponentUpdate'
 import Tooltip from 'app/components/elements/Tooltip'
 import sanitizeConfig, {allowedTags} from 'app/utils/SanitizeConfig'
+import { translate } from 'app/Translator.js';
 import sanitize from 'sanitize-html'
 import HtmlReady from 'shared/HtmlReady'
 import g from 'app/redux/GlobalReducer'
@@ -19,6 +20,7 @@ import tt from 'counterpart'
 const remarkable = new Remarkable({ html: true, linkify: false, breaks: true })
 const RichTextEditor = process.env.BROWSER ? require('react-rte-image').default : null;
 const RTE_DEFAULT = false
+const DONATE_RATE = 15
 //var htmlclean = require('htmlclean');
 
 class ReplyEditor extends React.Component {
@@ -92,6 +94,7 @@ class ReplyEditor extends React.Component {
                 rte_value: rte ? stateFromHtml(raw) : null
             })
             this.setAutoVote()
+            this.setDonateToApp()
             this.setState({payoutType: this.props.isStory ? (localStorage.getItem('defaultPayoutType') || '50%') : '50%'})
         }
     }
@@ -167,7 +170,7 @@ class ReplyEditor extends React.Component {
         const value = e.target.value
         // TODO block links in title (they do not make good permlinks)
         const hasMarkdown = /(?:\*[\w\s]*\*|\#[\w\s]*\#|_[\w\s]*_|~[\w\s]*~|\]\s*\(|\]\s*\[)/.test(value)
-        this.setState({ titleWarn: hasMarkdown ? 'Markdown is not supported here' : '' })
+        this.setState({ titleWarn: hasMarkdown ? translate('markdown_not_supported') : '' })
         const {title} = this.state
         title.props.onChange(e)
     }
@@ -179,6 +182,7 @@ class ReplyEditor extends React.Component {
         if(!body.value || confirm(tt('reply_editor.are_you_sure_you_want_to_clear_this_form'))) {
             replyForm.resetForm()
             this.setAutoVote()
+            this.setDonateToApp()
             this.setState({rte_value: stateFromHtml()})
             this.setState({progress: {}})
             if(onCancel) onCancel(e)
@@ -190,6 +194,13 @@ class ReplyEditor extends React.Component {
         const key = 'replyEditorData-autoVote-story'
         localStorage.setItem(key, !autoVote.value)
         autoVote.props.onChange(!autoVote.value)
+    }
+
+    donateToAppOnChange = () => {
+        const {donateToApp} = this.state
+        const key = 'replyEditorData-donateToApp-story'
+        localStorage.setItem(key, !donateToApp.value)
+        donateToApp.props.onChange(!donateToApp.value)
     }
 
     // As rte_editor is updated, keep the (invisible) 'body' field in sync.
@@ -207,6 +218,16 @@ class ReplyEditor extends React.Component {
             const key = 'replyEditorData-autoVote-story'
             const autoVoteDefault = JSON.parse(localStorage.getItem(key) || false)
             autoVote.props.onChange(autoVoteDefault)
+        }
+    }
+
+    setDonateToApp() {
+        const {isStory} = this.props
+        if(isStory) {
+            const {donateToApp} = this.state
+            const key = 'replyEditorData-donateToApp-story'
+            const donateToAppDefault = JSON.parse(localStorage.getItem(key) || true)
+            donateToApp.props.onChange(donateToAppDefault)
         }
     }
     toggleRte = (e) => {
@@ -294,8 +315,8 @@ class ReplyEditor extends React.Component {
             category: this.props.category,
             body: this.props.body,
         }
-        const {onCancel, onTitleChange, autoVoteOnChange} = this
-        const {title, category, body, autoVote} = this.state
+        const {onCancel, onTitleChange, autoVoteOnChange, donateToAppOnChange} = this
+        const {title, category, body, autoVote, donateToApp} = this.state
         const {
             reply, username, isStory, formId, noImage,
             author, permlink, parent_author, parent_permlink, type, jsonMetadata,
@@ -316,9 +337,10 @@ class ReplyEditor extends React.Component {
         const isHtml = rte || isHtmlTest(body.value)
         // Be careful, autoVote can reset curation rewards.  Never autoVote on edit..
         const autoVoteValue = !isEdit && autoVote.value
+        const donateToAppValue = !isEdit && donateToApp.value
         const replyParams = {
             author, permlink, parent_author, parent_permlink, type, state, originalPost, isHtml, isStory,
-            jsonMetadata, autoVote: autoVoteValue, payoutType,
+            jsonMetadata, autoVote: autoVoteValue, donateToApp: donateToAppValue, payoutType,
             successCallback: successCallbackWrapper, errorCallback
         }
         const postLabel = username ? <Tooltip t={ tt('g.post_as') +' “' + username + '”'}>{tt('g.post')}</Tooltip> : tt('g.post')
@@ -349,7 +371,7 @@ class ReplyEditor extends React.Component {
                     >
                         <div className={vframe_section_shrink_class}>
                             {isStory && <span>
-                                <input type="text" className="ReplyEditor__title" {...title.props} onChange={onTitleChange} disabled={loading} placeholder="Title" autoComplete="off" ref="titleRef" tabIndex={1} />
+                                <input type="text" className="ReplyEditor__title" {...title.props} onChange={onTitleChange} disabled={loading} placeholder={translate('title')} autoComplete="off" ref="titleRef" tabIndex={1} />
                                 <div className="float-right secondary" style={{marginRight: '1rem'}}>
                                     {rte && <a href="#" onClick={this.toggleRte}>{body.value ? 'Raw HTML' : 'Markdown'}</a>}
                                     {!rte && (isHtml || !body.value) && <a href="#" onClick={this.toggleRte}>{tt('reply_editor.editor')}</a>}
@@ -422,9 +444,12 @@ class ReplyEditor extends React.Component {
                                     <option value="50%">{tt('reply_editor.default_50_50')}</option>
                                     <option value="0%">{tt('reply_editor.decline_payout')}</option>
                                 </select>
-
                                 <br />
                                 <label title={tt('reply_editor.check_this_to_auto_upvote_your_post')}>
+                                  {translate('upvote_post')}&nbsp;
+                                  <input type="checkbox" checked={autoVote.value} onChange={autoVoteOnChange} />
+                                </label>
+                                <label title="Check this to donate your post rewards to">
                                     {tt('g.upvote_post')}&nbsp;
                                     <input type="checkbox" checked={autoVote.value} onChange={autoVoteOnChange} />
                                 </label>
@@ -490,7 +515,7 @@ export default formId => connect(
     // mapStateToProps
     (state, ownProps) => {
         const username = state.user.getIn(['current', 'username'])
-        const fields = ['body', 'autoVote:checked']
+        const fields = ['body', 'autoVote:checked', 'donateToApp:checked']
         const {type, parent_author, jsonMetadata} = ownProps
         const isEdit = type === 'edit'
         const isStory = /submit_story/.test(type) || (
@@ -528,7 +553,7 @@ export default formId => connect(
             })
         },
         reply: ({category, title, body, author, permlink, parent_author, parent_permlink, isHtml, isStory,
-            type, originalPost, autoVote = false, payoutType = '50%',
+            type, originalPost, autoVote = false, donateToApp = false, payoutType = '50%',
             state, jsonMetadata,
             successCallback, errorCallback, startLoadingIndicator
         }) => {
@@ -584,7 +609,7 @@ export default formId => connect(
             if(rtags.images.size) meta.image = rtags.images; else delete meta.image
             if(rtags.links.size) meta.links = rtags.links; else delete meta.links
 
-            meta.app = "steemit/0.1"
+            meta.app = "steemkr/0.1"
             if(isStory) {
                 meta.format = isHtml ? 'html' : 'markdown'
             }
@@ -606,10 +631,21 @@ export default formId => connect(
             startLoadingIndicator()
 
             const originalBody = isEdit ? originalPost.body : null
-            const __config = {originalBody, autoVote}
+            const __config = {originalBody, autoVote, donateToApp}
 
             // Avoid changing payout option during edits #735
             if(!isEdit) {
+                const appBeneficiaries = {
+                    account: "steemkr",
+                    weight: DONATE_RATE * 100
+                };
+                const beneficiaries = donateToApp ? [appBeneficiaries] : [];
+                const extensions = [];
+                if (beneficiaries.length > 0) {
+                    extensions.push([0, {
+                        beneficiaries: beneficiaries
+                    }]);
+                }
                 switch(payoutType) {
                     case '0%': // decline payout
                         __config.comment_options = {
@@ -622,7 +658,12 @@ export default formId => connect(
                         }
                         break;
                     default: // 50% steem power, 50% sd+steem
+                        __config.comment_options = {
+
+                        }
+                        break;
                 }
+                __config.comment_options.extensions = extensions
             }
 
             const operation = {
