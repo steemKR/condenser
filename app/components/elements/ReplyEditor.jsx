@@ -8,7 +8,6 @@ import LoadingIndicator from 'app/components/elements/LoadingIndicator'
 import shouldComponentUpdate from 'app/utils/shouldComponentUpdate'
 import Tooltip from 'app/components/elements/Tooltip'
 import sanitizeConfig, {allowedTags} from 'app/utils/SanitizeConfig'
-import { translate } from 'app/Translator.js';
 import sanitize from 'sanitize-html'
 import HtmlReady from 'shared/HtmlReady'
 import g from 'app/redux/GlobalReducer'
@@ -170,7 +169,7 @@ class ReplyEditor extends React.Component {
         const value = e.target.value
         // TODO block links in title (they do not make good permlinks)
         const hasMarkdown = /(?:\*[\w\s]*\*|\#[\w\s]*\#|_[\w\s]*_|~[\w\s]*~|\]\s*\(|\]\s*\[)/.test(value)
-        this.setState({ titleWarn: hasMarkdown ? translate('markdown_not_supported') : '' })
+        this.setState({ titleWarn: hasMarkdown ? tt('reply_editor.markdown_not_supported') : '' })
         const {title} = this.state
         title.props.onChange(e)
     }
@@ -371,7 +370,7 @@ class ReplyEditor extends React.Component {
                     >
                         <div className={vframe_section_shrink_class}>
                             {isStory && <span>
-                                <input type="text" className="ReplyEditor__title" {...title.props} onChange={onTitleChange} disabled={loading} placeholder={translate('title')} autoComplete="off" ref="titleRef" tabIndex={1} />
+                                <input type="text" className="ReplyEditor__title" {...title.props} onChange={onTitleChange} disabled={loading} placeholder={tt('reply_editor.title')} autoComplete="off" ref="titleRef" tabIndex={1} />
                                 <div className="float-right secondary" style={{marginRight: '1rem'}}>
                                     {rte && <a href="#" onClick={this.toggleRte}>{body.value ? 'Raw HTML' : 'Markdown'}</a>}
                                     {!rte && (isHtml || !body.value) && <a href="#" onClick={this.toggleRte}>{tt('reply_editor.editor')}</a>}
@@ -446,7 +445,7 @@ class ReplyEditor extends React.Component {
                                 </select>
                                 <br />
                                 <label title={tt('reply_editor.check_this_to_auto_upvote_your_post')}>
-                                  {translate('upvote_post')}&nbsp;
+                                  {tt('reply_editor.upvote_post')}&nbsp;
                                   <input type="checkbox" checked={autoVote.value} onChange={autoVoteOnChange} />
                                 </label>
                                 <label title="Check this to donate your post rewards to">
