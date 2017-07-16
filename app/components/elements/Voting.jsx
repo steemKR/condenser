@@ -12,6 +12,7 @@ import TimeAgoWrapper from 'app/components/elements/TimeAgoWrapper';
 import FoundationDropdown from 'app/components/elements/FoundationDropdown';
 import CloseButton from 'react-foundation-components/lib/global/close-button';
 import Progress from 'react-foundation-components/lib/global/progress-bar';
+import tt from 'counterpart';
 
 const ABOUT_FLAG = <div>
     <p>Flagging a post can remove rewards and make this material less visible.  Some common reasons to flag:</p>
@@ -43,10 +44,9 @@ class Voting extends React.Component {
         active_votes: React.PropTypes.object,
         loggedin: React.PropTypes.bool,
         post_obj: React.PropTypes.object,
-        vesting_shares: React.PropTypes.number,
         voting_power: React.PropTypes.number,
         reward_per_vest: React.PropTypes.number,
-        merged_vesting_shares: React.PropTypes.number,
+        net_vesting_shares: React.PropTypes.number,
         voting: React.PropTypes.bool,
     };
 
@@ -76,7 +76,7 @@ class Voting extends React.Component {
             this.setState({votingUp: up, votingDown: !up});
             const {myVote} = this.state;
             const {author, permlink, username, is_comment} = this.props;
-            if (this.props.vesting_shares > VOTE_WEIGHT_DROPDOWN_THRESHOLD) {
+            if (this.props.net_vesting_shares > VOTE_WEIGHT_DROPDOWN_THRESHOLD) {
                 localStorage.setItem('voteWeight' + (up ? '' : 'Down') + '-'+username+(is_comment ? '-comment' : ''),
                     this.state.weight);
             }
@@ -130,7 +130,7 @@ class Voting extends React.Component {
     }
 
     render() {
-        const {active_votes, showList, voting, flag, vesting_shares, voting_power, reward_per_vest, merged_vesting_shares, is_comment, post_obj} = this.props;
+        const {active_votes, showList, voting, flag, net_vesting_shares, is_comment, post_obj, voting_power, reward_per_vest} = this.props;
         const {username} = this.props;
         const {votingUp, votingDown, showWeight, weight, myVote} = this.state;
         // console.log('-- Voting.render -->', myVote, votingUp, votingDown);
@@ -146,7 +146,7 @@ class Voting extends React.Component {
 
             // myVote === current vote
             const dropdown = <FoundationDropdown show={showWeight} onHide={() => this.setState({showWeight: false})} className="Voting__adjust_weight_down">
-                {(myVote == null || myVote === 0) && vesting_shares > VOTE_WEIGHT_DROPDOWN_THRESHOLD &&
+                {(myVote == null || myVote === 0) && net_vesting_shares > VOTE_WEIGHT_DROPDOWN_THRESHOLD &&
                     <div>
                         <div className="weight-display">- {weight / 100}%</div>
                         <Slider min={100} max={10000} step={100} value={weight} onChange={this.handleWeightChange} />
@@ -172,6 +172,7 @@ class Voting extends React.Component {
         const total_votes = post_obj.getIn(['stats', 'total_votes']);
 
         const cashout_time = post_obj.get('cashout_time');
+
         const max_payout = parsePayoutAmount(post_obj.get('max_accepted_payout'));
         const pending_payout = parsePayoutAmount(post_obj.get('pending_payout_value'));
         const promoted = parsePayoutAmount(post_obj.get('promoted'));
@@ -230,25 +231,25 @@ class Voting extends React.Component {
                 voters.push({value: (sign > 0 ? '+ ' : '- ') + voter, link: '/@' + voter})
             }
             if (total_votes > voters.length) {
-                voters.push({value: <span>&hellip; and {(total_votes - voters.length)} more</span>});
+                voters.push({value: <span>&hellip; and {(total_votes - voters.length)} {tt('g.more')}</span>});
             }
             voters_list = <DropdownMenu selected={pluralize('votes', total_votes, true)} className="Voting__voters_list" items={voters} el="div" />;
         }
 
         let voteUpClick = this.voteUp;
         let dropdown = null;
-        if (myVote <= 0 && vesting_shares > VOTE_WEIGHT_DROPDOWN_THRESHOLD) {
+        if (myVote <= 0 && net_vesting_shares > VOTE_WEIGHT_DROPDOWN_THRESHOLD) {
             voteUpClick = this.toggleWeightUp;
-            const reward = (merged_vesting_shares
+            const reward = (net_vesting_shares
                 * parseInt(((voting_power * weight*0.01) + 49) / 50) 
                 * reward_per_vest
                 * 100).toFixed(2)
             dropdown = <FoundationDropdown show={showWeight} onHide={() => this.setState({showWeight: false})}>
                 <div className="Voting__adjust_weight">
                     <div>
-                        <Progress tabIndex="0" value={voting_power} max={100} labelFormatter={(percent, boundedValue, min, max) => voting_power.toFixed(2)+'% -'+(2 * weight * 0.0001).toFixed(2)+'% ($'+ reward +')'  } />
+                        <Progress tabIndex="0" value={voting_power} max={100} labelFormatter={(percent, boundedValue, min, max) => voting_power.toFixed(2)+'% -'+(2 * weight * 0.0001).toFixed(2)+'% ($'+ reward +')' } />
                     </div>
-                    <a href="#" onClick={this.voteUp} className="confirm_weight" title="Upvote"><Icon size="2x" name="chevron-up-circle" /></a>
+                    <a href="#" onClick={this.voteUp} className="confirm_weight" title={tt('g.upvote')}><Icon size="2x" name="chevron-up-circle" /></a>
                     <div className="weight-display">{weight / 100}%</div>
                     <Slider min={100} max={10000} step={100} value={weight} onChange={this.handleWeightChange} />
                     <CloseButton className="Voting__adjust_weight_close" onClick={() => this.setState({showWeight: false})} />
@@ -259,7 +260,7 @@ class Voting extends React.Component {
             <span className="Voting">
                 <span className="Voting__inner">
                     <span className={classUp}>
-                        {votingUpActive ? up : <a href="#" onClick={voteUpClick} title={myVote > 0 ? 'Remove Vote' : 'Upvote'}>{up}</a>}
+                        {votingUpActive ? up : <a href="#" onClick={voteUpClick} title={tt(myVote > 0 ? 'g.remove_vote' : 'g.upvote')}>{up}</a>}
                         {dropdown}
                     </span>
                     {payoutEl}
@@ -283,29 +284,27 @@ export default connect(
         const current_account = state.user.get('current')
         const username = current_account ? current_account.get('username') : null;
         const vesting_shares = current_account ? current_account.get('vesting_shares') : 0.0;
+        const delegated_vesting_shares = current_account ? current_account.get('delegated_vesting_shares') : 0.0;
+        const received_vesting_shares = current_account ? current_account.get('received_vesting_shares') : 0.0;
+        const net_vesting_shares = vesting_shares - delegated_vesting_shares + received_vesting_shares;
         const voting = state.global.get(`transaction_vote_active_${author}_${permlink}`)
 
         const accounts = state.global.get('accounts')
         const voter = accounts.get(username);
-        
-        let merged_vesting_shares = vesting_shares;
+
         let voting_power = 0.0;
-        const reward_per_vest = state.global.get('reward'); 
+        const reward_per_vest = state.global.get('reward');
         if (voter && voter.get('voting_power')) {
-            const delegated_vesting_shares = Number(voter.get('delegated_vesting_shares').replace(" VESTS", ""));
-            const received_vesting_shares = Number(voter.get('received_vesting_shares').replace(" VESTS", ""));
-            merged_vesting_shares = merged_vesting_shares - delegated_vesting_shares + received_vesting_shares;
             voting_power = voter.get('voting_power') * 0.01;
             const recover = (new Date - new Date(voter.get('last_vote_time') + "Z")) / 1e3
             voting_power = (voting_power = (voting_power + 1e2 * recover / 432e3)) > 100 ? 100 : voting_power
         }
-        merged_vesting_shares = Number(merged_vesting_shares);
 
         return {
             post: ownProps.post,
             flag: ownProps.flag,
             showList: ownProps.showList,
-            author, permlink, username, active_votes, vesting_shares, is_comment, voting_power, reward_per_vest, merged_vesting_shares,
+            author, permlink, username, active_votes, net_vesting_shares, is_comment, voting_power, reward_per_vest,
             post_obj: post,
             loggedin: username != null,
             voting
@@ -316,11 +315,11 @@ export default connect(
     (dispatch) => ({
         vote: (weight, {author, permlink, username, myVote}) => {
             const confirm = () => {
-                if(myVote == null) return
-                const t = ' will reset your curation rewards for this post.'
-                if(weight === 0) return 'Removing your vote' + t
-                if(weight > 0) return 'Changing to an Up-Vote' + t
-                if(weight < 0) return 'Changing to a Down-Vote' + t
+                if(myVote == null) return null
+                const t = tt('voting_jsx.we_will_reset_curation_rewards_for_this_post')
+                if(weight === 0) return tt('voting_jsx.removing_your_vote') + t
+                if(weight > 0) return tt('voting_jsx.changing_to_an_upvote') + t
+                if(weight < 0) return tt('voting_jsx.changing_to_a_downvote') + t
                 return null
             }
             dispatch(transaction.actions.broadcastOperation({

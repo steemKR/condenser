@@ -102,14 +102,16 @@ export default function useGeneralApi(app) {
                 throw new Error("We can't find your sign up request. You either haven't started your sign up application or weren't approved yet.");
             }
 
-            const existing_created_account = yield models.Account.findOne({
-                attributes: ['id'],
-                where: {user_id, ignored: false, created: true},
-                order: 'id DESC'
-            });
-            if (existing_created_account) {
-                throw new Error("Only one Steem account per user is allowed in order to prevent abuse");
-            }
+            // disable session/multi account for now
+
+            // const existing_created_account = yield models.Account.findOne({
+            //     attributes: ['id'],
+            //     where: {user_id, ignored: false, created: true},
+            //     order: 'id DESC'
+            // });
+            // if (existing_created_account) {
+            //     throw new Error("Only one Steem account per user is allowed in order to prevent abuse");
+            // }
 
             const remote_ip = getRemoteIp(this.req);
             // rate limit account creation to one per IP every 10 minutes
@@ -308,8 +310,20 @@ export default function useGeneralApi(app) {
 
     router.post('/csp_violation', function *() {
         if (rateLimitReq(this, this.req)) return;
-        const params = yield coBody.json(this);
-        console.log('-- /csp_violation -->', this.req.headers['user-agent'], params);
+        let params;
+        try {
+            params = yield coBody(this);
+        } catch (error) {
+            console.log('-- /csp_violation error -->', error);
+        }
+        if (params && params['csp-report']) {
+            const csp_report = params['csp-report'];
+            const value = `${csp_report['document-uri']} : ${csp_report['blocked-uri']}`;
+            console.log('-- /csp_violation -->', value, '--', this.req.headers['user-agent']);
+            recordWebEvent(this, 'csp_violation', value);
+        } else {
+            console.log('-- /csp_violation [no csp-report] -->', params, '--', this.req.headers['user-agent']);
+        }
         this.body = '';
     });
 

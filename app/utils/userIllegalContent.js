@@ -1,8 +1,5 @@
 const list = `
-matthewtyoung
-spaces
-the-gaming-llama
-cmgsteems
+aplomb
 `.trim().split('\n');
 
 export default list;

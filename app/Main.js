@@ -23,7 +23,6 @@ try {
 }
 
 function runApp(initial_state) {
-    console.log('Initial state', initial_state);
     const config = initial_state.offchain.config
     steem.config.set('websocket', config.ws_connection_client);
     window.$STM_Config = config;

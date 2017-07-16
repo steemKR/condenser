@@ -9,10 +9,11 @@ import {sortComments} from 'app/components/cards/Comment';
 // import { Link } from 'react-router';
 import FoundationDropdownMenu from 'app/components/elements/FoundationDropdownMenu';
 import {Set} from 'immutable'
-import { translate } from 'app/Translator';
+import tt from 'counterpart';
 import { localizedCurrency } from 'app/components/elements/LocalizedCurrency';
 import shouldComponentUpdate from 'app/utils/shouldComponentUpdate';
 import {serverApiRecordEvent} from 'app/utils/ServerApiClient';
+import { INVEST_TOKEN_UPPERCASE } from 'app/client_config';
 
 const PostFullWithTranslateButton = translateButtonEnhancer(PostFull, {
   titleSelector: '.PostFull__header .entry-title',
@@ -98,8 +99,8 @@ class Post extends React.Component {
                         <div className="row">
                             <div className="column">
                                 <div className="PostFull">
-                                    <p onClick={this.showAnywayClick}>{translate('this_post_was_hidden_due_to_low_ratings')}.{' '}
-                                    <button style={{marginBottom: 0}} className="button hollow tiny float-right" onClick={this.showAnywayClick}>{translate('show')}</button></p>
+                                    <p onClick={this.showAnywayClick}>{tt('promote_post_jsx.this_post_was_hidden_due_to_low_ratings')}.{' '}
+                                    <button style={{marginBottom: 0}} className="button hollow tiny float-right" onClick={this.showAnywayClick}>{tt('g.show')}</button></p>
                                 </div>
                             </div>
                         </div>
@@ -131,16 +132,16 @@ class Post extends React.Component {
         const negativeGroup = commentHidden &&
             (<div className="hentry Comment root Comment__negative_group">
                 <p>
-                    {translate(showNegativeComments ? 'now_showing_comments_with_low_ratings' : 'comments_were_hidden_due_to_low_ratings')}.{' '}
+                    {tt(showNegativeComments ? 'post_jsx.now_showing_comments_with_low_ratings' : 'post_jsx.comments_were_hidden_due_to_low_ratings')}.{' '}
                     <button className="button hollow tiny float-right" onClick={e => this.toggleNegativeReplies(e)}>
-                        {translate(showNegativeComments ? 'hide' :'show')}
+                        {tt(showNegativeComments ? 'g.hide' :'g.show')}
                     </button>
                 </p>
             </div>);
 
 
         let sort_orders = [ 'trending', 'votes', 'new'];
-        let sort_labels = [ translate('trending'), translate('votes'), translate('age') ];
+        let sort_labels = [ tt('main_menu.trending'), tt('g.votes'), tt('g.age') ];
         let sort_menu = [];
         let sort_label;
 
@@ -158,7 +159,7 @@ class Post extends React.Component {
             return <center>
                 <div className="NotFound float-center">
                     <div>
-                        <h4 className="NotFound__header">Sorry! This page doesn't exist.</h4>
+                        <h4 className="NotFound__header">Sorry! This page doesnt exist.</h4>
                         <p>Not to worry. You can head back to <a style={{fontWeight: 800}} href="/">our homepage</a>,
                             or check out some great posts.
                         </p>
@@ -183,11 +184,11 @@ class Post extends React.Component {
                 {!current_user && <div className="row">
                     <div className="column">
                         <div className="Post__promo">
-                            {translate('authors_get_paid_when_people_like_you_upvote_their_post')}.
+                            {tt('g.next_7_strings_sinngle_block.authors_get_paid_when_people_like_you_upvote_their_post')}.
                             <br /> {// remove '$' from signup_bonus before parsing it into local currency
-                                    translate('if_you_enjoyed_what_you_read_earn_amount', {amount: '$'+localizedCurrency(signup_bonus.substring(1))})}
+                                    tt('g.next_7_strings_sinngle_block.if_you_enjoyed_what_you_read_earn_amount', {amount: '$'+localizedCurrency(signup_bonus.substring(1)), INVEST_TOKEN_UPPERCASE})}
                             <br />
-                            <button type="button" className="button sign-up" onClick={showSignUp}>Sign up now to receive <span className="free-money">FREE STEEM!</span></button>
+                            <button type="button" className="button sign-up" onClick={showSignUp}>{tt('g.next_7_strings_sinngle_block.sign_up_now_to_receive')}<span className="free-money">{tt('g.next_7_strings_sinngle_block.free_steem')}</span></button>
                         </div>
                     </div>
                 </div>}
@@ -196,7 +197,7 @@ class Post extends React.Component {
                         <div className="Post_comments__content">
                             {positiveComments.length ?
                             (<div className="Post__comments_sort_order float-right">
-                                {translate('sort_order')}: &nbsp;
+                                {tt('post_jsx.sort_order')}: &nbsp;
                                 <FoundationDropdownMenu menu={sort_menu} label={sort_label} dropdownPosition="bottom" dropdownAlignment="right" />
                             </div>) : null}
                             <div className="clear-both" />

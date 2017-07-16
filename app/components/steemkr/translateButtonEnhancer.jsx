@@ -12,7 +12,9 @@ export default function translateButtonEnhancer(Comp, {titleSelector, bodySelect
     }
 
     transformContent = (content) => {
+      const { location } = this.props;
       if (!content) return
+      if (!location) return
       // Replace Steemit to SteemKR
       content.body = content.body.replace(/https:\/\/steemit\.com/ig, location.origin)
     }
