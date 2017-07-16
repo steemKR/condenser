@@ -172,6 +172,7 @@ class Voting extends React.Component {
         const total_votes = post_obj.getIn(['stats', 'total_votes']);
 
         const cashout_time = post_obj.get('cashout_time');
+
         const max_payout = parsePayoutAmount(post_obj.get('max_accepted_payout'));
         const pending_payout = parsePayoutAmount(post_obj.get('pending_payout_value'));
         const promoted = parsePayoutAmount(post_obj.get('promoted'));

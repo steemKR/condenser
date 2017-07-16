@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import TimeAgoWrapper from 'app/components/elements/TimeAgoWrapper';
+import BeneFiciaries from 'app/components/elements/BeneFiciaries';
 import pluralize from 'pluralize';
 import Icon from 'app/components/elements/Icon';
 import { connect } from 'react-redux';
@@ -20,6 +21,7 @@ import PageViewsCounter from 'app/components/elements/PageViewsCounter';
 import ShareMenu from 'app/components/elements/ShareMenu';
 import {serverApiRecordEvent} from 'app/utils/ServerApiClient';
 import Userpic from 'app/components/elements/Userpic';
+import DropdownMenu from 'app/components/elements/DropdownMenu';
 import { APP_DOMAIN, APP_NAME } from 'app/client_config';
 import tt from 'counterpart';
 import userIllegalContent from 'app/utils/userIllegalContent';
@@ -50,6 +52,7 @@ function TimeAuthorCategory({content, authorRepLog10, showTags}) {
         <span className="PostFull__time_author_category vcard">
             <Icon name="clock" className="space-right" />
             <TimeAgoWrapper date={content.created} className="updated" />
+            <BeneFiciaries content={content} />
             {} {tt('g.by')} <Author author={content.author} authorRepLog10={authorRepLog10} />
             {showTags && <span> {tt('g.in')} <TagList post={content} single /></span>}
         </span>
@@ -271,13 +274,13 @@ class PostFull extends React.Component {
             if(content.depth > 1) {
                 direct_parent_link = (<li>
                     <Link to={parent_link}>
-                        {tt('postfull_jsx.view_the_direct_parent')}
+                        {tt('g.view_the_direct_parent')}
                     </Link>
                 </li>)
             }
             post_header = (<div className="callout">
                 <h3 className="entry-title">{tt('g.re')}: {content.root_title}</h3>
-                <h5>{tt('postfull_jsx.you_are_viewing_a_single_comments_thread_from')}:</h5>
+                <h5>{tt('g.you_are_viewing_a_single_comments_thread_from')}:</h5>
                 <p>
                     {content.root_title}
                 </p>
@@ -317,7 +320,6 @@ class PostFull extends React.Component {
                         </div>
                     </span>
                 }
-
                 {showPromote && <button className="Promote__button float-right button hollow tiny" onClick={this.showPromotePost}>{tt('g.promote')}</button>}
                 <TagList post={content} horizontal />
                 <div className="PostFull__footer row">
