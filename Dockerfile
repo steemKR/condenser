@@ -31,9 +31,11 @@ ENV STEEMKR_VERSION $STEEMKR_VERSION
 
 EXPOSE 8080
 
+RUN \
+  yarn run build
+
 CMD \
   cp -rf ./config/production-$STEEMKR_VERSION.json ./config/production.json && \
-  yarn run build && \
   yarn run production
 
 # uncomment the lines below to run it in development mode
