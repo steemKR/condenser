@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import TimeAgoWrapper from 'app/components/elements/TimeAgoWrapper';
-import BeneFiciaries from 'app/components/elements/BeneFiciaries';
+import Beneficiaries from 'app/components/elements/Beneficiaries';
 import pluralize from 'pluralize';
 import Icon from 'app/components/elements/Icon';
 import { connect } from 'react-redux';
@@ -52,7 +52,7 @@ function TimeAuthorCategory({content, authorRepLog10, showTags}) {
         <span className="PostFull__time_author_category vcard">
             <Icon name="clock" className="space-right" />
             <TimeAgoWrapper date={content.created} className="updated" />
-            <BeneFiciaries content={content} />
+            <Beneficiaries content={content} />
             {} {tt('g.by')} <Author author={content.author} authorRepLog10={authorRepLog10} />
             {showTags && <span> {tt('g.in')} <TagList post={content} single /></span>}
         </span>
