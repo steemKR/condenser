@@ -19,7 +19,7 @@ import tt from 'counterpart'
 const remarkable = new Remarkable({ html: true, linkify: false, breaks: true })
 const RichTextEditor = process.env.BROWSER ? require('react-rte-image').default : null;
 const RTE_DEFAULT = false
-const DONATE_RATE = 15
+const DONATE_RATE = '15'
 //var htmlclean = require('htmlclean');
 
 class ReplyEditor extends React.Component {
@@ -445,12 +445,12 @@ class ReplyEditor extends React.Component {
                                 </select>
                                 <br />
                                 <label title={tt('reply_editor.check_this_to_auto_upvote_your_post')}>
-                                  {tt('reply_editor.upvote_post')}&nbsp;
+                                  {tt('g.upvote_post')}&nbsp;
                                   <input type="checkbox" checked={autoVote.value} onChange={autoVoteOnChange} />
                                 </label>
                                 <label title="Check this to donate your post rewards to">
-                                    {tt('g.upvote_post')}&nbsp;
-                                    <input type="checkbox" checked={autoVote.value} onChange={autoVoteOnChange} />
+                                  {tt('reply_editor.check_this_to_donate_post_reward_to', {targetAccount: 'SteemKR', donateRate: DONATE_RATE})}&nbsp;
+                                  <input type="checkbox" checked={donateToApp.value} onChange={donateToAppOnChange} />
                                 </label>
                             </div>}
                         </div>
