@@ -17,7 +17,7 @@ class NotFound extends React.Component {
                                         <Icon name="steem" size="2x" />
                                     </Link>
                                 </li>
-                                <li className="Header__top-steemit show-for-medium noPrint"><a href="/">steemit<span className="beta">beta</span></a></li>
+                                <li className="Header__top-steemit show-for-medium noPrint"><a href="/">steemKR<span className="beta">beta</span></a></li>
                             </ul>
                         </div>
                     </div>
