@@ -359,7 +359,7 @@ class CommentImpl extends React.Component {
                     <div className="Comment__header">
                         <div className="Comment__header_collapse">
                             <Voting post={post} flag />
-                            <a title={tt('blocktrades_deposit.collapse_or_expand')} onClick={this.toggleCollapsed}>{ this.state.collapsed ? '[+]' : '[-]' }</a>
+                            <a title={tt('g.collapse_or_expand')} onClick={this.toggleCollapsed}>{ this.state.collapsed ? '[+]' : '[-]' }</a>
                         </div>
                         <span className="Comment__header-user">
                             <div className="Comment__Userpic-small">
@@ -376,7 +376,7 @@ class CommentImpl extends React.Component {
                         { this.state.collapsed && comment.children > 0 &&
                           <span className="marginLeft1rem">{tt('reply_count', {replyCount: comment.children})}</span>}
                         { !this.state.collapsed && hide_body &&
-                            <a className="marginLeft1rem" onClick={this.revealBody}>{tt('blocktrades_deposit.reveal_comment')}</a>}
+                            <a className="marginLeft1rem" onClick={this.revealBody}>{tt('g.reveal_comment')}</a>}
                     </div>
                     <div className="Comment__body entry-content">
                         {showEdit ? renderedEditor : body}
@@ -417,7 +417,7 @@ const Comment = connect(
             dispatch(transaction.actions.broadcastOperation({
                 type: 'delete_comment',
                 operation: {author, permlink},
-                confirm: tt('blocktrades_deposit.are_you_sure'),
+                confirm: tt('g.are_you_sure'),
             }))
         },
     })

@@ -6,8 +6,8 @@ const getUrl = (text, from, to) =>
 
 
 export default function ({ title, bodyContent, from, to }) {
-  const cleanedBodyContent = bodyContent.replace(/&nbsp;/g, ' ');
-  const bodyTextSplitted = compact(striptags(cleanedBodyContent, [], '\n').split(/\n|\r|\./))
+  const cleanedBodyContent = bodyContent.replace(/&nbsp;/g, ' ').replace(/<(\/?|\!?)(strong|em|b|i)>/g, '');
+  const bodyTextSplitted = compact(striptags(cleanedBodyContent, [], '\n').split(/(\r\n|\r|\n)/))
   const sourceArray = [...[title], ...bodyTextSplitted];
 
   return Promise

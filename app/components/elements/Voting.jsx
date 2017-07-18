@@ -135,6 +135,7 @@ class Voting extends React.Component {
         const {votingUp, votingDown, showWeight, weight, myVote} = this.state;
         // console.log('-- Voting.render -->', myVote, votingUp, votingDown);
         if(flag && !username) return null
+        if(!post_obj) return null
 
         const votingUpActive = voting && votingUp;
         const votingDownActive = voting && votingDown;

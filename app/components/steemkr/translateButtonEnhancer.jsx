@@ -1,6 +1,8 @@
 import React from 'react'
 import googleTranslateTextTo from 'app/utils/GoogleTranslator';
 
+const isBrowser = typeof window !== 'undefined';
+
 export default function translateButtonEnhancer(Comp, {titleSelector, bodySelector, style}) {
   return class extends React.Component {
     constructor() {
@@ -12,11 +14,9 @@ export default function translateButtonEnhancer(Comp, {titleSelector, bodySelect
     }
 
     transformContent = (content) => {
-      const { location } = this.props;
-      if (!content) return
-      if (!location) return
-      // Replace Steemit to SteemKR
-      content.body = content.body.replace(/https:\/\/steemit\.com/ig, location.origin)
+      if (!isBrowser) return;
+
+      content.body = (content.body || '').replace(/https:\/\/steemit\.com/ig, location.origin);
     }
 
     toggleTranslatePost = (to) => {

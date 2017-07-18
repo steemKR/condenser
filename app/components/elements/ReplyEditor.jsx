@@ -319,17 +319,26 @@ class ReplyEditor extends React.Component {
         const {
             reply, username, isStory, formId, noImage,
             author, permlink, parent_author, parent_permlink, type, jsonMetadata,
-            state, successCallback,
+            state, successCallback, last_post
         } = this.props
         const {submitting, valid, handleSubmit} = this.state.replyForm
         const {postError, titleWarn, rte, payoutType} = this.state
         const {progress, noClipboardData} = this.state
-        const disabled = submitting || !valid
+
+        const wating = ((date, max) => {
+            if (!date) return 0;
+            const enable = new Date(date + 'Z').getTime() + (max * 1000);
+            return Math.max(Math.ceil((enable - new Date().getTime())*0.001), 0);
+        })(last_post, 20);
+        const disabled = submitting || !valid || wating > 0
         const loading = submitting || this.state.loading
+        if (wating > 0) { setTimeout(() => { this.forceUpdate(); }, 1000); }
 
         const errorCallback = estr => { this.setState({ postError: estr, loading: false }) }
         const successCallbackWrapper = (...args) => {
-            this.setState({ loading: false })
+            this.setState({
+                loading: false
+            });
             if (successCallback) successCallback(args)
         }
         const isEdit = type === 'edit'
@@ -342,7 +351,7 @@ class ReplyEditor extends React.Component {
             jsonMetadata, autoVote: autoVoteValue, donateToApp: donateToAppValue, payoutType,
             successCallback: successCallbackWrapper, errorCallback
         }
-        const postLabel = username ? <Tooltip t={ tt('g.post_as') +' “' + username + '”'}>{tt('g.post')}</Tooltip> : tt('g.post')
+        const postLabel = username ? <Tooltip t={ tt('g.post_as') +' “' + username + '”'}>{tt('g.post')}{ wating > 0 ? `(${wating})` : false  }</Tooltip> : tt('g.post')
         const hasTitleError = title && title.touched && title.error
         let titleError = null
         // The Required title error (triggered onBlur) can shift the form making it hard to click on things..
@@ -360,7 +369,7 @@ class ReplyEditor extends React.Component {
         return (
             <div className="ReplyEditor row">
                 <div className="column small-12">
-                    <div ref="draft" className="ReplyEditor__draft ReplyEditor__draft-hide">tt('reply_editor.draft_saved')</div>
+                    <div ref="draft" className="ReplyEditor__draft ReplyEditor__draft-hide">{tt('reply_editor.draft_saved')}</div>
                     <form className={vframe_class}
                           onSubmit={handleSubmit(({data}) => {
                               const startLoadingIndicator = () => this.setState({loading: true, postError: undefined})
@@ -513,7 +522,9 @@ import {connect} from 'react-redux'
 export default formId => connect(
     // mapStateToProps
     (state, ownProps) => {
-        const username = state.user.getIn(['current', 'username'])
+        const username = state.user.getIn(['current', 'username']);
+        const accounts = state.global.get('accounts')
+        const last_post = accounts.getIn([username, 'last_post']);
         const fields = ['body', 'autoVote:checked', 'donateToApp:checked']
         const {type, parent_author, jsonMetadata} = ownProps
         const isEdit = type === 'edit'
@@ -530,7 +541,7 @@ export default formId => connect(
         }
         const ret = {
             ...ownProps,
-            fields, isStory, username,
+            fields, isStory, username, last_post,
             initialValues: {title, body, category}, state,
             formId,
         }

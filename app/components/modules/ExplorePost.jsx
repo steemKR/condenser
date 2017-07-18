@@ -50,16 +50,16 @@ class ExplorePost extends Component {
         const steemd = 'https://steemd.com' + link;
         const steemdb = 'https://steemdb.com' + link;
         const busy = 'https://busy.org' + link;
-        const steemit = 'https://steemkr.com' + link;
-        const phist = 'https://phist.steemdata.com/history?identifier=steemit.com' + link;
+        const site = 'https://steemkr.com' + link;
+        const phist = 'https://phist.steemdata.com/history?identifier=steemkr.com' + link;
         let text = this.state.copied == true ? tt('explorepost_jsx.copied') : tt('explorepost_jsx.copy');
         return (
             <span className="ExplorePost">
                 <h4>{tt('g.share_this_post')}</h4>
                 <hr />
                 <div className="input-group">
-                    <input className="input-group-field share-box" type="text" value={steemit} onChange={(e) => e.preventDefault()} />
-                    <CopyToClipboard text={steemit} onCopy={this.onCopy} className="ExplorePost__copy-button input-group-label">
+                    <input className="input-group-field share-box" type="text" value={site} onChange={(e) => e.preventDefault()} />
+                    <CopyToClipboard text={site} onCopy={this.onCopy} className="ExplorePost__copy-button input-group-label">
                       <span>{text}</span>
                     </CopyToClipboard>
                 </div>
