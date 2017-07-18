@@ -325,7 +325,8 @@ class ReplyEditor extends React.Component {
         const {postError, titleWarn, rte, payoutType} = this.state
         const {progress, noClipboardData} = this.state
 
-        const wating = ((date, max) => {
+        const isEdit = type === 'edit'
+        const wating = isEdit ? 0 : ((date, max) => {
             if (!date) return 0;
             const enable = new Date(date + 'Z').getTime() + (max * 1000);
             return Math.max(Math.ceil((enable - new Date().getTime())*0.001), 0);
@@ -341,7 +342,7 @@ class ReplyEditor extends React.Component {
             });
             if (successCallback) successCallback(args)
         }
-        const isEdit = type === 'edit'
+
         const isHtml = rte || isHtmlTest(body.value)
         // Be careful, autoVote can reset curation rewards.  Never autoVote on edit..
         const autoVoteValue = !isEdit && autoVote.value
