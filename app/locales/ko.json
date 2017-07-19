@@ -288,7 +288,7 @@
     "exceeds_maximum_length": "최대 용량을 초과했습니다(%(maxKb)sKB)",
     "including_the_category": "(다음 카테고리를 포함해주세요 '%(rootCategory)s')",
     "use_limited_amount_of_tags": "%(tagsLength)개 태그, 총 %(includingCategory)개 입니다. 본문이나 카테고리 필드에 태그를 5개 이하로 입력해주세요.",
-    "are_you_sure_you_want_to_clear_this_form": "정말 입력하신 모든 내용을 지우겠습니까?",
+    "are_you_sure_you_want_to_clear_this_form": "입력하신 내용을 되돌리시겠습니까?",
     "uploading": "업로드 중",
     "draft_saved": "임시저장되었습니다.",
     "editor": "에디터",
