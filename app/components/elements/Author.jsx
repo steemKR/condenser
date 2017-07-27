@@ -61,8 +61,8 @@ class Author extends React.Component {
             return author_link;
 
         const {name, about} = this.props.account ? normalizeProfile(this.props.account.toJS()) : {};
-
-        const dropdown = <div className="Author__dropdown">
+        const context = {}
+        const dropdownContent = <div className="Author__dropdown">
             <Link to={'/@' + author}>
                 <Userpic account={author} width="75" height="75" />
             </Link>
@@ -72,31 +72,36 @@ class Author extends React.Component {
             <Link to={'/@' + author} className="Author__username">
                 @{author}
             </Link>
-            <div>
+            <div className="text-center">
                 <Follow className="float-right" follower={username} following={author} what="blog"
-                        showFollow={follow} showMute={mute} />
+                        showFollow={follow} showMute={mute} context={context} onClick={() => {
+                            context.dropdown.close();
+                        }} />
             </div>
 
             <div className="Author__bio">
                 {about}
             </div>
         </div>;
+        const dropdown = <LinkWithDropdown
+            closeOnClickOutside
+            dropdownPosition="bottom"
+            dropdownAlignment="left"
+            dropdownContent={dropdownContent}
+        >
+            <span className="FoundationDropdownMenu__label">
+                <span itemProp="author" itemScope itemType="http://schema.org/Person">
+                    <strong>{author}</strong>
+                </span>
+                <Icon name="dropdown-arrow" />
+            </span>
+        </LinkWithDropdown>
+        context.dropdown = dropdown;
+        context.dropdownContent = dropdownContent;
 
         return (
             <span className="Author">
-                <LinkWithDropdown
-                    closeOnClickOutside
-                    dropdownPosition="bottom"
-                    dropdownAlignment="left"
-                    dropdownContent={dropdown}
-                >
-                    <span className="FoundationDropdownMenu__label">
-                        <span itemProp="author" itemScope itemType="http://schema.org/Person">
-                            <strong>{author}</strong>
-                        </span>
-                        <Icon name="dropdown-arrow" />
-                    </span>
-                </LinkWithDropdown>
+                {dropdown}
                 <Reputation value={authorRepLog10} />
             </span>
         )

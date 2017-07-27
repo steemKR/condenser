@@ -14,12 +14,15 @@
     color: #444;
     font-weight: 600;
     line-height: 1;
+    height: 20px;
   }
 
   .Author__username {
+    display: block;
     text-decoration: none;
     font-size: 90%;
     color: #666;
+    height: 60px;
   }
 
   .Author__bio {

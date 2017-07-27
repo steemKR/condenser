@@ -79,6 +79,15 @@ export default class Follow extends React.Component {
         const {followingWhat} = this.props; // redux
         const {showFollow, showMute, fat, children} = this.props; // html
         const {busy} = this.state;
+        
+        const showTransferModal = (asset, transferType, e) => {
+            this.props.showTransfer({
+                to: following,
+                asset, transferType
+            });
+            const author_preview = document.querySelector('.dropdown-pane.is-open');
+            if(author_preview) author_preview.remove();
+        };
 
         const cnBusy = busy ? 'disabled' : '';
         const cnActive = 'button' + (fat ? '' : ' slim');
@@ -95,7 +104,8 @@ export default class Follow extends React.Component {
 
             {showMute && followingWhat === 'ignore' &&
                 <label className={cnInactive} onClick={this.unignore}>{tt('g.unmute')}</label>}
-
+            {true &&
+                <label className={cnInactive} onClick={(e) => showTransferModal('SBD', 'Transfer to Account', e) }>{tt('g.transfer')}</label>}
             {children && <span>&nbsp;&nbsp;{children}</span>}
         </span>
     }
@@ -119,12 +129,12 @@ module.exports = connect(
             f.get('blog_result', emptySet).contains(following) ? 'blog' :
             f.get('ignore_result', emptySet).contains(following) ? 'ignore' :
             null;
-
         return {
+            ...ownProps,
             follower,
             following,
             followingWhat,
-            loading,
+            loading
         };
     },
     dispatch => ({
@@ -141,6 +151,10 @@ module.exports = connect(
                 successCallback: done,
                 errorCallback: done,
             }))
+        },
+        showTransfer: (transferDefaults) => {
+            dispatch(user.actions.setTransferDefaults(transferDefaults))
+            dispatch(user.actions.showTransfer())
         },
         showLogin: e => {
             if (e) e.preventDefault();
