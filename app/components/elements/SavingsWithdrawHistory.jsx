@@ -3,7 +3,7 @@ import React from 'react'
 import shouldComponentUpdate from 'app/utils/shouldComponentUpdate'
 import LoadingIndicator from 'app/components/elements/LoadingIndicator'
 import TimeAgoWrapper from 'app/components/elements/TimeAgoWrapper'
-import transaction from 'app/redux/Transaction'
+import tt from 'counterpart';
 import Memo from 'app/components/elements/Memo'
 
 class SavingsWithdrawHistory extends React.Component {
