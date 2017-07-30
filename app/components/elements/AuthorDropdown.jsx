@@ -18,13 +18,15 @@ const AuthorDropdown = (props) => {
                     <Link to={'/@' + props.author}>
                         <Userpic account={props.author} width="75" height="75" />
                     </Link>
-                    <Link to={'/@' + props.author} className="Author__name">
-                        {props.name}
-                    </Link>
-                    <Link to={'/@' + props.author} className="Author__username">
-                        @{props.author}
-                    </Link>
-                    <div>
+                    <div className="Author__namebox">
+                        <Link to={'/@' + props.author} className="Author__name">
+                            {props.name}
+                        </Link>
+                        <Link to={'/@' + props.author} className="Author__username">
+                            @{props.author}
+                        </Link>
+                    </div>
+                    <div className="text-center">
                         <Follow className="float-right" follower={props.username} following={props.author} what="blog" showFollow={props.follow} showMute={props.mute} />
                     </div>
                     <div className="Author__bio">
