@@ -9,9 +9,9 @@ const AuthorDropdown = (props) => {
     const author_link = <span className="author" itemProp="author" itemScope itemType="http://schema.org/Person">
         <Link to={'/@' + props.author}><strong>{props.author}</strong></Link> <Reputation value={props.authorRepLog10} />
     </span>;
-    if(!(props.follow || props.mute) || props.username === props.author) {
-        return author_link;
-    } else {
+    // if(!(props.follow || props.mute) || props.username === props.author) {
+    //     return author_link;
+    // } else {
         return (
             <div className = "Author__container">
                 <div className="Author__dropdown">
@@ -35,7 +35,7 @@ const AuthorDropdown = (props) => {
                 </div>
             </div>
         )
-    }
+    // }
 }
 
 export default AuthorDropdown;

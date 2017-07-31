@@ -121,7 +121,7 @@ class PostSummary extends React.Component {
         const author_category = (<span className="vcard">
             <a href={title_link_url} onClick={e => navigate(e, onClick, post, title_link_url)}><TimeAgoWrapper date={p.created} className="updated" /></a>
             <Beneficiaries content={content.toJSON()} />
-            {} {tt('g.by')} <Author author={p.author} authorRepLog10={authorRepLog10} follow={false} mute={false} />
+            {} {tt('g.by')} <Author author={p.author} authorRepLog10={authorRepLog10} follow={true} mute={true} />
             {} {tt('g.in')} <TagList post={p} single />
         </span>);
 

@@ -62,7 +62,6 @@ class Author extends React.Component {
                     >
                         <strong>{author}</strong>
                     </span>
-                    <Icon name="dropdown-arrow" />
                     <Reputation value={authorRepLog10} />
                 </span>
                 <Overlay
