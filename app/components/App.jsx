@@ -228,6 +228,11 @@ class App extends React.Component {
                         </a>
                     </li>
                     <li>
+                        <a href="https://docs.google.com/spreadsheets/d/1ugtsCnnNa0jQ7_6EbLIsSOrSTicbKUAmmyaW7Vu0Vsg/pubhtml?gid=75655260&single=true" target="_blank" onClick={this.navigate}>
+                            {tt('navigation.APP_NAME_explore_locale')}
+                        </a>
+                    </li>
+                    <li>
                         <a onClick={() => depositSteem(username)}>
                             {tt('navigation.buy_LIQUID_TOKEN', {LIQUID_TOKEN})}
                         </a>

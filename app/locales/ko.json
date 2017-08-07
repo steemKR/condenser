@@ -242,7 +242,8 @@
   },
   "navigation": {
     "APP_NAME_about": "스팀에 대하여",
-    "APP_NAME_explore": "둘러보기",
+    "APP_NAME_explore": "전체태그 둘러보기",
+    "APP_NAME_explore_locale": "KR태그 둘러보기",
     "APP_NAME_whitepaper": "Steem 백서",
     "buy_LIQUID_TOKEN": "%(LIQUID_TOKEN)s 구매",
     "sell_LIQUID_TOKEN": "%(LIQUID_TOKEN)s 판매",
