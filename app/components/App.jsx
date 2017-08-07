@@ -260,7 +260,7 @@ class App extends React.Component {
                 </ul>
                 <ul className="vertical menu">
                     <li>
-                        <a href="https://t.me/steemkr" target="_blank" rel="noopener noreferrer">
+                        <a href="https://discord.gg/ZDWyNMC" target="_blank" rel="noopener noreferrer">
                             SteemKR 공개 채팅방&nbsp;<Icon name="extlink" />
                         </a>
                     </li>
