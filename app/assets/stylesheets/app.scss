@@ -1,10 +1,10 @@
 @import "./foundation-settings";
 @import "~foundation-sites/scss/foundation";
+@import "./fonts";
 
 @include foundation-everything(true);
 
 @import "./foundation-overrides";
-@import "./fonts";
 @import "./forms";
 @import "./mixins";
 @import "./markdown";
