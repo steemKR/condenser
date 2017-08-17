@@ -224,7 +224,7 @@ class App extends React.Component {
                     </li>
                     <li>
                         <a href="/tags" onClick={this.navigate}>
-                            {tt('navigation.APP_NAME_explore')}
+                            {tt('navigation.explore')}
                         </a>
                     </li>
                     <li>
@@ -266,29 +266,29 @@ class App extends React.Component {
                     </li>
                     <li>
                         <a href="https://steemit.chat/home" target="_blank" rel="noopener noreferrer">
-                            {tt('navigation.APP_NAME_chat', {APP_NAME})}&nbsp;<Icon name="extlink" />
+                            {tt('navigation.chat')}&nbsp;<Icon name="extlink" />
                         </a>
                     </li>
                     <li>
                         <a href="http://steemtools.com/" onClick={this.navigate} target="_blank" rel="noopener noreferrer">
-                            {tt('navigation.APP_NAME_app_center', {APP_NAME})}&nbsp;<Icon name="extlink" />
+                            {tt('navigation.app_center')}&nbsp;<Icon name="extlink" />
                         </a>
                     </li>
                     <li className="last">
                         <a href="https://steemit.github.io/steemit-docs/" target="_blank" rel="noopener noreferrer">
-                            {tt('navigation.APP_NAME_api_docs')}&nbsp;<Icon name="extlink" />
+                            {tt('navigation.api_docs')}&nbsp;<Icon name="extlink" />
                         </a>
                     </li>
                 </ul>
                 <ul className="vertical menu">
                     <li>
                         <a href="https://steem.io/SteemWhitePaper.pdf" onClick={this.navigate}>
-                            {tt('navigation.APP_NAME_whitepaper')}&nbsp;<Icon name="extlink" />
+                            {tt('navigation.whitepaper')}&nbsp;<Icon name="extlink" />
                         </a>
                     </li>
                     <li>
                         <a href="https://steem.io" onClick={this.navigate}>
-                            {tt('navigation.APP_NAME_about')}&nbsp;<Icon name="extlink" />
+                            {tt('navigation.about')}&nbsp;<Icon name="extlink" />
                         </a>
                     </li>
                     <li>

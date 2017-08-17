@@ -286,9 +286,9 @@ You will need to provide your email address and phone number.
 <a class="anchor" name="How_long_does_the_account_approval_process_take"></a>
 ## How long does the account approval process take?
 
-Most accounts are approved within 24 hours. Some may take up to three business days.
+Most accounts are approved within 24 hours. Some may take up to a week.
 
-If your account has not been approved after three business days, please ask for help in the <a href="https://steemit.chat/channel/help">#help</a> channel on <a href="https://steemit.chat/home">steemit.chat</a>.
+If your account has not been approved after one week, please ask for help in the <a href="https://steemit.chat/channel/help">#help</a> channel on <a href="https://steemit.chat/home">steemit.chat</a>.
 
 <a href="/faq.html#Table_of_Contents_Accounts">^</a>
 <a class="anchor" name="Why_do_I_need_to_provide_my_email_and_phone_number"></a>
@@ -622,6 +622,7 @@ Language-specific groups include:
 - Korean = kr
 - Russian = ru
 - French = fr
+- Portuguese = pt
 
 <a href="/faq.html#Table_of_Contents_Posting">^</a>
 <a class="anchor" name="Can_I_delete_something_I_posted"></a>

@@ -37,7 +37,7 @@ function hasPositivePayout(cont, c) {
 
 export function sortComments( cont, comments, sort_order ) {
 
-  function netNegative(a)  {
+  function netNegative(a) {
       return a.get("net_rshares") < 0;
   }
   function totalPayout(a) {
@@ -53,13 +53,13 @@ export function sortComments( cont, comments, sort_order ) {
   }
 
   /** sorts replies by upvotes, age, or payout */
-  let sort_orders = {
+  const sort_orders = {
       votes: (a, b) => {
                 const aactive = countUpvotes(cont.get(a))
                 const bactive = countUpvotes(cont.get(b))
                 return bactive - aactive;
               },
-      new: (a, b) =>  {
+      new: (a, b) => {
                 const acontent = cont.get(a);
                 const bcontent = cont.get(b);
                 if (netNegative(acontent)) {
@@ -89,7 +89,7 @@ export function sortComments( cont, comments, sort_order ) {
               }
   }
   comments.sort( sort_orders[sort_order] );
-};
+}
 
 class CommentImpl extends React.Component {
 
@@ -279,16 +279,19 @@ class CommentImpl extends React.Component {
         let controls = null;
 
         if (!this.state.collapsed && !hide_body) {
-            body = (<MarkdownViewer formId={post + '-viewer'} text={comment.body}
-                noImage={noImage || gray} jsonMetadata={jsonMetadata} />);
-            controls = <div>
+            body = (<MarkdownViewer
+                formId={post + '-viewer'}
+                text={comment.body}
+                noImage={noImage || gray}
+                jsonMetadata={jsonMetadata} />);
+            controls = (<div>
                 <Voting post={post} />
                 <span className="Comment__footer__controls">
                     {showReplyOption && <a onClick={onShowReply}>{tt('g.reply')}</a>}
-                    {' '}{!readonly && showEditOption   && <a onClick={onShowEdit}>{tt('g.edit')}</a>}
+                {' '}{!readonly && showEditOption && <a onClick={onShowEdit}>{tt('g.edit')}</a>}
                     {' '}{!readonly && showDeleteOption && <a onClick={onDeletePost}>{tt('g.delete')}</a>}
                 </span>
-            </div>;
+            </div>);
         }
 
         let replies = null;
@@ -322,13 +325,15 @@ class CommentImpl extends React.Component {
         if(hide_body || this.state.collapsed) commentClasses.push('collapsed');
 
         let innerCommentClass = ignore || gray ? 'downvoted' : ''
-        if(this.state.highlight) innerCommentClass = innerCommentClass + ' highlighted'
+        if(this.state.highlight) innerCommentClass += ' highlighted'
 
         //console.log(comment);
         let renderedEditor = null;
         if (showReply || showEdit) {
-            renderedEditor = <div key="editor">
-                <Editor {...comment} type={showReply ? 'submit_comment' : 'edit'}
+            renderedEditor = (<div key="editor">
+              <Editor
+                  {...comment}
+                  type={showReply ? 'submit_comment' : 'edit'}
                     successCallback={() => {
                         this.setState({showReply: false, showEdit: false})
                         this.saveOnShow(null)
@@ -339,7 +344,7 @@ class CommentImpl extends React.Component {
                     }}
                     jsonMetadata={jsonMetadata}
                 />
-            </div>
+            </div>)
         }
 
         const depth_indicator = [];
@@ -374,7 +379,7 @@ class CommentImpl extends React.Component {
                         { (this.state.collapsed || hide_body) &&
                           <Voting post={post} showList={false} /> }
                         { this.state.collapsed && comment.children > 0 &&
-                          <span className="marginLeft1rem">{tt('reply_count', {replyCount: comment.children})}</span>}
+                  <span className="marginLeft1rem">{tt('g.reply_count', {count: comment.children})}</span>}
                         { !this.state.collapsed && hide_body &&
                             <a className="marginLeft1rem" onClick={this.revealBody}>{tt('g.reveal_comment')}</a>}
                     </div>
@@ -411,7 +416,7 @@ const Comment = connect(
     },
 
     // mapDispatchToProps
-    (dispatch) => ({
+    dispatch => ({
         unlock: () => { dispatch(user.actions.showLogin()) },
         deletePost: (author, permlink) => {
             dispatch(transaction.actions.broadcastOperation({

@@ -129,12 +129,13 @@ module.exports = connect(
             f.get('blog_result', emptySet).contains(following) ? 'blog' :
             f.get('ignore_result', emptySet).contains(following) ? 'ignore' :
             null;
+
         return {
             ...ownProps,
             follower,
             following,
             followingWhat,
-            loading
+            loading,
         };
     },
     dispatch => ({

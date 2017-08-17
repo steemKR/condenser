@@ -30,10 +30,11 @@ class Settings extends React.Component {
         reactForm({
             instance: this,
             name: 'accountSettings',
-            fields: ['profile_image', 'name', 'about', 'location', 'website'],
+            fields: ['profile_image', 'cover_image', 'name', 'about', 'location', 'website'],
             initialValues: props.profile,
             validation: values => ({
                 profile_image: values.profile_image && !/^https?:\/\//.test(values.profile_image) ? tt('settings_jsx.invalid_url') : null,
+                cover_image: values.cover_image && !/^https?:\/\//.test(values.cover_image) ? tt('settings_jsx.invalid_url') : null,
                 name: values.name && values.name.length > 20 ? tt('settings_jsx.name_is_too_long') : values.name && /^\s*@/.test(values.name) ? tt('settings_jsx.name_must_not_begin_with') : null,
                 about: values.about && values.about.length > 160 ? tt('settings_jsx.about_is_too_long') : null,
                 location: values.location && values.location.length > 30 ? tt('settings_jsx.location_is_too_long') : null,
@@ -68,10 +69,11 @@ class Settings extends React.Component {
         if(!metaData.profile) metaData.profile = {}
         delete metaData.user_image; // old field... cleanup
 
-        const {profile_image, name, about, location, website} = this.state
+        const {profile_image, cover_image, name, about, location, website} = this.state
 
         // Update relevant fields
         metaData.profile.profile_image = profile_image.value
+        metaData.profile.cover_image = cover_image.value
         metaData.profile.name = name.value
         metaData.profile.about = about.value
         metaData.profile.location = location.value
@@ -79,6 +81,7 @@ class Settings extends React.Component {
 
         // Remove empty keys
         if(!metaData.profile.profile_image) delete metaData.profile.profile_image;
+        if(!metaData.profile.cover_image) delete metaData.profile.cover_image;
         if(!metaData.profile.name) delete metaData.profile.name;
         if(!metaData.profile.about) delete metaData.profile.about;
         if(!metaData.profile.location) delete metaData.profile.location;
@@ -124,48 +127,37 @@ class Settings extends React.Component {
         })
     }
 
+    handleLanguageChange = (event) => {
+        const language = event.target.value
+        store.set('language', language)
+        this.props.changeLanguage(language)
+    }
+
     render() {
         const {state, props} = this
 
         const {submitting, valid, touched} = this.state.accountSettings
         const disabled = !props.isOwnAccount || state.loading || submitting || !valid || !touched
 
-        const {profile_image, name, about, location, website} = this.state
+        const {profile_image, cover_image, name, about, location, website} = this.state
 
-        const {follow, account, isOwnAccount} = this.props
+        const {follow, account, isOwnAccount, locale} = this.props
         const following = follow && follow.getIn(['getFollowingAsync', account.name]);
         const ignores = isOwnAccount && following && following.get('ignore_result')
 
         return <div className="Settings">
 
-            {/*<div className="row">
-                <div className="small-12 medium-6 large-4 columns">
-                    <label>{tt('g.choose_language')}
-                        <select defaultValue={store.get('language')} onChange={this.handleLanguageChange}>
-                            <option value="en">English</option>
-                            <option value="ru">Russian</option>
-                            <option value="es">Spanish</option>
-                            <option value="es-AR">Spanish (Argentina)</option>
-                            <option value="fr">French</option>
-                            <option value="it">Italian</option>
-                            <option value="jp">Japanese</option>
-                        </select>
-                    </label>
-                </div>
-            </div>*/}
-            {/*<div className="row">
-                <div className="small-12 medium-6 large-4 columns">
-                    <label>{tt('g.choose_currency')}
-                        <select defaultValue={store.get('currency')} onChange={this.handleCurrencyChange}>
-                            {
-                                ALLOWED_CURRENCIES.map(i => {
-                                    return <option key={i} value={i}>{i}</option>
-                                })
-                            }
-                        </select>
-                    </label>
-                </div>
-            </div>*/}
+            {/*<div className="row">*/}
+                {/*<div className="small-12 medium-6 large-4 columns">*/}
+                    {/*<label>{tt('g.choose_language')}*/}
+                        {/*<select defaultValue={locale} onChange={this.handleLanguageChange}>*/}
+                            {/*<option value="en">English</option>*/}
+                            {/*<option value="es">Spanish</option>*/}
+                        {/*</select>*/}
+                    {/*</label>*/}
+                {/*</div>*/}
+            {/*</div>*/}
+            {/*<br />*/}
             <div className="row">
                 <form onSubmit={this.handleSubmitForm} className="small-12 medium-6 large-4 columns">
                     <h4>{tt('settings_jsx.public_profile_settings')}</h4>
@@ -174,6 +166,12 @@ class Settings extends React.Component {
                         <input type="url" {...profile_image.props} autoComplete="off" />
                     </label>
                     <div className="error">{profile_image.blur && profile_image.touched && profile_image.error}</div>
+
+                    <label>
+                        {tt('settings_jsx.cover_image_url')}
+                        <input type="url" {...cover_image.props} autoComplete="off" />
+                    </label>
+                    <div className="error">{cover_image.blur && cover_image.touched && cover_image.error}</div>
 
                     <label>
                         {tt('settings_jsx.profile_name')}
@@ -251,7 +249,8 @@ export default connect(
         const username = current_user ? current_user.get('username') : ''
         let metaData = account ? o2j.ifStringParseJSON(account.json_metadata) : {}
         if (typeof metaData === 'string') metaData = o2j.ifStringParseJSON(metaData); // issue #1237
-        const profile = metaData && metaData.profile ? metaData.profile : {}
+        const profile = metaData && metaData.profile ? metaData.profile : {};
+        const locale = state.user.get('locale');
 
         return {
             account,
@@ -260,6 +259,7 @@ export default connect(
             isOwnAccount: username == accountname,
             profile,
             follow: state.global.get('follow'),
+            locale,
             ...ownProps
         }
     },

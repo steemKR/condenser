@@ -5,11 +5,12 @@
 @include foundation-everything(true);
 
 @import "./foundation-overrides";
+@import "./fonts";
 @import "./forms";
 @import "./mixins";
 @import "./markdown";
 @import "./notifications";
-@import "app/components/all";
+@import "src/app/components/all";
 
 /* Small only */
 @media screen and (max-width: 39.9375em) {

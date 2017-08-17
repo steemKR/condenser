@@ -222,7 +222,7 @@ class PostFull extends React.Component {
         }
         // detect illegal users
         if (userIllegalContent.includes(content.author)) {
-            content_body  = 'Not available for legal reasons.'
+            content_body = 'Not available for legal reasons.'
         }
 
         const replyParams = {author, permlink, parent_author, parent_permlink, category, title, body}
@@ -320,6 +320,7 @@ class PostFull extends React.Component {
                         </div>
                     </span>
                 }
+
                 {showPromote && <button className="Promote__button float-right button hollow tiny" onClick={this.showPromotePost}>{tt('g.promote')}</button>}
                 <TagList post={content} horizontal />
                 <div className="PostFull__footer row">
@@ -366,7 +367,7 @@ export default connect(
     }),
 
     // mapDispatchToProps
-    (dispatch) => ({
+    dispatch => ({
         dispatchSubmit: (data) => { dispatch(user.actions.usernamePasswordLogin({...data})) },
         clearError: () => { dispatch(user.actions.loginError({error: null})) },
         unlock: () => { dispatch(user.actions.showLogin()) },

@@ -342,7 +342,7 @@ class ReplyEditor extends React.Component {
             });
             if (successCallback) successCallback(args)
         }
-
+        const isEdit = type === 'edit'
         const isHtml = rte || isHtmlTest(body.value)
         // Be careful, autoVote can reset curation rewards.  Never autoVote on edit..
         const autoVoteValue = !isEdit && autoVote.value
@@ -453,6 +453,7 @@ class ReplyEditor extends React.Component {
                                     <option value="50%">{tt('reply_editor.default_50_50')}</option>
                                     <option value="0%">{tt('reply_editor.decline_payout')}</option>
                                 </select>
+
                                 <br />
                                 <label title={tt('reply_editor.check_this_to_auto_upvote_your_post')}>
                                   {tt('g.upvote_post')}&nbsp;
@@ -523,7 +524,7 @@ import {connect} from 'react-redux'
 export default formId => connect(
     // mapStateToProps
     (state, ownProps) => {
-        const username = state.user.getIn(['current', 'username']);
+        const username = state.user.getIn(['current', 'username'])
         const accounts = state.global.get('accounts')
         const last_post = accounts.getIn([username, 'last_post']);
         const fields = ['body', 'autoVote:checked', 'donateToApp:checked']

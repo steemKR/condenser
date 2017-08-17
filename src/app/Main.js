@@ -23,8 +23,9 @@ try {
 }
 
 function runApp(initial_state) {
+    console.log('Initial state', initial_state);
     const config = initial_state.offchain.config
-    steem.config.set('websocket', config.ws_connection_client);
+    steem.api.setOptions({ url: config.steemd_connection_client });
     steem.config.set('address_prefix', config.address_prefix);
     steem.config.set('chain_id', config.chain_id);
     window.$STM_Config = config;
@@ -49,6 +50,7 @@ if (!window.Intl) {
     require.ensure(['intl/dist/Intl'], (require) => {
         window.IntlPolyfill = window.Intl = require('intl/dist/Intl')
         require('intl/locale-data/jsonp/en-US.js')
+        require('intl/locale-data/jsonp/es.js')
         Iso.bootstrap(runApp);
     }, "IntlBundle");
 }

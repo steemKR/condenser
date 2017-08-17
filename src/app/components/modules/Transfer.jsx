@@ -72,7 +72,7 @@ class TransferForm extends Component {
             initialValues: props.initialValues,
             validation: values => ({
                 to:
-                    ! values.to ? tt('g.required') : validate_account_name(values.to),
+                    ! values.to ? tt('g.required') : validate_account_name(values.to, values.memo),
                 amount:
                     ! values.amount ? 'Required' :
                     ! /^\d+(\.\d+)?$/.test(values.amount) ? tt('transfer_jsx.amount_is_in_form') :
@@ -126,14 +126,15 @@ class TransferForm extends Component {
             'Savings Withdraw': tt('transfer_jsx.withdraw_funds_after_the_required_3_day_waiting_period'),
         };
         const powerTip = tt('tips_js.influence_token')
-        const powerTip2 = tt('tips_js.VESTING_TOKEN_is_non_transferrable_and_requires_convert_back_to_LIQUID_TOKEN', {LIQUID_TOKEN, VESTING_TOKEN})
+        const powerTip2 = tt('tips_js.VESTING_TOKEN_is_non_transferable_and_requires_convert_back_to_LIQUID_TOKEN', {LIQUID_TOKEN, VESTING_TOKEN})
         const powerTip3 = tt('tips_js.converted_VESTING_TOKEN_can_be_sent_to_yourself_but_can_not_transfer_again', {LIQUID_TOKEN, VESTING_TOKEN})
         const {to, amount, asset, memo} = this.state;
         const {loading, trxError, advanced} = this.state;
         const {currentUser, toVesting, transferToSelf, dispatchSubmit} = this.props;
         const {transferType} = this.props.initialValues;
         const {submitting, valid, handleSubmit} = this.state.transfer;
-        const isMemoPrivate = memo && /^#/.test(memo.value);
+        // const isMemoPrivate = memo && /^#/.test(memo.value); -- private memos are not supported yet
+        const isMemoPrivate = false;
         const form = (
             <form onSubmit={handleSubmit(({data}) => {
                 this.setState({loading: true});
@@ -143,8 +144,8 @@ class TransferForm extends Component {
             >
                 {toVesting && <div className="row">
                     <div className="column small-12">
-                        <p>{powerTip}</p>
-                        <p>{powerTip2}</p>
+                        <p>{tt('tips_js.influence_token')}</p>
+                        <p>{tt('tips_js.non_transferable', {LIQUID_TOKEN, VESTING_TOKEN})}</p>
                     </div>
                 </div>}
 
@@ -224,7 +225,7 @@ class TransferForm extends Component {
                 {memo && <div className="row">
                     <div className="column small-2" style={{paddingTop: 33}}>{tt('g.memo')}</div>
                     <div className="column small-10">
-                        <small>{tt('transfer_jsx.this_memo_is') + isMemoPrivate ? tt('transfer_jsx.private') : tt('transfer_jsx.public')}</small>
+                        <small>{isMemoPrivate ? tt('transfer_jsx.this_memo_is_private') : tt('transfer_jsx.this_memo_is_public')}</small>
                         <input type="text" placeholder={tt('g.memo')} {...memo.props}
                             ref="memo" autoComplete="on" autoCorrect="off" autoCapitalize="off" spellCheck="false" disabled={loading} />
                         <div className="error">{memo.touched && memo.error && memo.error}&nbsp;</div>
@@ -257,7 +258,7 @@ class TransferForm extends Component {
 }
 
 const AssetBalance = ({onClick, balanceValue}) =>
-    <a onClick={onClick} style={{borderBottom: '#A09F9F 1px dotted', cursor: 'pointer'}}>{tt('transfer_jsx.balance') + ": " + balanceValue}</a>;
+    <a onClick={onClick} style={{borderBottom: '#A09F9F 1px dotted', cursor: 'pointer'}}>{tt('g.balance') + ": " + balanceValue}</a>;
 
 import {connect} from 'react-redux'
 

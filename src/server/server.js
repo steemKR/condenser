@@ -47,7 +47,7 @@ const cacheOpts = { maxAge: 86400000, gzip: true };
 // (unless passed in as an env var)
 const numProcesses = process.env.NUM_PROCESSES || os.cpus().length;
 
-app.use(requestTime());
+app.use(requestTime(numProcesses));
 
 app.keys = [config.get('session_key')];
 
@@ -221,7 +221,10 @@ if (env === 'production') {
         reportOnly: config.get('helmet.reportOnly'),
         setAllHeaders: config.get('helmet.setAllHeaders')
     };
-    helmetConfig.directives.reportUri = '/api/v1/csp_violation';
+    helmetConfig.directives.reportUri = helmetConfig.directives.reportUri[0];
+    if (helmetConfig.directives.reportUri === '-') {
+        delete helmetConfig.directives.reportUri;
+    }
     app.use(helmet.contentSecurityPolicy(helmetConfig));
 }
 
@@ -260,7 +263,7 @@ if (env === 'development') {
     app.use(
         mount(
             '/assets',
-            staticCache(path.join(__dirname, '../dist'), cacheOpts)
+            staticCache(path.join(__dirname, '../../dist'), cacheOpts)
         )
     );
 }
