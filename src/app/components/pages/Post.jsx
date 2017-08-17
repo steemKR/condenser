@@ -195,7 +195,7 @@ class Post extends React.Component {
                     <div className="column large-12">
                         <div className="Post_comments__content">
                             {positiveComments.length ?
-                            (<div className="Post__comments_sort_order float-right">
+                            (<div className="Post__comments_sort_order text-right">
                                 {tt('post_jsx.sort_order')}: &nbsp;
                                 <FoundationDropdownMenu menu={sort_menu} label={sort_label} dropdownPosition="bottom" dropdownAlignment="right" />
                             </div>) : null}
