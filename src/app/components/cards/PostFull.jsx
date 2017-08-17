@@ -147,13 +147,7 @@ class PostFull extends React.Component {
         const href = this.share_params.url;
         e.preventDefault();
         // loadFbSdk(document, 'script', 'facebook-jssdk').then(fb => {
-        window.FB.ui({
-            method: 'share',
-            href
-        }, (response) => {
-            if (response && !response.error_message)
-                serverApiRecordEvent('FbShare', this.share_params.link);
-        });
+        window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(href));
         // });
     }
 
