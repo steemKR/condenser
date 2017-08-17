@@ -342,7 +342,6 @@ class ReplyEditor extends React.Component {
             });
             if (successCallback) successCallback(args)
         }
-        const isEdit = type === 'edit'
         const isHtml = rte || isHtmlTest(body.value)
         // Be careful, autoVote can reset curation rewards.  Never autoVote on edit..
         const autoVoteValue = !isEdit && autoVote.value
