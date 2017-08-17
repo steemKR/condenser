@@ -17,9 +17,12 @@
     "by": "by",
     "cancel": "취소",
     "change_password": "패스워드 변경",
+    "choose_language": "언어 선택",
     "clear": "지우기",
     "close": "닫기",
+    "collapse_or_expand": "접기/펼치기",
     "comments": "답글",
+    "confirm": "Confirm",
     "convert": "전환",
     "date": "Date",
     "delete": "삭제",
@@ -31,6 +34,7 @@
     "follow": "팔로우",
     "for": " 다음에 대해 ",
     "from": " 다음으로부터: ",
+    "go_back": "뒤로",
     "hide": "숨기기",
     "in": "in",
     "in_reply_to": "in reply to",
@@ -65,15 +69,21 @@
     "print": "프린트",
     "promote": "프로모션",
     "promoted": "promoted",
-    "re": "RE ",
+    "re": "RE",
     "recent_password": "Recent Password",
-    "recieve": "Receive ",
+    "receive": "Receive ",
     "remove": "제거",
     "remove_vote": "보팅 제거",
     "replied_to": "다음 글에 달린 댓글:",
     "replies": "댓글",
     "reply": "댓글 남기기",
+    "reply_count": {
+      "zero":  "댓글 없음",
+      "one": "1개 댓글",
+      "other": "%(count)개 댓글"
+    },
     "reputation": "평판",
+    "reveal_comment": "댓글 보기",
     "request": "요청하기",
     "required": "필수",
     "rewards": "보상",
@@ -95,32 +105,27 @@
     "topics": "토픽",
     "transaction_history": "거래 기록",
     "transfer": "송금 ",
-    "receive": "받음 ",
     "trending_topics": "트렌딩 토픽",
     "type": "타입",
     "unfollow": "팔로우해제",
     "unmute": "뮤트취소",
+    "unknown": "알수없음",
     "upvote": "보팅",
     "upvote_post": "이 포스팅에 보팅하기",
     "username": "계정 이름",
     "version": "버전",
-    "view_the_direct_parent": "바로 윗 글 보기",
-    "view_the_full_context": "전체 글 보기",
+    
     "vote": "보팅",
     "votes": "보팅",
     "wallet": "지갑",
     "warning": "경고",
     "yes": "예",
-    "you_are_viewing_a_single_comments_thread_from": "다음에 대한 하나의 댓글을 보고 있습니다 ",
-    "reveal_comment": "댓글 보기",
-    "collapse_or_expand": "접기/펼치기",
-    "confirm": "확인",
     "posting": "포스팅",
     "owner": "오너",
     "active": "엑티브",
     "account_not_found": "계정 이름을 찾을 수 없습니다",
     "this_is_wrong_password": "올바르지 않은 패스워드입니다",
-    "do_you_need_to": "Do you need to",
+    "do_you_need_to": "다음이 필요합니까?",
     "account_name": "계정 이름",
     "recover_your_account": "계정 복구하기",
     "reset_usernames_password": "%(username)s의 패스워드 리셋하기",
@@ -182,14 +187,15 @@
     "APP_NAME_support": "%(APP_NAME)s Support",
     "please_email_questions_to": "Please email your questions to",
 
-    "next_7_strings_sinngle_block": {
+    "next_7_strings_single_block": {
       "authors_get_paid_when_people_like_you_upvote_their_post": "Authors get paid when people like you upvote their post",
-      "if_you_enjoyed_what_you_read_earn_amount": "If you enjoyed what you read here, earn %(amount)s of %(INVEST_TOKEN_UPPERCASE)s",
+      "if_you_enjoyed_what_you_read_earn_amount": "If you enjoyed what you read here, create your account today and start earning FREE STEEM!",
       "when_you": "when you",
       "when_you_link_text": "Sign Up",
       "and_vote_for_it": "and vote for it",
       "sign_up_now_to_receive": "Sign up now to receive ",
-      "free_steem": "FREE STEEM!"
+      "free_steem": "FREE STEEM!",
+      "sign_up_earn_steem": "Sign up now to earn "
     },
 
     "next_3_strings_together": {
@@ -241,9 +247,8 @@
     "advanced": "상세보기"
   },
   "navigation": {
-    "APP_NAME_about": "스팀에 대하여",
-    "APP_NAME_explore": "전체태그 둘러보기",
-    "APP_NAME_explore_locale": "KR태그 둘러보기",
+    "about": "스팀에 대하여",
+    "explore": "전체태그 둘러보기",
     "APP_NAME_whitepaper": "Steem 백서",
     "buy_LIQUID_TOKEN": "%(LIQUID_TOKEN)s 구매",
     "sell_LIQUID_TOKEN": "%(LIQUID_TOKEN)s 판매",
@@ -253,14 +258,18 @@
     "change_account_password": "패스워드 변경하기",
     "APP_NAME_api_docs": "Steem API 문서",
     "APP_NAME_chat": "Steemit Chat",
-    "APP_NAME_app_center": "Steem App Center",
     "witnesses": "증인들",
     "vote_for_witnesses": "증인 선출하기",
     "privacy_policy": "개인정보취급방침",
     "terms_of_service": "이용약관",
     "sign_up": "회원가입",
     "welcome": "빠른 시작 가이드",
-    "faq": "자주 찾는 질문"
+    "faq": "자주 찾는 질문",
+    "chat": "Steemit Chat",
+    "app_center": "Steem App Center",
+    "api_docs": "Steem API 문서",
+    "whitepaper": "Steem Whitepaper",
+    "APP_NAME_explore_locale": "KR태그 둘러보기"
   },
   "main_menu": {
     "hot": "hot",
@@ -284,7 +293,6 @@
     "APP_NAME_is_now_open_source": " %(APP_NAME)s is now Open Source"
   },
   "reply_editor": {
-    "title": "제목",
     "shorten_title": "제목이 너무 깁니다",
     "exceeds_maximum_length": "최대 용량을 초과했습니다(%(maxKb)sKB)",
     "including_the_category": "(다음 카테고리를 포함해주세요 '%(rootCategory)s')",
@@ -308,7 +316,7 @@
     "tag_your_story": "태그를 입력하세요(최대 5개), 첫번째로 입력한 태그가 이 포스트의 메인 카테고리가 됩니다.",
     "select_a_tag": "태그를 선택하세요",
     "maximum_tag_length_is_24_characters": "태그는 24자 이내로 입력해주세요",
-    "use_limitied_amount_of_categories": "%(amount)개의 카테고리만 사용해주세요",
+    "use_limited_amount_of_categories": "%(amount)개의 카테고리만 사용해주세요",
     "use_only_lowercase_letters": "소문자만 사용해주세요",
     "use_one_dash": "1개의 대쉬만 사용할 수 있습니다",
     "use_spaces_to_separate_tags": "공백을 이용해서 태그를 구분해주세요",
@@ -319,25 +327,6 @@
   "tags_page": {
     "replies": "댓글",
     "payouts": "보상"
-  },
-  "blocktrades_deposit": {
-    "change_deposit_address": "Change Deposit Address",
-    "get_deposit_address": "Get Deposit Address",
-    "powered_by": "Powered by",
-    "send_amount_of_coins_to": "Send %(value)s %(coinName)s to",
-    "insufficent_funds": "Insufficent funds",
-    "update_estimate": "Update Estimate",
-    "get_estimate": "Get Estimate",
-    "must_include_memo": "You must include the memo above",
-    "estimate_using": "Estimate using",
-    "amount_to_send": "Amount to send %(estimateInputCoin)s",
-    "deposit_using": "Deposit using",
-    "suggested_limit": "Suggested limit %(depositLimit)s",
-    "internal_server_error": "Internal Server Error",
-    "enter_amount": "Enter Amount",
-    "processing": "Processing",
-    "broadcasted": "Broadcasted",
-    "confirmed": "Confirmed"
   },
   "postfull_jsx": {
     "this_post_is_not_available_due_to_a_copyright_claim": "This post is not available due to a copyright claim.",
@@ -364,7 +353,10 @@
     "i_understand_dont_show_again": "I understand, don't show me again",
     "insufficent_balance": "Insufficient balance",
     "in_week_convert_DEBT_TOKEN_to_LIQUID_TOKEN": "In 3.5 days, convert %(amount)s %(DEBT_TOKEN)s into %(LIQUID_TOKEN)s",
-    "account_name_is_not_available": "Account name is not available"
+    "account_name_is_not_available": "Account name is not available",
+    "view_the_full_context": "전체 글 보기",
+    "view_the_direct_parent": "바로 윗 글 보기",
+    "you_are_viewing_a_single_comments_thread_from": "다음에 대한 하나의 댓글을 보고 있습니다 "
   },
   "market_jsx": {
     "action": "Action",
@@ -444,16 +436,6 @@
     "estimated_author_rewards_last_week": "Estimated author rewards last week",
     "author_rewards_history": "Author Rewards History"
   },
-  "plurals": {
-    "reply_count": "{replyCount, plural,\n=0 {no replies}\none {1 reply}\nother {%(replyCount)s replies}}",
-    "author_rewards_last_24_hours": "Author rewards last 24 hours",
-    "daily_average_author_rewards": "Daily average author rewards",
-    "balance": "Balance",
-    "estimate_account_value": "Estimated Account Value",
-    "next_power_down_is_scheduled_to_happen_at": "The next power down is scheduled to happen",
-    "transfers_are_temporary_disabled": "Transfers are temporary disabled",
-    "history": "History"
-  },
   "curationrewards_jsx": {
     "curation_rewards_last_24_hours": "Curation rewards last 24 hours",
     "daily_average_curation_rewards": "Daily average curation rewards",
@@ -512,7 +494,11 @@
   "witnesses_jsx": {
     "witness_thread": "witness thread",
     "top_witnesses": "Witness Voting",
-    "you_have_votes_remaining": "You have {votesCount, plural,\n=0 {no votes}\none {1 vote}\nother {%(votesCount)s votes}} remaining",
+    "you_have_votes_remaining": {
+      "zero": "You have no votes remaining",
+      "one": "You have 1 vote remaining",
+      "other": "You have %(count)s votes remaining"
+    },
     "you_can_vote_for_maximum_of_witnesses": "You can vote for a maximum of 30 witnesses",
     "witness": "Witness",
     "information": "Information",
@@ -526,9 +512,17 @@
   },
   "votesandcomments_jsx": {
     "no_responses_yet_click_to_respond": "No responses yet. Click to respond.",
-    "response_count": "{responseCount, plural,\n=0 {no responses}\none {1 responses}\nother {%(responseCount)s responses}}",
+    "response_count": {
+      "zero": "no responses",
+      "one": "1 response",
+      "other": "%(count)s responses"
+    },
     "click_to_respond": "Click to respond",
-    "vote_count": "{voteCount, plural,\n=0 {no votes}\none {1 vote}\nother {%(voteCount)s votes}}"
+    "vote_count": {
+      "zero": "no votes",
+      "one": "1 vote",
+      "other": "%(count)s votes"
+    }
   },
   "userkeys_jsx": {
     "public": "Public",
@@ -588,7 +582,8 @@
     "tokens_worth_about_AMOUNT_of_LIQUID_TOKEN": "Tokens worth about %(amount)s of %(LIQUID_TOKEN)s.",
     "influence_token": "이 영향력 토큰은 게시물 보상에 대한 영향력을 증가시키며, 더 많은 큐레이션 보상을 받을 수 있도록 합니다.",
     "estimated_value": "추산 가치는 %(LIQUID_TOKEN)s의 평균 가격을 US달러로 환산한 것을 기준으로 합니다.",
-    "VESTING_TOKEN_is_non_transferrable_and_requires_convert_back_to_LIQUID_TOKEN": "%(VESTING_TOKEN)s is non-transferrable and requires 3 months (13 payments) to convert back to %(LIQUID_TOKEN)s.",
+    "non_transferable": "%(VESTING_TOKEN)s is non-transferable and requires 3 months (13 payments) to convert back to %(LIQUID_TOKEN)s.",
+    "VESTING_TOKEN_is_non_transferable_and_requires_convert_back_to_LIQUID_TOKEN": "%(VESTING_TOKEN)s is non-transferrable and requires 3 months (13 payments) to convert back to %(LIQUID_TOKEN)s.",
     "converted_VESTING_TOKEN_can_be_sent_to_yourself_but_can_not_transfer_again": "Converted %(VESTING_TOKEN)s can be sent to yourself or someone else but can not transfer again without converting back to %(LIQUID_TOKEN)s.",
     "profile": "Profile",
     "send_to_account": "Send to account",
@@ -748,28 +743,30 @@
     "start_with_a_letter": "start with a letter.",
     "have_only_letters_digits_or_dashes": "have only letters, digits, or dashes.",
     "have_only_one_dash_in_a_row": "have only one dash in a row.",
-    "end_with_a_letter_or_digit": "end with a letter or digit."
+    "end_with_a_letter_or_digit": "end with a letter or digit.",
+    "verified_exchange_no_memo": "You must include a memo for your exchange transfer."
   },
   "settings_jsx": {
-    "invalid_url": "Invalid URL",
-    "name_is_too_long": "Name is too long",
-    "name_must_not_begin_with": "Name must not begin with @",
-    "about_is_too_long": "About is too long",
-    "location_is_too_long": "Location is too long",
-    "website_url_is_too_long": "Website URL is too long",
-    "public_profile_settings": "Public Profile Settings",
-    "private_post_display_settings": "Private Post Display Settings",
-    "not_safe_for_work_nsfw_content": "Not safe for work (NSFW) content",
-    "always_hide": "Always hide",
-    "always_warn": "Always warn",
-    "always_show": "Always show",
-    "muted_users": "Muted Users",
-    "update": "Update",
-    "profile_image_url": "Profile picture url",
-    "profile_name": "Display Name",
-    "profile_about": "About",
-    "profile_location": "Location",
-    "profile_website": "Website"
+    "invalid_url": "유효하지 않은 URL",
+    "name_is_too_long": "이름이 너무 깁니다",
+    "name_must_not_begin_with": "이름은 @으로 시작하면 안됩니다",
+    "about_is_too_long": "소개가 너무 깁니다",
+    "location_is_too_long": "위치가 너무 깁니다",
+    "website_url_is_too_long": "웹사이트 URL이 너무 깁니다",
+    "public_profile_settings": "공개 프로필 설정",
+    "private_post_display_settings": "개인 포스팅 표시 설정",
+    "not_safe_for_work_nsfw_content": "자극적인 컨텐츠(NSFW)",
+    "always_hide": "항상 숨기기",
+    "always_warn": "항상 경고하기",
+    "always_show": "항상 보이기",
+    "muted_users": "Mute된 유저",
+    "update": "업데이트",
+    "profile_image_url": "프로필 이미지 URL",
+    "cover_image_url": "커버 이미지 URL",
+    "profile_name": "표시할 이름",
+    "profile_about": "소개",
+    "profile_location": "위치",
+    "profile_website": "웹사이트"
   },
   "transfer_jsx": {
     "amount_is_in_form": "Amount is in the form 99999.999",
@@ -777,9 +774,8 @@
     "use_only_3_digits_of_precison": "Use only 3 digits of precison",
     "send_to_account": "다음 계정으로 보내기: ",
     "asset": "자산",
-    "this_memo_is": "메모: ",
-    "private": "개인",
-    "public": "공개",
+    "this_memo_is_private": "비공개 메모",
+    "this_memo_is_public": "공개 메모",
     "power_up": "파워업",
     "submit": "제출",
     "basic" : "간단보기",
