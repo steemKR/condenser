@@ -21,7 +21,7 @@ COPY . /var/app
 #  npm run build
 
 RUN \
-  sed -i -e 's/127\.0\.0\.1/steemkr_mysql/g' db/config/config.json
+  sed -i -e 's/127\.0\.0\.1/steemkr_mysql/g' src/db/config/config.json
 
 RUN mkdir tmp
 
