@@ -258,7 +258,7 @@ class TransferForm extends Component {
 }
 
 const AssetBalance = ({onClick, balanceValue}) =>
-    <a onClick={onClick} style={{borderBottom: '#A09F9F 1px dotted', cursor: 'pointer'}}>{tt('g.balance') + ": " + balanceValue}</a>;
+    <a onClick={onClick} style={{borderBottom: '#A09F9F 1px dotted', cursor: 'pointer'}}>{tt('transfer_jsx.balance') + ": " + balanceValue}</a>;
 
 import {connect} from 'react-redux'
 
