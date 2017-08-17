@@ -51,3 +51,8 @@ $body-font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-s
 /// Global value used for all elements that have a border radius.
 /// @type Number
 $global-radius: 3px !default;
+
+
+// Override
+$global-font-size: 105%;
+$body-font-family: 'Spoqa Han Sans', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
