@@ -125,14 +125,24 @@ class Voting extends React.Component {
         if (username && active_votes) {
             const vote = active_votes.find(el => el.get('voter') === username);
             // weight warning, the API may send a string or a number (when zero)
-            if(vote) this.setState({myVote: parseInt(vote.get('percent') || 0, 10)})
+            if(vote) {
+                const myVote = parseInt(vote.get('percent') || 0, 10);
+                const myVoteRshares = parseInt(vote.get('rshares') || 0, 10);
+                const totalRshares = active_votes.reduce((r, n) => r + parseInt(n.get('rshares') || 0, 10), 0);
+                const myVoteRsharesRate = myVoteRshares / totalRshares
+                this.setState({
+                    myVote,
+                    myVoteRshares,
+                    myVoteRsharesRate
+                })
+            }
         }
     }
 
     render() {
         const {active_votes, showList, voting, flag, net_vesting_shares, is_comment, post_obj, voting_power, reward_per_vest} = this.props;
         const {username} = this.props;
-        const {votingUp, votingDown, showWeight, weight, myVote} = this.state;
+        const {votingUp, votingDown, showWeight, weight, myVote, myVoteRshares, myVoteRsharesRate} = this.state;
         // console.log('-- Voting.render -->', myVote, votingUp, votingDown);
         if(flag && !username) return null
         if(!post_obj) return null
@@ -173,12 +183,14 @@ class Voting extends React.Component {
         const total_votes = post_obj.getIn(['stats', 'total_votes']);
 
         const cashout_time = post_obj.get('cashout_time');
+        const post_abs_rshares = post_obj.get('abs_rshares');
 
         const max_payout = parsePayoutAmount(post_obj.get('max_accepted_payout'));
         const pending_payout = parsePayoutAmount(post_obj.get('pending_payout_value'));
         const promoted = parsePayoutAmount(post_obj.get('promoted'));
         const total_author_payout = parsePayoutAmount(post_obj.get('total_payout_value'));
         const total_curator_payout = parsePayoutAmount(post_obj.get('curator_payout_value'));
+        
 
         let payout = pending_payout + total_author_payout + total_curator_payout;
         if (payout < 0.0) payout = 0.0;
@@ -216,6 +228,7 @@ class Voting extends React.Component {
         const payoutEl = <DropdownMenu el="div" items={payoutItems}>
             <span style={payout_limit_hit ? {opacity: '0.5'} : {}}>
                 <FormattedAsset amount={payout} asset="$" classname={max_payout === 0 ? 'strikethrough' : ''} />
+                {myVoteRsharesRate > 0 && <small>({(myVoteRsharesRate * payout).toFixed(2)})</small>}
                 {payoutItems.length > 0 && <Icon name="dropdown-arrow" />}
             </span>
         </DropdownMenu>;
