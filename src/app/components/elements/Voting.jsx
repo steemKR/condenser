@@ -228,7 +228,7 @@ class Voting extends React.Component {
         const payoutEl = <DropdownMenu el="div" items={payoutItems}>
             <span style={payout_limit_hit ? {opacity: '0.5'} : {}}>
                 <FormattedAsset amount={payout} asset="$" classname={max_payout === 0 ? 'strikethrough' : ''} />
-                {myVoteRsharesRate > 0 && <small>({(myVoteRsharesRate * payout).toFixed(2)})</small>}
+                {post_abs_rshares > 0 && myVoteRshares > 0 && <small>({(myVoteRshares * reward_per_vest).toFixed(2)})</small>}
                 {payoutItems.length > 0 && <Icon name="dropdown-arrow" />}
             </span>
         </DropdownMenu>;
