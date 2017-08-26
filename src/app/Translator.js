@@ -8,6 +8,7 @@ import intlLocale_en from 'react-intl/locale-data/en';
 import intlLocale_ko from 'react-intl/locale-data/ko';
 
 addLocaleData([...intlLocale_en, ...intlLocale_ko]);
+tt.setFallbackLocale('en');
 
 const en = require('app/locales/en.json');
 const ko = require('app/locales/ko.json');
@@ -42,13 +43,13 @@ tt.registerTranslations('ko', Object.assign({}, en, ko, localeDefaults));
 
 class Translator extends React.Component {
     render() {
-        const locale = this.props.locale;
-        tt.setLocale(locale);
+        let language = this.props.locale;
+        tt.setLocale(language);
         return <IntlProvider
             // to ensure dynamic language change, "key" property with same "locale" info must be added
             // see: https://github.com/yahoo/react-intl/wiki/Components#multiple-intl-contexts
-            key={locale}
-            locale={locale}
+            key={language}
+            locale={language}
             defaultLocale={DEFAULT_LANGUAGE}
         >
             {this.props.children}

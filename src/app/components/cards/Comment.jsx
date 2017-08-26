@@ -14,6 +14,7 @@ import {List} from 'immutable'
 import tt from 'counterpart';
 import {parsePayoutAmount} from 'app/utils/ParsersAndFormatters';
 import {Long} from 'bytebuffer';
+import ImageUserBlockList from 'app/utils/ImageUserBlockList';
 
 import translateButtonEnhancer from 'app/components/steemkr/translateButtonEnhancer';
 
@@ -265,6 +266,9 @@ class CommentImpl extends React.Component {
         // const get_asset_value = ( asset_str ) => { return parseFloat( asset_str.split(' ')[0] ); }
         // const steem_supply = this.props.global.getIn(['props','current_supply']);
 
+        // hide images if author is in blacklist
+        const hideImages = ImageUserBlockList.includes(author)
+
         const showDeleteOption = username === author && allowDelete
         const showEditOption = username === author
         const showReplyOption = comment.depth < 255
@@ -283,6 +287,7 @@ class CommentImpl extends React.Component {
                 formId={post + '-viewer'}
                 text={comment.body}
                 noImage={noImage || gray}
+                hideImages={hideImages}
                 jsonMetadata={jsonMetadata} />);
             controls = (<div>
                 <Voting post={post} />

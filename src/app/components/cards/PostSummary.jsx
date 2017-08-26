@@ -15,6 +15,7 @@ import Author from 'app/components/elements/Author';
 import TagList from 'app/components/elements/TagList';
 import UserNames from 'app/components/elements/UserNames';
 import tt from 'counterpart';
+import ImageUserBlockList from 'app/utils/ImageUserBlockList';
 
 function isLeftClickEvent(event) {
     return event.button === 0
@@ -98,7 +99,7 @@ class PostSummary extends React.Component {
         let comments_link;
 
         if( content.get( 'parent_author') !== "" ) {
-           title_text = tt('g.re') + ': ' + content.get('root_title');
+           title_text = tt('g.re_to', {topic: content.get('root_title')});
            title_link_url = content.get( 'url' );
            comments_link = title_link_url;
         } else {
@@ -129,7 +130,7 @@ class PostSummary extends React.Component {
             <Voting post={post} showList={false} />
             <VotesAndComments post={post} commentsLink={comments_link} />
             <span className="PostSummary__time_author_category">
-                {!archived && <Reblog author={p.author} permlink={p.permlink} />}
+                {!archived && <Reblog author={p.author} permlink={p.permlink} parent_author={p.parent_author} />}
                 <span className="show-for-medium">
                     {author_category}
                 </span>
@@ -154,7 +155,7 @@ class PostSummary extends React.Component {
                             {tt('postsummary_jsx.this_post_is')} <span className="nsfw-flag">nsfw</span>.
                             {tt('postsummary_jsx.you_can')} <a href="#" onClick={this.onRevealNsfw}>{tt('postsummary_jsx.reveal_it')}</a> {tt('g.or') + ' '}
                             {username ? <span>{tt('postsummary_jsx.adjust_your')} <Link to={`/@${username}/settings`}>{tt('postsummary_jsx.display_preferences')}</Link>.</span>
-                                : <span><Link to="/enter_email">{tt('postsummary_jsx.create_an_account')}</Link> {tt('postsummary_jsx.to_save_your_preferences')}.</span>}
+                                : <span><Link to="/pick_account">{tt('postsummary_jsx.create_an_account')}</Link> {tt('postsummary_jsx.to_save_your_preferences')}.</span>}
                             {content_footer}
                         </div>
                     </article>
@@ -162,8 +163,10 @@ class PostSummary extends React.Component {
             }
         }
 
+        const userBlacklisted = ImageUserBlockList.includes(p.author)
+
         let thumb = null;
-        if(!gray && p.image_link) {
+        if(!gray && p.image_link && !userBlacklisted) {
           const prox = $STM_Config.img_proxy_prefix
           const size = (thumbSize == 'mobile') ? '640x480' : '256x512';
           const url = (prox ? prox + size + '/' : '') + p.image_link

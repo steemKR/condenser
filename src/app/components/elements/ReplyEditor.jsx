@@ -413,7 +413,7 @@ class ReplyEditor extends React.Component {
                                 <p className="drag-and-drop">
                                     {tt('reply_editor.insert_images_by_dragging_dropping')}
                                     {noClipboardData ? '' : tt('reply_editor.pasting_from_the_clipboard')}
-                                    {tt('g.or') + " " + tt('g.by') + " "}<a onClick={this.onOpenClick}>{tt('reply_editor.selecting_them')}</a>.
+                                    {tt('reply_editor.or_by')} <a onClick={this.onOpenClick}>{tt('reply_editor.selecting_them')}</a>.
                                 </p>
                                 }
                                 {progress.message && <div className="info">{progress.message}</div>}
@@ -446,7 +446,7 @@ class ReplyEditor extends React.Component {
 
                             {isStory && !isEdit && <div className="ReplyEditor__options float-right text-right">
 
-                                {tt('g.rewards')}:&nbsp;
+                                {tt('g.rewards')} &nbsp;
                                 <select value={this.state.payoutType} onChange={this.onPayoutTypeChange} style={{color: this.state.payoutType == '0%' ? 'orange' : 'inherit'}}>
                                     <option value="100%">{tt('reply_editor.power_up_100')}</option>
                                     <option value="50%">{tt('reply_editor.default_50_50')}</option>
