@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import user from 'app/redux/User'
 import g from 'app/redux/GlobalReducer'
 import ShowKey from 'app/components/elements/ShowKey'
+import AccountAuth from 'app/components/steemkr/AccountAuth'
 import tt from 'counterpart';
 
 class Keys extends Component {
@@ -33,12 +34,17 @@ class Keys extends Component {
             props: {account, authType, privateKeys, onKey},
         } = this
         let pubkeys
+        let accounts
         if (authType === 'memo') {
             pubkeys = List([account.get('memo_key')])
+            accounts = List([])
         } else {
             const authority = account.get(authType)
             const authorities = authority.get('key_auths')
             pubkeys = authorities.map(a => a.get(0))
+
+            const account_auths = authority.get('account_auths')
+            accounts = account_auths.map(a => a.get(0))
         }
         const rowClass = 'hoverBackground'
         let idx = 0;
@@ -75,12 +81,28 @@ class Keys extends Component {
                 </div>
             </div>
         ))
+        const account_auths = accounts.map(name => (
+            <div key={idx++}>
+                <div className="row">
+                    <div className="column small-12">
+                        <span className={rowClass}>
+                            <AccountAuth name={name}
+                            cmpProps={{className: rowClass}} authType={authType} accountName={account.get('name')}
+                            onKey={onKey}>
+                            &nbps;
+                            </AccountAuth>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        ))
         return (
             <span>
                 <div className="row">
                     <div className="column small-12">
                         <label>{tt_auth_type}</label>
                         {auths}
+                        {account_auths}
                     </div>
                 </div>
             </span>
