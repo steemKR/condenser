@@ -3,6 +3,9 @@
   "google_analytics_id": "UA-101225297-3",
   "img_proxy_prefix": "https://steemitimages.com/",
   "upload_image": "https://steemitimages.com",
+  "notify": {
+    "gcm_key": "AIzaSyAbmPJfm1X0_8pUbwRv9qPUpNZyh526ngA"
+  },
   "session_cookie_key": "stm-kr",
   "session_key": "steemkrses",
   "site_domain": "steemkr.com"
