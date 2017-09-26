@@ -18,7 +18,7 @@ import { union } from 'lodash';
 const sheets = google.sheets('v4')
 
 function getKRTags() {
-    // TODO: cache the result
+    // TODO: cache the result and hide the API key
     return new Promise((resolve, reject) => {
         sheets.spreadsheets.values.get({
             auth: 'AIzaSyAbmPJfm1X0_8pUbwRv9qPUpNZyh526ngA',
