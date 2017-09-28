@@ -3,7 +3,25 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Select from 'react-select';
 import {api} from 'steem';
-import { debounce } from 'lodash';
+
+function debounce(inner, ms = 0) {
+  let timer = null;
+  let resolves = [];
+
+  return function (...args) {
+    // Run the function after a certain amount of time
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      // Get the result of the inner function, then apply it to the resolve function of
+      // each promise that has been created since the last time the inner function was run
+      let result = inner(...args);
+      resolves.forEach(r => r(result));
+      resolves = [];
+    }, ms);
+
+    return new Promise(r => resolves.push(r));
+  };
+}
 
 class TagUserSearchSelect extends React.Component {
 
@@ -14,12 +32,11 @@ class TagUserSearchSelect extends React.Component {
         super();
         this.state = {};
 
-        this.search = debounce(this.search.bind(this), 750);
+        this.search = debounce(this.search.bind(this), 1000);
         this.onChange = this.onChange.bind(this);
     }
 
     search(input) {
-        console.log(input);
         if (!input || input.length < 1) {
             return Promise.resolve({ options: [] });
         }
@@ -59,7 +76,6 @@ class TagUserSearchSelect extends React.Component {
                     label: `${symbol}${v}`,
                 };
             })
-            console.log(options);
 
             return { options };
         })
