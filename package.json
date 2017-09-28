@@ -118,6 +118,7 @@
     "react-router-redux": "^4.0.0",
     "react-router-scroll": "^0.4.2",
     "react-rte-image": "^0.3.1",
+    "react-select": "^1.0.0-rc.10",
     "react-timeago": "^3.1.2",
     "redux": "^3.3.1",
     "redux-form": "5.3.4",

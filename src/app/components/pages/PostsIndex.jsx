@@ -11,6 +11,7 @@ import MarkNotificationRead from 'app/components/elements/MarkNotificationRead';
 import tt from 'counterpart';
 import Immutable from "immutable";
 import Callout from 'app/components/elements/Callout';
+import TagUserSearchSelect from 'app/components/elements/TagUserSearchSelect';
 
 class PostsIndex extends React.Component {
 
@@ -101,6 +102,9 @@ class PostsIndex extends React.Component {
             <div className={'PostsIndex row' + (fetching ? ' fetching' : '')}>
                 <div className="PostsIndex__left column small-collapse">
                     <div className="PostsIndex__topics_compact show-for-small hide-for-large">
+                        <TagUserSearchSelect order={topics_order} current={category} compact />
+                    </div>
+                    <div className="PostsIndex__topics_compact show-for-small hide-for-large">
                         <Topics order={topics_order} current={category} compact />
                     </div>
                     {markNotificationRead}
@@ -115,6 +119,7 @@ class PostsIndex extends React.Component {
                         />}
                 </div>
                 <div className="PostsIndex__topics column shrink show-for-large">
+                    <TagUserSearchSelect order={topics_order} current={category} compact={false} />
                     <Topics order={topics_order} current={category} compact={false} />
                     <small><a onClick={this.onShowSpam}>{tt(showSpam ? 'g.next_3_strings_together.show_less' : 'g.next_3_strings_together.show_more')}</a>{' ' + tt('g.next_3_strings_together.value_posts')}</small>
                 </div>
