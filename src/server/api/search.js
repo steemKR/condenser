@@ -17,10 +17,22 @@ import { union } from 'lodash';
 
 const sheets = google.sheets('v4')
 
+const krTagListCache = {
+    data: null,
+    updatedAt: new Date(),
+};
+
 function getKRTags() {
-    // TODO: cache the result and hide the API key
+    const now = new Date();
+    const HOUR = 1000 * 60 * 60;
+
+    if (krTagListCache.data && now - krTagListCache.updatedAt < HOUR) {
+        return Promise.resolve(krTagListCache.data);
+    }
+
     return new Promise((resolve, reject) => {
         sheets.spreadsheets.values.get({
+            // TODO: API key from env
             auth: 'AIzaSyAbmPJfm1X0_8pUbwRv9qPUpNZyh526ngA',
             spreadsheetId: '1ugtsCnnNa0jQ7_6EbLIsSOrSTicbKUAmmyaW7Vu0Vsg',
             range: 'A3:D',
@@ -29,6 +41,8 @@ function getKRTags() {
                 reject(err);
                 return;
             }
+            krTagListCache.data = res;
+            krTagListCache.updatedAt = new Date();
             resolve(res);
         });
     })

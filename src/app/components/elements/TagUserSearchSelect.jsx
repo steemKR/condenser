@@ -3,6 +3,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Select from 'react-select';
 import {api} from 'steem';
+import { debounce } from 'lodash';
 
 class TagUserSearchSelect extends React.Component {
 
@@ -12,6 +13,9 @@ class TagUserSearchSelect extends React.Component {
     constructor() {
         super();
         this.state = {};
+
+        this.search = debounce(this.search.bind(this), 750);
+        this.onChange = this.onChange.bind(this);
     }
 
     search(input) {
@@ -45,7 +49,7 @@ class TagUserSearchSelect extends React.Component {
         .then(r => r.json())
         .then(res => {
             if (res.error) {
-                throw new Error(status);
+                throw new Error(res.error);
             }
             const options = res.sort((a,b) => {
                 return a.localeCompare(b);
@@ -75,8 +79,8 @@ class TagUserSearchSelect extends React.Component {
     render() {
         return (
             <Select.Async
-              loadOptions={this.search.bind(this)}
-              onChange={this.onChange.bind(this)}
+              loadOptions={this.search}
+              onChange={this.onChange}
               autoBlur
               placeholder='@유저, #태그'
               clearable={false}
