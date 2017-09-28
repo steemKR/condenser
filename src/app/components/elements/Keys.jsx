@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import user from 'app/redux/User'
 import g from 'app/redux/GlobalReducer'
 import ShowKey from 'app/components/elements/ShowKey'
-import AccountAuth from 'app/components/steemkr/AccountAuth'
 import tt from 'counterpart';
 
 class Keys extends Component {
@@ -81,28 +80,12 @@ class Keys extends Component {
                 </div>
             </div>
         ))
-        const account_auths = accounts.map(name => (
-            <div key={idx++}>
-                <div className="row">
-                    <div className="column small-12">
-                        <span className={rowClass}>
-                            <AccountAuth name={name}
-                            cmpProps={{className: rowClass}} authType={authType} accountName={account.get('name')}
-                            onKey={onKey}>
-                            &nbps;
-                            </AccountAuth>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        ))
         return (
             <span>
                 <div className="row">
                     <div className="column small-12">
                         <label>{tt_auth_type}</label>
                         {auths}
-                        {account_auths}
                     </div>
                 </div>
             </span>
