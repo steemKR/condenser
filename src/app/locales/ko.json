@@ -70,6 +70,7 @@
     "promote": "프로모션",
     "promoted": "promoted",
     "re": "RE",
+    "re_to": "RE: %(topic)",
     "recent_password": "Recent Password",
     "receive": "Receive ",
     "remove": "제거",
@@ -114,7 +115,7 @@
     "upvote_post": "이 포스팅에 보팅하기",
     "username": "계정 이름",
     "version": "버전",
-    
+
     "vote": "보팅",
     "votes": "보팅",
     "wallet": "지갑",
