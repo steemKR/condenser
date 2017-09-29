@@ -8,7 +8,6 @@ import intlLocale_en from 'react-intl/locale-data/en';
 import intlLocale_ko from 'react-intl/locale-data/ko';
 
 addLocaleData([...intlLocale_en, ...intlLocale_ko]);
-tt.setFallbackLocale('en');
 
 const en = require('app/locales/en.json');
 const ko = require('app/locales/ko.json');
@@ -39,7 +38,7 @@ const localeDefaults = {
 }
 tt.registerTranslations('en', en);
 tt.registerTranslations('ko', Object.assign({}, en, ko, localeDefaults));
-
+tt.setFallbackLocale('en');
 
 class Translator extends React.Component {
     render() {
@@ -59,8 +58,8 @@ class Translator extends React.Component {
 
 export default connect(
     (state, ownProps) => {
-		const locale = state.user.get('locale');
-		tt.setLocale(locale);
+        const locale = state.user.get('locale');
+        tt.setLocale(locale);
         return {...ownProps, locale};
     }
 )(Translator);
