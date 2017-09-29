@@ -73,7 +73,7 @@ class CheckLoginOwner extends React.Component {
                     {tt('postfull_jsx.owhership_changed_on')} <FormattedDate value={last_valid_date} />
                 </p>
                 <p>
-                    {tt('g.deadline_for_recovery_is' + ' ')} <u><TimeAgoWrapper date={deadline} /></u>.
+                    {tt('g.deadline_for_recovery_is')} <b><TimeAgoWrapper date={deadline} /></b>.
                 </p>
                 <p>
                     <input type="checkbox" onChange={this.onUnderstood} />&nbsp;&nbsp;
