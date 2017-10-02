@@ -98,7 +98,7 @@ class TagUserSearchSelect extends React.Component {
               loadOptions={this.search}
               onChange={this.onChange}
               autoBlur
-              placeholder='@유저, #태그'
+              placeholder="@유저이름, 또는 #태그으로 검색하실 수 있습니다"
               clearable={false}
             />
         );
