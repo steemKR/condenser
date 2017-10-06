@@ -379,7 +379,16 @@ class ReplyEditor extends React.Component {
                     >
                         <div className={vframe_section_shrink_class}>
                             {isStory && <span>
-                                <input type="text" className="ReplyEditor__title" {...title.props} onChange={onTitleChange} disabled={loading} placeholder={tt('submit_a_story.title')} autoComplete="off" ref="titleRef" tabIndex={1} />
+                                <input
+                                    type="text"
+                                    className="ReplyEditor__title"
+                                    onChange={onTitleChange}
+                                    disabled={loading}
+                                    placeholder={tt('reply_editor.title')}
+                                    autoComplete="off"
+                                    ref="titleRef"
+                                    tabIndex={1}
+                                    {...title.props} />
                                 <div className="float-right secondary" style={{marginRight: '1rem'}}>
                                     {rte && <a href="#" onClick={this.toggleRte}>{body.value ? 'Raw HTML' : 'Markdown'}</a>}
                                     {!rte && (isHtml || !body.value) && <a href="#" onClick={this.toggleRte}>{tt('reply_editor.editor')}</a>}
@@ -436,7 +445,7 @@ class ReplyEditor extends React.Component {
                         </div>
                         <div className={vframe_section_shrink_class}>
                             {!loading &&
-                            <button type="submit" className="button" disabled={disabled} tabIndex={4}>{isEdit ? 'Update Post' : postLabel}</button>
+                            <button type="submit" className="button" disabled={disabled} tabIndex={4}>{isEdit ? tt('reply_editor.update_post') : postLabel}</button>
                             }
                             {loading && <span><br /><LoadingIndicator type="circle" /></span>}
                             &nbsp; {!loading && this.props.onCancel &&
@@ -610,8 +619,13 @@ export default formId => connect(
 
             const formCategories = Set(category ? category.trim().replace(/#/g, "").split(/ +/) : [])
             const rootCategory = originalPost && originalPost.category ? originalPost.category : formCategories.first()
-            let allCategories = Set([...formCategories.toJS(), ...rtags.hashtags])
+            let allCategories = Set([...formCategories.toJS()])
             if(/^[-a-z\d]+$/.test(rootCategory)) allCategories = allCategories.add(rootCategory)
+
+            let postHashtags = [...rtags.hashtags]
+            while (allCategories.size < 5 && postHashtags.length > 0) {
+                allCategories = allCategories.add(postHashtags.shift())
+            }
 
             // merge
             const meta = isEdit ? jsonMetadata : {}
@@ -634,8 +648,8 @@ export default formId => connect(
             }
 
             if(meta.tags.length > 5) {
-                const includingCategory = isEdit ? ` (including the category '${rootCategory}')` : ''
-                errorCallback(`You have ${meta.tags.length} tags total${includingCategory}.  Please use only 5 in your post and category line.`)
+                const includingCategory = isEdit ? tt('reply_editor.including_the_category', {rootCategory}) : ''
+                errorCallback(tt('reply_editor.use_limited_amount_of_tags', {tagsLength: meta.tags.length, includingCategory}))
                 return
             }
 

@@ -15,7 +15,7 @@ function addSiteMeta(metas) {
     metas.push({property: 'fb:app_id', content: $STM_Config.fb_app});
     metas.push({name: 'twitter:card', content: 'summary'});
     metas.push({name: 'twitter:site', content: '@steemkr'});
-    metas.push({name: 'twitter:title', content: 'Steemkr'});
+    metas.push({name: 'twitter:title', content: '#SteemKR'});
     metas.push({name: 'twitter:description', site_desc});
     metas.push({name: 'twitter:image', content: 'https://steemit.com/images/steemit-share.png'});
 }
