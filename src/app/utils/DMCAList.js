@@ -48,4 +48,5 @@ export default `
 /crypto/@medicbtom/palm-beach-confidential-released-their-monthly-pick
 /news/@vaerospace/fire-and-fury-pdf-direct-download-from-ipfs-a-great-giggle
 /nsfw/@dirtywhale/fuckingawesome-blair-williams---scream
+/blog/@dreamya/korea-bucheon-cartoon-festival-cosplay-card-capture-sakura
 `.trim().split('\n');
