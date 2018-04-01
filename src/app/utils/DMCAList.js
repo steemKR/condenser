@@ -49,4 +49,6 @@ export default `
 /news/@vaerospace/fire-and-fury-pdf-direct-download-from-ipfs-a-great-giggle
 /nsfw/@dirtywhale/fuckingawesome-blair-williams---scream
 /blog/@dreamya/korea-bucheon-cartoon-festival-cosplay-card-capture-sakura
+/hentai/@doujinblog/160611moonlitwitchesver101rj176572-tdu8fnezbb
+/hentai/@doujinblog/171201ver102rj213431-mleyceiiyz
 `.trim().split('\n');
