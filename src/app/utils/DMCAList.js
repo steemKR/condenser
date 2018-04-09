@@ -51,4 +51,5 @@ export default `
 /blog/@dreamya/korea-bucheon-cartoon-festival-cosplay-card-capture-sakura
 /hentai/@doujinblog/160611moonlitwitchesver101rj176572-tdu8fnezbb
 /hentai/@doujinblog/171201ver102rj213431-mleyceiiyz
+/action/@padmaavat/baaghi-2-full-movie-watch
 `.trim().split('\n');
