@@ -52,4 +52,5 @@ export default `
 /hentai/@doujinblog/160611moonlitwitchesver101rj176572-tdu8fnezbb
 /hentai/@doujinblog/171201ver102rj213431-mleyceiiyz
 /action/@padmaavat/baaghi-2-full-movie-watch
+/vn/@duckljng24/blog-63-that-man-oh-soo
 `.trim().split('\n');

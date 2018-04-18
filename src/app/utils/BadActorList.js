@@ -96,6 +96,7 @@ bloocktrades
 bloctrades
 blocktradess
 blocktrade
+upbit
 `.trim().split('\n');
 
 export default list;
