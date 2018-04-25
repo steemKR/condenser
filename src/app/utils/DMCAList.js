@@ -55,4 +55,7 @@ export default `
 /vn/@duckljng24/blog-63-that-man-oh-soo
 /baaghi/@hd-movie-watch/baaghi-2-2018-hindi-full-movie-download-hd-1080p-720p-torrent
 /baaghi2/@mariarose4568/baghi-2-baaghi-2-full-movie-watch-online-2018-hindi-free-download
+/action/@padmaavat/baaghi-2-hindi-720p-850mb-full-movie-download-filmywap-free
+/movies/@mariarose4568/padman-2018-full-movie-hindi-watch-online-2018-free-download-hd
+/avengers/@keilamve/avengers-infinity-war-2018-bdrip-blu-ray-full-movie-download-in-hindi-filmywap
 `.trim().split('\n');

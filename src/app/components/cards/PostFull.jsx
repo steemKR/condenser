@@ -16,6 +16,7 @@ import TagList from 'app/components/elements/TagList';
 import Author from 'app/components/elements/Author';
 import {repLog10, parsePayoutAmount} from 'app/utils/ParsersAndFormatters';
 import DMCAList from 'app/utils/DMCAList'
+import DMCAUserList from 'app/utils/DMCAUserList';
 import PageViewsCounter from 'app/components/elements/PageViewsCounter';
 import ShareMenu from 'app/components/elements/ShareMenu';
 import {serverApiRecordEvent} from 'app/utils/ServerApiClient';
@@ -212,7 +213,7 @@ class PostFull extends React.Component {
 
         let content_body = content.body;
         const url = `/${category}/@${author}/${permlink}`
-        const bDMCAStop = DMCAList.includes(url);
+        const bDMCAStop = DMCAList.includes(url) || DMCAUserList.includes(content.author);
         const bIllegalContentUser = userIllegalContent.includes(content.author)
         if(bDMCAStop) {
             content_body = tt('postfull_jsx.this_post_is_not_available_due_to_a_copyright_claim')
