@@ -53,4 +53,6 @@ export default `
 /hentai/@doujinblog/171201ver102rj213431-mleyceiiyz
 /action/@padmaavat/baaghi-2-full-movie-watch
 /vn/@duckljng24/blog-63-that-man-oh-soo
+/baaghi/@hd-movie-watch/baaghi-2-2018-hindi-full-movie-download-hd-1080p-720p-torrent
+/baaghi2/@mariarose4568/baghi-2-baaghi-2-full-movie-watch-online-2018-hindi-free-download
 `.trim().split('\n');
