@@ -58,7 +58,6 @@
     "foundation-sites": "git+https://github.com/steemit/foundation-sites.git#e8e32c715bbc4c822b80b555345f61337269ca78",
     "git-rev-sync": "^1.6.0",
     "google-auth-library": "^0.11.0",
-    "google-translate-api": "git+https://github.com/snkrsnkampa/google-translate-api.git#8a288f5bf98582c788029eda6157e03d51fd8639",
     "googleapis": "^22.2.0",
     "grant-koa": "^3.6.0",
     "highcharts": "^4.2.5",
