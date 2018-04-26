@@ -103,117 +103,34 @@ class PickAccount extends React.Component {
 
         const account_status = offchainUser ? offchainUser.get('account_status') : null;
 
-        if (serverBusy || $STM_Config.disable_signups) {
-            return <div className="row">
-                <div className="column">
-                    <div className="callout alert">
-                        <p>The creation of new accounts is temporarily disabled.</p>
-                    </div>
-                </div>
-            </div>;
-        }
-        if (cryptographyFailure) {
-            return <div className="row">
-                <div className="column">
-                    <div className="callout alert">
-                        <h4>Browser Out of Date</h4>
-                        <p>We will be unable to create your Steem account with this browser.</p>
-                        <p>The latest versions of <a href="https://www.google.com/chrome/">Chrome</a> and <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>
-                            are well-tested and known to work well with steemit.com.</p>
-                    </div>
-                </div>
-            </div>;
-        }
-
-        if (loggedIn) {
-            return <div className="row">
-                <div className="column">
-                    <div className="callout alert">
-                        <p>You need to <a href="#" onClick={logout}>Logout</a> before you can create an additional account.</p>
-                        <p>Please note that Steemit can only register one account per verified user.</p>
-                    </div>
-                </div>
-            </div>;
-        }
-
-        if (account_status === 'waiting') {
-            return <div className="row">
-                <div className="column">
-                    <br />
-                    <div className="callout alert">
-                        <p>Your sign up request is being processed and you will receive an email from us when it is ready.</p>
-                        <p>Signup requests can take up to 7 days to be processed, but usually complete in a day or two.</p>
-                    </div>
-                </div>
-            </div>;
-        }
-
-        if (account_status === 'approved') {
-            return <div className="row">
-                <div className="column">
-                    <br />
-                    <div className="callout success">
-                        <p>Congratulations! Your sign up request has been approved.</p>
-                        <p><Link to="/create_account">Let's get your account created!</Link></p>
-                    </div>
-                </div>
-            </div>;
-        }
-
-        // const existingUserAccount = offchainUser.get('account');
-        // if (existingUserAccount) {
-        //     return <div className="row">
-        //         <div className="column">
-        //             <div className="callout alert">
-        //                 <p>Our records indicate that you already have steem account: <strong>{existingUserAccount}</strong></p>
-        //                 <p>In order to prevent abuse Steemit can only register one account per verified user.</p>
-        //                 <p>You can either <a href="/login.html">login</a> to your existing account
-        //                     or <a href="mailto:support@steemit.com">send us email</a> if you need a new account.</p>
-        //             </div>
-        //         </div>
-        //     </div>;
-        // }
-
-        let next_step = null;
-        if (server_error) {
-            if (server_error === 'Email address is not confirmed') {
-                next_step = <div className="callout alert">
-                    <a href="/enter_email">Please verify your email address</a>
-                </div>;
-            } else if (server_error === 'Phone number is not confirmed') {
-                next_step = <div className="callout alert">
-                    <a href="/enter_mobile">Please verify your phone number</a>
-                </div>;
-            } else {
-                next_step = <div className="callout alert">
-                    <h5>Couldn't create account. The server returned the following error:</h5>
-                    <p>{server_error}</p>
-                </div>;
-            }
-        }
-
         return (
             <div>
                 <div className="CreateAccount row">
                     <div className="column" style={{maxWidth: '36rem', margin: '0 auto'}}>
+                        <br/>
+                        <h3>STEEM의 계정생성</h3>
+                        <p>
+                            STEEM 블록체인에서 계정을 생성하고 사용하기 위해서는 <b>STEEM</b>이 필요합니다. 
+                            이는 다른 암호화폐들이 수수료를 지불하는 것과는 달리 <b>스팀은 수수료가 없으며</b>, 
+                            스팀파워를 통해서 사용자가 가지고 있는 <b>대역폭 만큼만 데이터를 사용</b>할 수 있기 때문입니다.<br /><br />
+                            <b>Steemit Inc.</b>는 계정을 생성하기 위한 기금을 보유하고 있으며,
+                            이미 스팀 계정을 가지고 있는 사람의 스팀과 스팀파워를 사용하여 계정을 생성할 수 있습니다.
+                            이처럼 현재 계정 생성을 지원하는 서비스들을 소개해드리겠습니다.
+                            <br/>
+                            <br />
+                            <b>계정을 생성한 뒤, 반드시 암호를 변경하여 사용하시기 바랍니다. 모든 암호 관리의 책임은 개인에게 있으며, <a target="_blank" href="https://bookchain.gitbooks.io/steem-bluepaper/content/ko-KR/Bluepaper.html#도난-계정-복구">스팀의 유일한 계정 복구 프로세스</a>외에는 별도로 계정을 복구할 수단이 없습니다.</b>
+                        </p>
                         <br />
-                        <Progress tabIndex="0" value={10} max={100} />
+                        <h4>Steemit Inc.를 통해서 계정 생성하기</h4>
+                        <a target="_blank" href="https://signup.steemit.com"><button className="button">계정 생성하기</button></a>
                         <br />
-                        <h4 style={{ color: "#4078c0" }}>Welcome to Steemit</h4>
-                        <div className="secondary">
-                             <p>Your account name is how you will be known on steemit.com.<br />
-                                 {/*Your account name <strong>can never be changed</strong>, so please choose carefully.*/}</p>
-                        </div>
-                        <form onSubmit={this.onSubmit} autoComplete="off" noValidate method="post">
-                            <div className={name_error ? 'error' : ''}>
-                                <label>ACCOUNT NAME</label>
-                                <input type="text" name="name" autoComplete="off" onChange={this.onNameChange} value={name} placeholder={"Name..."} />
-                                <p>{name_error}</p>
-                            </div>
-                            <input disabled={submit_btn_disabled} type="submit" className={submit_btn_class} value="CONTINUE" />
-                        </form>
-                        <br />
-                        <p className="secondary">Already have an account? <Link to="/login.html">Login</Link></p>
+                        <h4>직접 계정 생성하기</h4>
+                        <p>
+                            스팀 또는 다른 암호화폐들을 이용하여 직접 스팀 계정을 생성하실 수 있습니다. 이러한 기능을 제공하고 있는 웹사이트들은 아래와 같습니다.
+                        </p>
+                        <a target="_blank" href="https://anon.steem.network/"><button className="button">anon.steem.network 사용하기</button></a>
+                        <a target="_blank" href="https://blocktrades.us/create-steem-account"><button className="button">blockTradues.us 사용하기</button></a>
+                        <a target="_blank" href="https://nhj7.github.io/steem.apps/#AccountCreator"><button className="button">nhj7.github.io/steem.apps 사용하기</button></a>
                     </div>
                 </div>
             </div>

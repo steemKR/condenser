@@ -31,46 +31,8 @@ class SignUp extends React.Component {
         return <div className="SignUp">
             <div className="row">
                 <div className="column">
-                    <h3>Sign Up</h3>
-                    <p>Steemit funds each account with over {this.props.signup_bonus} worth of Steem Power; to prevent abuse, we
-                        require new users to login via social media.<br />
-                        Your personal information will be kept <a href="/privacy.html" target="_blank">private</a>.
-                    </p>
-                </div>
-            </div>
-            <div className="row">
-                <div className="column large-4 shrink">
-                    <SvgImage name="facebook" width="64px" height="64px" />
-                </div>
-                <div className="column large-8">
-                    <a href="/connect/facebook" className="button SignUp--fb-button">Continue with Facebook</a>
-                </div>
-            </div>
-            <div className="row">
-            &nbsp;
-            </div>
-            <div className="row">
-                <div className="column large-4 shrink">
-                    <SvgImage name="reddit" width="64px" height="64px" />
-                </div>
-                <div className="column large-8">
-                    <a href="/connect/reddit" className="button SignUp--reddit-button">Continue with Reddit</a>
-                    <br /><span className="secondary">(requires 5 or more Reddit comment karma)</span>
-                </div>
-            </div>
-            <div className="row">
-                <div className="column">
-                      <br />
-                    Don't have a Facebook or Reddit account? <br />
-                    {this.state.waiting_list ? <AddToWaitingList /> : <a href="#" onClick={() => this.setState({waiting_list: true})}>
-                        <strong> Subscribe to get a notification when SMS confirmation is available.</strong>
-                    </a>}
-                </div>
-            </div>
-            <div className="row">
-                <div className="column">
-                      <br />
-                    <p className="secondary">By verifying your account you agree to the Steemit <a href="/tos.html" target="_blank">terms and conditions</a>.</p>
+                    <h3>Sign Up via <a href="https://signup.steemit.com">signup.steemit.com</a></h3>
+                    <p>Steemit Inc는 계정 생성을 위한 기금을 관리하고 있으며, 이를 통해 무료로 계정을 생성하실 수 있습니다.</p>
                 </div>
             </div>
         </div>
