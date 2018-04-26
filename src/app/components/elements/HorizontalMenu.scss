@@ -1,5 +1,8 @@
 .HorizontalMenu {
   display: none;
+  li a {
+    font-size: 1rem;
+  }
   .active > a {
     background: none;
     color: $black;

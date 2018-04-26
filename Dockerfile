@@ -8,10 +8,12 @@ RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 WORKDIR /var/app
 
 RUN mkdir -p /var/app
-ADD package.json /var/app/package.json
+COPY . /var/app
+COPY package.json /var/app/package.json
+
 RUN $HOME/.yarn/bin/yarn --production
 
-COPY . /var/app
+
 
 # FIXME TODO: fix eslint warnings
 
