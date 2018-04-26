@@ -2,7 +2,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Select from 'react-select';
-import {api} from 'steem';
+import {api} from '@steemit/steem-js';
 
 function debounce(inner, ms = 0) {
   let timer = null;

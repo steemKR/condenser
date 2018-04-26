@@ -2,7 +2,7 @@ import config from 'config';
 
 require('dotenv').config()
 
-import * as steem from 'steem';
+import * as steem from '@steemit/steem-js';
 
 delete process.env.BROWSER;
 
