@@ -26,8 +26,8 @@ export function* getAccount(username, force = false) {
 }
 
 export function* getRewardFund(type = 'post') {
-    const fund = yield call([api, api.getRewardFund], type)
-    const feed_price = yield call([api, api.getCurrentMedianHistoryPrice])
+    const fund = yield call([api, api.getRewardFundAsync], type)
+    const feed_price = yield call([api, api.getCurrentMedianHistoryPriceAsync])
     
     let rewardPerVest = undefined
     if(feed_price) {
