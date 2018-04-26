@@ -1,16 +1,17 @@
 version: '2'
 
 services:
-  alpha:
-    container_name: alpha
+  server_green:
+    container_name: server_green
     build: .
     restart: always
     environment:
       - NODE_ENV=production
+      - NUM_PROCESSES=2
       - TZ=Asia/Seoul
-      - STEEMKR_VERSION=alpha
+      - STEEMKR_VERSION=stable
     restart: always
     ports:
-      - 3021:8080
+      - 3003:8080
     depends_on:
       - steemkr_mysql

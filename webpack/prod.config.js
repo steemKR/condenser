@@ -15,8 +15,7 @@ export default {
                 BROWSER: JSON.stringify(true),
                 NODE_ENV: JSON.stringify('production'),
                 // FIXME this requires we put .git into the docker image :(
-                VERSION: JSON.stringify(git.tag()),
-                NUM_PROCESSES: 2,
+                VERSION: JSON.stringify(git.tag())
             },
             global: {
                 TYPED_ARRAY_SUPPORT: JSON.stringify(false)
