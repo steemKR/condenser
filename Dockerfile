@@ -1,15 +1,15 @@
-FROM node:7.5
+FROM node:8.11
 
 # yarn > npm
 # RUN npm install --global yarn
 
-RUN npm install -g yarn
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 
 WORKDIR /var/app
 
 RUN mkdir -p /var/app
 ADD package.json /var/app/package.json
-RUN yarn --production
+RUN $HOME/.yarn/bin/yarn --production
 
 COPY . /var/app
 
@@ -32,11 +32,11 @@ ENV STEEMKR_VERSION $STEEMKR_VERSION
 EXPOSE 8080
 
 RUN \
-  yarn run build
+  $HOME/.yarn/bin/yarn build
 
 CMD \
   cp -rf ./config/production-$STEEMKR_VERSION.json ./config/production.json && \
-  yarn run production
+  $HOME/.yarn/bin/yarn run production
 
 # uncomment the lines below to run it in development mode
 # ENV NODE_ENV development
