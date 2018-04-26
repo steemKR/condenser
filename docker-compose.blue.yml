@@ -1,18 +1,6 @@
 version: '2'
 
 services:
-  steemkr_mysql:
-    container_name: steemkr_mysql
-    image: mysql
-    restart: always
-    volumes:
-      - ../database:/var/lib/mysql
-    ports:
-      - 13306:3306
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=steemit_dev
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
   server_blue:
     container_name: server_blue
     build: .
