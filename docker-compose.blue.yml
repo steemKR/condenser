@@ -7,7 +7,6 @@ services:
     restart: always
     environment:
       - NODE_ENV=production
-      - NUM_PROCESSES=2
       - TZ=Asia/Seoul
       - STEEMKR_VERSION=stable
     restart: always
