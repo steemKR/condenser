@@ -3,7 +3,6 @@ spaces
 the-gaming-llama
 cmgsteems
 iamgod
-padmaavat
 harshvasistha
 padmaavat
 vectordan
@@ -20,6 +19,7 @@ chirag1
 anuchaudhary546
 azki
 dvdripper
+ohiopimp
 `.trim().split('\n');
 
 export default list;
