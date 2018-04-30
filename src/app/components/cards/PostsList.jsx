@@ -22,6 +22,7 @@ class PostsList extends React.Component {
     static propTypes = {
         posts: PropTypes.object.isRequired,
         loading: PropTypes.bool.isRequired,
+        order: PropTypes.string,
         category: PropTypes.string,
         loadMore: PropTypes.func,
         showSpam: PropTypes.bool,
@@ -173,19 +174,35 @@ class PostsList extends React.Component {
 
     render() {
         const {posts, showSpam, loading, category, content,
-            ignore_result, account} = this.props;
+            ignore_result, account, order} = this.props;
         const {thumbSize, showPost, nsfwPref} = this.state
         const postsInfo = [];
+        const postsAuthors = [];
         posts.forEach((item) => {
             const cont = content.get(item);
             if(!cont) {
                 console.error('PostsList --> Missing cont key', item)
                 return
             }
+            let repeatedly = false;
             const ignore = ignore_result && ignore_result.has(cont.get('author'))
             const hide = cont.getIn(['stats', 'hide'])
-            if(!(ignore || hide) || showSpam) // rephide
-                postsInfo.push({item, ignore})
+            const author = item.match(/^(.+)\//)[1];
+            console.log(author);
+            if (!postsAuthors[author]) {
+                postsAuthors[author] = [];
+            }
+            if (order == 'trending') {
+                postsAuthors[author].push(cont);
+                if (postsAuthors[author].length > 1) {
+                    repeatedly = true;
+                }
+            }
+
+            // rephide
+            if (!(ignore || hide || repeatedly) || showSpam) {
+                postsInfo.push({ item, ignore, author});
+            }
         });
         const renderSummary = items => items.map(item => <li key={item.item}>
             <PostSummary
@@ -195,6 +212,7 @@ class PostsList extends React.Component {
                 ignore={item.ignore}
                 onClick={this.onPostClick}
                 nsfwPref={nsfwPref}
+                relational={postsAuthors[item.author]}
             />
         </li>)
 

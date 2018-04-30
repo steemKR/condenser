@@ -111,6 +111,7 @@ class PostsIndex extends React.Component {
                     {(!fetching && (posts && !posts.size)) ? <Callout>{emptyText}</Callout> :
                         <PostsList
                             ref="list"
+                            order={topics_order}
                             posts={posts ? posts : Immutable.List()}
                             loading={fetching}
                             category={category}

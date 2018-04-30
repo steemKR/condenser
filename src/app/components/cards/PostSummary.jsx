@@ -41,7 +41,8 @@ class PostSummary extends React.Component {
         content: React.PropTypes.object.isRequired,
         thumbSize: React.PropTypes.string,
         nsfwPref: React.PropTypes.string,
-        onClick: React.PropTypes.func
+        onClick: React.PropTypes.func,
+        relational: React.PropTypes.object
     };
 
     constructor() {
@@ -65,7 +66,7 @@ class PostSummary extends React.Component {
     }
 
     render() {
-        const {thumbSize, ignore, onClick} = this.props;
+        const { thumbSize, ignore, onClick, relational} = this.props;
         const {post, content} = this.props;
         const {account} = this.props;
         if (!content) return null;
@@ -138,6 +139,19 @@ class PostSummary extends React.Component {
             </span>
         </div>)
 
+        let content_relational;
+        if (relational) {
+            content_relational = [];
+            relational.forEach((item, idx) => {
+                if (idx == 0) {
+                    return;
+                }
+                content_relational.push(<div className="PostSummary__relational">
+                    <Link to={item.get('url')}>{item.get('title')}</Link>
+                </div>)
+            })
+        }
+
         const {nsfwPref, username} = this.props
         const {revealNsfw} = this.state
 
@@ -196,6 +210,7 @@ class PostSummary extends React.Component {
                     </div>
                     {content_body}
                     {content_footer}
+                    {content_relational}
                 </div>
             </article>
         )
