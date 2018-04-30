@@ -191,6 +191,16 @@ class Post extends React.Component {
                         </div>
                     </div>
                 </div>}
+                <div className="row">
+                    <div className="column">
+                        <div className="Post_banner__sponsorship">
+                            <div className="Post_banner__sponsorship_box">
+                                <div className="Post_banner__sponsorship_text">STEEMKR.COM IS SPONSORED BY</div>
+                                <a href="https://www.gamexcoin.io/" target="_blank"><img className="Post_banner__sponsorship_image" src="/images/steemkr_gxc_banner.gif" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="comments" className="Post_comments row hfeed">
                     <div className="column large-12">
                         <div className="Post_comments__content">
