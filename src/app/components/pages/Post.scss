@@ -33,12 +33,24 @@
     .Post_banner__sponsorship_text {
       font-size: 10px;
     }
-    .Post_banner__sponsorship_image {
-      max-width: 100%;
-      height: auto;
+    .Post_banner__sponsorship_image_fullwidth {
+      display: none;
     }
   }
 }
+@media screen and (min-width: 600px) {
+  .Post_banner__sponsorship {
+    .Post_banner__sponsorship_box {
+      .Post_banner__sponsorship_image {
+        display: none;
+      }
+      .Post_banner__sponsorship_image_fullwidth {
+        display: block;
+      }
+    }
+  }
+}
+
 .Post_comments__content {
   max-width: 50rem;
   margin: 0 auto 3.5rem;

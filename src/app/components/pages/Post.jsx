@@ -196,7 +196,10 @@ class Post extends React.Component {
                         <div className="Post_banner__sponsorship">
                             <div className="Post_banner__sponsorship_box">
                                 <div className="Post_banner__sponsorship_text">STEEMKR.COM IS SPONSORED BY</div>
-                                <a href="https://www.gamexcoin.io/" target="_blank"><img className="Post_banner__sponsorship_image" src="/images/steemkr_gxc_banner.gif" /></a>
+                                <a href="https://www.gamexcoin.io/" target="_blank">
+                                    <div className="Post_banner__sponsorship_image"><img src="/images/steemkr_gxc_banner.gif"/></div>
+                                    <div className="Post_banner__sponsorship_image_fullwidth"><img src="/images/steemkr_gxc_banner_full.gif"/></div>
+                                </a>
                             </div>
                         </div>
                     </div>
