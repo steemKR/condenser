@@ -188,7 +188,6 @@ class PostsList extends React.Component {
             const ignore = ignore_result && ignore_result.has(cont.get('author'))
             const hide = cont.getIn(['stats', 'hide'])
             const author = item.match(/^(.+)\//)[1];
-            console.log(author);
             if (!postsAuthors[author]) {
                 postsAuthors[author] = [];
             }
