@@ -2,22 +2,22 @@ import extractContent from 'app/utils/ExtractContent';
 import {objAccessor} from 'app/utils/Accessors';
 import normalizeProfile from 'app/utils/NormalizeProfile';
 
-const site_desc = 'Steemkr is a social media platform where everyone gets paid for creating and curating content. It leverages a robust digital points system (Steem) for digital rewards.';
+const site_desc = 'SteemKR is a social media platform where everyone gets paid for creating and curating content. It leverages a robust digital points system (Steem) for digital rewards.';
 
 function addSiteMeta(metas) {
-    metas.push({title: 'Steemkr'});
+    metas.push({title: 'SteemKR'});
     metas.push({name: 'description', content: site_desc});
     metas.push({property: 'og:type', content: 'website'});
-    metas.push({property: 'og:site_name', content: 'Steemkr'});
-    metas.push({property: 'og:title', content: 'Steemkr'});
+    metas.push({property: 'og:site_name', content: 'SteemKR'});
+    metas.push({property: 'og:title', content: 'SteemKR'});
     metas.push({property: 'og:description', content: site_desc});
-    metas.push({property: 'og:image', content: 'https://steemit.com/images/steemit-share.png'});
+    metas.push({property: 'og:image', content: 'https://steemkr.com/images/steemit-share.png'});
     metas.push({property: 'fb:app_id', content: $STM_Config.fb_app});
     metas.push({name: 'twitter:card', content: 'summary'});
     metas.push({name: 'twitter:site', content: '@steemkr'});
     metas.push({name: 'twitter:title', content: '#SteemKR'});
     metas.push({name: 'twitter:description', site_desc});
-    metas.push({name: 'twitter:image', content: 'https://steemit.com/images/steemit-share.png'});
+    metas.push({name: 'twitter:image', content: 'https://steemkr.com/images/steemit-share.png'});
 }
 
 export default function extractMeta(chain_data, rp) {
@@ -44,7 +44,7 @@ export default function extractMeta(chain_data, rp) {
             metas.push({property: 'og:title',        content: title});
             metas.push({property: 'og:type',         content: 'article'});
             metas.push({property: 'og:url',          content: url});
-            metas.push({property: 'og:image',        content: image || 'https://steemit.com/images/steemit-share.png'});
+            metas.push({property: 'og:image',        content: image || 'https://steemkr.com/images/steemit-share.png'});
             metas.push({property: 'og:description',  content: desc});
             metas.push({property: 'og:site_name',    content: 'Steemkr'});
             metas.push({property: 'fb:app_id',       content: $STM_Config.fb_app});
@@ -56,7 +56,7 @@ export default function extractMeta(chain_data, rp) {
             metas.push({name: 'twitter:site',        content: '@steemkr'});
             metas.push({name: 'twitter:title',       content: title});
             metas.push({name: 'twitter:description', content: desc});
-            metas.push({name: 'twitter:image',       content: image || 'https://steemit.com/images/steemit-twshare.png'});
+            metas.push({name: 'twitter:image',       content: image || 'https://steemkr.com/images/steemit-twshare.png'});
         } else {
             addSiteMeta(metas);
         }
@@ -65,7 +65,7 @@ export default function extractMeta(chain_data, rp) {
         let {name, about, profile_image} = normalizeProfile(account);
         if(name == null) name = account.name;
         if(about == null) about = "Join thousands on steemit who share, post and earn rewards.";
-        if(profile_image == null) profile_image = 'https://steemit.com/images/steemit-twshare.png';
+        if(profile_image == null) profile_image = 'https://steemkr.com/images/steemit-twshare.png';
         // Set profile tags
         const title = `@${account.name}`;
         const desc  = `The latest posts from ${name}. Follow me at @${account.name}. ${about}`;
