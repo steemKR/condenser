@@ -20,6 +20,9 @@ anuchaudhary546
 azki
 dvdripper
 ohiopimp
+marvinlox
+agroup85
+rahul0614
 `.trim().split('\n');
 
 export default list;
