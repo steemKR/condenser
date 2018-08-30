@@ -55,13 +55,11 @@ export default function ServerHTML({ body, assets, locale, title, meta }) {
             { 
                 (config.google_ad_client) && 
                     [
-                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>,
-                        <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({
-                            google_ad_client: config.google_ad_client,
+                        <Safe.script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></Safe.script>,
+                        <Safe.script>{`(adsbygoogle = window.adsbygoogle || []).push({
+                            google_ad_client: '${config.google_ad_client}',
                             enable_page_level_ads: true
-                        });
-                        </script>
+                        })`}</Safe.script>
                     ]
             }
         </head>
