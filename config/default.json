@@ -41,7 +41,7 @@
       "imgSrc": "* data:",
       "objectSrc": "'none'",
       "pluginTypes": "application/pdf",
-      "scriptSrc": "'self' www.google-analytics.com pagead2.googlesyndication.com adservice.google.co.kr connect.facebook.net",
+      "scriptSrc": "'self' www.google-analytics.com pagead2.googlesyndication.com adservice.google.com connect.facebook.net",
       "styleSrc": "'self' 'unsafe-inline' fonts.googleapis.com",
       "reportUri": "/api/v1/csp_violation"
     },
