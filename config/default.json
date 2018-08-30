@@ -30,6 +30,7 @@
     }
   },
   "google_analytics_id": false,
+  "google_ad_client": false,
   "helmet": {
     "directives": {
       "childSrc": "'self' www.youtube.com staticxx.facebook.com w.soundcloud.com player.vimeo.com",
@@ -96,8 +97,8 @@
     "auth_token": false
   },
   "upload_image": false,
-  "steemd_connection_client": "wss://rpc.dist.one",
-  "steemd_connection_server": "https://steemd.dist.one",
+  "steemd_connection_client": "https://api.steemit.com",
+  "steemd_connection_server": "https://api.steemit.com",
   "chain_id": "0000000000000000000000000000000000000000000000000000000000000000",
   "address_prefix": "STM"
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import config from 'config';
 
 export default function ServerHTML({ body, assets, locale, title, meta }) {
     let page_title = title;
@@ -51,6 +52,18 @@ export default function ServerHTML({ body, assets, locale, title, meta }) {
             { assets.style.map((href, idx) =>
                 <link href={href} key={idx} rel="stylesheet" type="text/css" />) }
             <title>{page_title}</title>
+            { 
+                (config.google_ad_client) && 
+                    [
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>,
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({
+                            google_ad_client: config.google_ad_client,
+                            enable_page_level_ads: true
+                        });
+                        </script>
+                    ]
+            }
         </head>
         <body>
         <div id="content" dangerouslySetInnerHTML={ { __html: body } }></div>
