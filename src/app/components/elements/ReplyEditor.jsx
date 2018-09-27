@@ -330,7 +330,7 @@ class ReplyEditor extends React.Component {
             if (!date) return 0;
             const enable = new Date(date + 'Z').getTime() + (max * 1000);
             return Math.max(Math.ceil((enable - new Date().getTime())*0.001), 0);
-        })(last_post, 20);
+        })(last_post, 3);
         const disabled = submitting || !valid || wating > 0
         const loading = submitting || this.state.loading
         if (wating > 0) { setTimeout(() => { this.forceUpdate(); }, 1000); }
