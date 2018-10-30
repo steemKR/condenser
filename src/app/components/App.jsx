@@ -220,11 +220,6 @@ class App extends React.Component {
                         </a>
                     </li>
                     <li>
-                        <a href="https://docs.google.com/spreadsheets/d/1ugtsCnnNa0jQ7_6EbLIsSOrSTicbKUAmmyaW7Vu0Vsg/pubhtml?gid=75655260&single=true" target="_blank" onClick={this.navigate}>
-                            {tt('navigation.APP_NAME_explore_locale')}
-                        </a>
-                    </li>
-                    <li>
                         <a onClick={() => depositSteem(username)}>
                             {tt('navigation.buy_LIQUID_TOKEN', {LIQUID_TOKEN})}
                         </a>
@@ -252,22 +247,17 @@ class App extends React.Component {
                 </ul>
                 <ul className="vertical menu">
                     <li>
-                        <a href="https://discord.gg/ZDWyNMC" target="_blank" rel="noopener noreferrer">
-                            SteemKR 공개 채팅방&nbsp;<Icon name="extlink" />
-                        </a>
-                    </li>
-                    <li>
                         <a href="https://steemit.chat/home" target="_blank" rel="noopener noreferrer">
                             {tt('navigation.chat')}&nbsp;<Icon name="extlink" />
                         </a>
                     </li>
                     <li>
-                        <a href="http://steemtools.com/" onClick={this.navigate} target="_blank" rel="noopener noreferrer">
+                        <a href="http://steemprojects.com/" onClick={this.navigate} target="_blank" rel="noopener noreferrer">
                             {tt('navigation.app_center')}&nbsp;<Icon name="extlink" />
                         </a>
                     </li>
                     <li className="last">
-                        <a href="https://steemit.github.io/steemit-docs/" target="_blank" rel="noopener noreferrer">
+                        <a href="https://developers.steem.io/" target="_blank" rel="noopener noreferrer">
                             {tt('navigation.api_docs')}&nbsp;<Icon name="extlink" />
                         </a>
                     </li>
@@ -281,16 +271,6 @@ class App extends React.Component {
                     <li>
                         <a href="https://steem.io" onClick={this.navigate}>
                             {tt('navigation.about')}&nbsp;<Icon name="extlink" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/privacy.html" onClick={this.navigate} rel="nofollow">
-                            {tt('navigation.privacy_policy')}
-                        </a>
-                    </li>
-                    <li className="last">
-                        <a href="/tos.html" onClick={this.navigate} rel="nofollow">
-                            {tt('navigation.terms_of_service')}
                         </a>
                     </li>
                 </ul>

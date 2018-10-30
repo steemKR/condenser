@@ -124,14 +124,14 @@ class PickAccount extends React.Component {
                         <h4>Steemit Inc.를 통해서 계정 생성하기</h4>
                         <a target="_blank" href="https://signup.steemit.com"><button className="button">계정 생성하기</button></a>
                         <br />
-                        <h4>Overnodes 를 통해서 계정 생성하기</h4>
-                        <a target="_blank" href="https://overnodes.co.kr/steem-id-info?uid=steemkr"><button className="button">계정 생성하기</button></a>
+                        <h4>Overnodes를 통해서 계정 생성하기</h4>
+                        <a target="_blank" href="https://overnodes.co.kr/steem-id-info?uid=steemkr"><button className="button">카카오톡 연동으로 계정 생성하기</button></a>
                         <br />
                         <h4>직접 계정 생성하기</h4>
                         <p>
                             스팀 또는 다른 암호화폐들을 이용하여 직접 스팀 계정을 생성하실 수 있습니다. 이러한 기능을 제공하고 있는 웹사이트들은 아래와 같습니다.
                         </p>
-                        <a target="_blank" href="https://steemkr.github.io/rc.html"><button className="button">리소스 크레딧을 사용하기</button></a>
+                        <a target="_blank" href="https://steemkr.github.io/tools/rc.html"><button className="button">리소스 크레딧을 사용하기</button></a>
                         <a target="_blank" href="https://anon.steem.network/"><button className="button">anon.steem.network 사용하기</button></a>
                         <a target="_blank" href="https://blocktrades.us/create-steem-account"><button className="button">blockTradues.us 사용하기</button></a>
                         <a target="_blank" href="https://nhj7.github.io/steem.apps/#AccountCreator"><button className="button">nhj7.github.io/steem.apps 사용하기</button></a>
