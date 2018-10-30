@@ -1,5 +1,5 @@
 // sometimes it's impossible to use html tags to style coin name, hence usage of _UPPERCASE modifier
-export const APP_NAME = '스팀KR';
+export const APP_NAME = 'SteemKR';
 export const APP_URL = 'https://steemkr.com';
 // sometimes APP_NAME is written in non-latin characters, but they are needed for technical purposes
 // ie. "Голос" > "Golos"
