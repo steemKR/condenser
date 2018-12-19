@@ -14,3 +14,8 @@ services:
       - 3003:8080
     depends_on:
       - steemkr_mysql
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "4"
