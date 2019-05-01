@@ -213,7 +213,7 @@ class PostsList extends React.Component {
                 nsfwPref={nsfwPref}
                 relational={postsAuthors[item.author]}
             />
-            {!username && index % 5 == 4(<div
+            {!username && index % 5 == 4 && (<div
                 style={{
                     textAlign:"center"
                 }}
