@@ -190,6 +190,7 @@ class Post extends React.Component {
                             <button type="button" className="button sign-up" onClick={showSignUp}>{tt('g.next_7_strings_single_block.sign_up_earn_steem')}<span className="free-money">{tt('g.next_7_strings_single_block.free_steem')}</span></button>
                         </div>
                     </div>
+                    <script type='text/javascript' src='https://inorbitad.com/ads/www/delivery/ads.js?zoneid=3347&width=0&height=0'></script>
                 </div>}
                 <div className="row">
                     <div className="column">
