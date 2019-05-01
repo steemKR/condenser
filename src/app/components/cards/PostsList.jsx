@@ -174,7 +174,7 @@ class PostsList extends React.Component {
 
     render() {
         const {posts, showSpam, loading, category, content,
-            ignore_result, account, order} = this.props;
+            ignore_result, account, order, username} = this.props;
         const {thumbSize, showPost, nsfwPref} = this.state
         const postsInfo = [];
         const postsAuthors = [];
