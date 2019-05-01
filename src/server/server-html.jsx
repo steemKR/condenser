@@ -56,24 +56,6 @@ export default function ServerHTML({ body, assets, locale, title, meta }) {
         <body>
         <div id="content" dangerouslySetInnerHTML={ { __html: body } }></div>
         {assets.script.map((href, idx) => <script key={ idx } src={ href }></script>) }
-
-        <script id={"spout-tag-f0c5ba4c-8599-42c3-8938-58424052cfcd"}>{`(function() {
-        var r = encodeURIComponent(top.document.referrer.substring(0,250)),
-            p = encodeURIComponent(top.document.location.href.substring(0,250)),
-            t = Date.now(),
-            u = 'f0c5ba4c-8599-42c3-8938-58424052cfcd',
-            e = document.createElement('script'),
-            s = sessionStorage.getItem('spoutable-' + u);
-        if (!s) {
-        var m = Math.random.bind(Math);
-        s = JSON.stringify({sessionId: [ t, m(), m(), m(), m(), m(), m(), m(), m(), m(), m(), m(), m() ]});
-        sessionStorage.setItem('spoutable-' + u, s);
-        }
-        e.async = true;
-        e.src='//s.spoutable.com/s?u='+u+'&s='+encodeURIComponent(s)+'&t='+t+'&r='+r+'&p='+p;
-        document.head.appendChild(e);
-        })()`}
-        </script>
         </body>
         </html>
     );
