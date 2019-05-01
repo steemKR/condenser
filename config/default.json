@@ -33,7 +33,7 @@
   "google_ad_client": false,
   "helmet": {
     "directives": {
-      "childSrc": "'self' www.youtube.com staticxx.facebook.com w.soundcloud.com player.vimeo.com",
+      "childSrc": "'self' www.youtube.com staticxx.facebook.com w.soundcloud.com player.vimeo.com ad.a-ads.com",
       "connectSrc": "'self' steemit.com api.steemit.com dist.one wss://rpc.dist.one api.blocktrades.us https://steemitimages.com https://translate.googleapis.com",
       "defaultSrc": "'self' www.youtube.com staticxx.facebook.com player.vimeo.com ad.a-ads.com",
       "fontSrc": "data: fonts.gstatic.com 'self'",
