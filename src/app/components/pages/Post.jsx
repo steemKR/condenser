@@ -190,6 +190,7 @@ class Post extends React.Component {
                             <button type="button" className="button sign-up" onClick={showSignUp}>{tt('g.next_7_strings_single_block.sign_up_earn_steem')}<span className="free-money">{tt('g.next_7_strings_single_block.free_steem')}</span></button>
                         </div>
                     </div>
+                    <iframe data-aa="1163365" src="//ad.a-ads.com/1163365?size=320x50" scrolling="no" style="width:320px; height:50px; border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>
                 </div>}
                 <div className="row">
                     <div className="column">

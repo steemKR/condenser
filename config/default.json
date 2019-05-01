@@ -35,13 +35,13 @@
     "directives": {
       "childSrc": "'self' www.youtube.com staticxx.facebook.com w.soundcloud.com player.vimeo.com",
       "connectSrc": "'self' steemit.com api.steemit.com dist.one wss://rpc.dist.one api.blocktrades.us https://steemitimages.com https://translate.googleapis.com",
-      "defaultSrc": "'self' www.youtube.com staticxx.facebook.com player.vimeo.com",
+      "defaultSrc": "'self' www.youtube.com staticxx.facebook.com player.vimeo.com ad.a-ads.com",
       "fontSrc": "data: fonts.gstatic.com 'self'",
       "frameAncestors": "'none'",
       "imgSrc": "* data:",
       "objectSrc": "'none'",
       "pluginTypes": "application/pdf",
-      "scriptSrc": "'self' www.google-analytics.com pagead2.googlesyndication.com adservice.google.com connect.facebook.net inorbitad.com",
+      "scriptSrc": "'self' www.google-analytics.com pagead2.googlesyndication.com adservice.google.com connect.facebook.net",
       "styleSrc": "'self' 'unsafe-inline' fonts.googleapis.com",
       "reportUri": "/api/v1/csp_violation"
     },
