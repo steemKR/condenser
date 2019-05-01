@@ -195,7 +195,7 @@ class Post extends React.Component {
                     <div className="column">
                         <div className="Post__promo"
                             dangerouslySetInnerHTML={{
-                                __html: '<iframe data-aa="1163365" src="//ad.a-ads.com/1163365?size=468x60" scrolling="no" style="width:468px; height:60px; border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>',
+                                __html: '<iframe data-aa="1163365" src="//acceptable.a-ads.com/1163365" scrolling="no" style="border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>',
                             }}
                         />
                     </div>
