@@ -203,7 +203,7 @@ class PostsList extends React.Component {
                 postsInfo.push({ item, ignore, author});
             }
         });
-        const renderSummary = items => items.map(item => <li key={item.item}>
+        const renderSummary = items => items.map((item, index) => <li key={item.item}>
             <PostSummary
                 account={account}
                 post={item.item}
@@ -213,6 +213,14 @@ class PostsList extends React.Component {
                 nsfwPref={nsfwPref}
                 relational={postsAuthors[item.author]}
             />
+            {!username && index % 5 == 4(<div
+                style={{
+                    textAlign:"center"
+                }}
+                dangerouslySetInnerHTML={{
+                    __html: '<iframe data-aa="1163365" src="//acceptable.a-ads.com/1163365" scrolling="no" style="border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>',
+                }}
+            />)}
         </li>)
 
         return (
