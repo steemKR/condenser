@@ -36,6 +36,12 @@
   }
 }
 
+.PostFull__banner {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #e6e6e6;
+  border-top: 1px solid #e6e6e6;
+}
 .PostFull__header, .PostFull__body {
   max-width: 40rem;
   margin: 0 auto;

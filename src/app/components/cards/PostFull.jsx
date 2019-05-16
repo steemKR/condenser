@@ -330,6 +330,12 @@ class PostFull extends React.Component {
                         {post_header}
                         <TimeAuthorCategoryLarge content={content} authorRepLog10={authorRepLog10} />
                       </div>
+                      {!username &&
+                        <div className="PostFull__banner"
+                          dangerouslySetInnerHTML={{
+                            __html: `<iframe id="post_banner" src="https://page.ludorum.dev/banner_728_90.html" scrolling="no" style="width:728px; max-width: 100%; height:90px; border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>`,
+                          }}
+                        />}
                       <div className="PostFull__body entry-content">
                           { contentBody }
                       </div>
