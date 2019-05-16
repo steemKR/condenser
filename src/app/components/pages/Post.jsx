@@ -191,15 +191,6 @@ class Post extends React.Component {
                         </div>
                     </div>
                 </div>}
-                {!current_user && <div className="row">
-                    <div className="column">
-                        <div className="Post__promo"
-                            dangerouslySetInnerHTML={{
-                                __html: '<iframe data-aa="1163365" src="//acceptable.a-ads.com/1163365" scrolling="no" style="border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>',
-                            }}
-                        />
-                    </div>
-                </div>}
                 <div className="row">
                     <div className="column">
                         <div className="Post_banner__sponsorship">
@@ -213,6 +204,15 @@ class Post extends React.Component {
                         </div>
                     </div>
                 </div>
+                {!current_user && <div className="row">
+                    <div className="column">
+                        <div className="Post__promo"
+                            dangerouslySetInnerHTML={{
+                                __html: '<div class="text-center"><small>ADVERTISEMENT</small></div><iframe data-aa="1163365" src="//ad.a-ads.com/1163365?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>',
+                            }}
+                        />
+                    </div>
+                </div>}
                 <div id="comments" className="Post_comments row hfeed">
                     <div className="column large-12">
                         <div className="Post_comments__content">
