@@ -221,6 +221,14 @@ class PostsList extends React.Component {
                     __html: '<iframe data-aa="1163365" src="//acceptable.a-ads.com/1163365" scrolling="no" style="border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>',
                 }}
             />)}
+            {!username && index % 5 == 4 && category != "bitcoin" && (<div
+                style={{
+                    textAlign:"center"
+                }}
+                dangerouslySetInnerHTML={{
+                    __html: '<iframe id="post_banner" src="https://page.ludorum.dev/banner_728_90.html" scrolling="no" style="width:728px; max-width: 100%; height:90px; border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>',
+                }}
+            />)}
         </li>)
 
         return (
