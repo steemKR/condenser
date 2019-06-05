@@ -58,4 +58,5 @@ export default `
 /action/@padmaavat/baaghi-2-hindi-720p-850mb-full-movie-download-filmywap-free
 /movies/@mariarose4568/padman-2018-full-movie-hindi-watch-online-2018-free-download-hd
 /avengers/@keilamve/avengers-infinity-war-2018-bdrip-blu-ray-full-movie-download-in-hindi-filmywap
+/bitcoin/@lenar79/why-markets-could-collapse-at-any-moment-many-of-the-text-one-view
 `.trim().split('\n');
