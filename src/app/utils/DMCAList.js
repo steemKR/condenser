@@ -59,4 +59,5 @@ export default `
 /movies/@mariarose4568/padman-2018-full-movie-hindi-watch-online-2018-free-download-hd
 /avengers/@keilamve/avengers-infinity-war-2018-bdrip-blu-ray-full-movie-download-in-hindi-filmywap
 /bitcoin/@lenar79/why-markets-could-collapse-at-any-moment-many-of-the-text-one-view
+/money/@ewon21/hichki-hichki-full-movie-hindi-2018-in-1080-hd-dvdrip-bluerayrip
 `.trim().split('\n');
