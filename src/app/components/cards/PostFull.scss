@@ -41,6 +41,10 @@
   text-align: center;
   border-bottom: 1px solid #e6e6e6;
   border-top: 1px solid #e6e6e6;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .PostFull__header, .PostFull__body {
   max-width: 40rem;
